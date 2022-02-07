@@ -3,7 +3,7 @@ import logo from './logo.jpg';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // pages
-import SearchBooks from './pages/SearchBooks';
+import SearchBooks from './pages/Books/SearchBooks';
 import Transactions from './pages/Transactions';
 
 function App() {

@@ -1,9 +1,10 @@
 import React from 'react';
 
-import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import ScrollTop from '../components/ScrollTop';
+import Sidebar from '../../components/Sidebar';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import ScrollTop from '../../components/ScrollTop';
+import BookCards from '../../components/BookCards';
 
 function SearchBooks() {
   return (
@@ -14,7 +15,9 @@ function SearchBooks() {
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
             <Header />
-            <div className='container-fluid'></div>
+            <div className='container-fluid'>
+              <BookCards />
+            </div>
           </div>
 
           <Footer />
