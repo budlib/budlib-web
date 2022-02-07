@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // pages
 import SearchBooks from './pages/SearchBooks';
+import Transactions from './pages/Transactions';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <ComponentRenderer />
         </Route> */}
         <Route path='/books/search' element={<SearchBooks />} />
+        <Route path='/transactions' element={<Transactions />} />
 
         {/* <Route path='*'>
           <ErrorPage />
