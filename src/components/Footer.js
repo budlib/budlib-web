@@ -1,6 +1,6 @@
 import React from 'react';
 
-const footer = () => {
+const Footer = () => {
   return (
     <footer className='sticky-footer bg-white'>
       <div className='container my-auto'>
@@ -12,4 +12,4 @@ const footer = () => {
   );
 };
 
-export default footer;
+export default Footer;

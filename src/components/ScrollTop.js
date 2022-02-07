@@ -1,6 +1,6 @@
 import React from 'react';
 
-const scrollTop = () => {
+const ScrollTop = () => {
   return (
     <a className='scroll-to-top rounded' href='#page-top'>
       <i className='fas fa-angle-up'></i>
@@ -8,4 +8,4 @@ const scrollTop = () => {
   );
 };
 
-export default scrollTop;
+export default ScrollTop;
