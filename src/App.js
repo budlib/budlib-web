@@ -1,9 +1,10 @@
 import React from 'react';
 import logo from './logo.jpg';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 // pages
 import SearchBooks from './pages/Books/SearchBooks';
+import SearchLoaners from './pages/Loaners/SearchLoaners';
 import Transactions from './pages/Transactions';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <ComponentRenderer />
         </Route> */}
         <Route path='/books/search' element={<SearchBooks />} />
+        <Route path='/loaners/search' element={<SearchLoaners />} />
         <Route path='/transactions' element={<Transactions />} />
 
         {/* <Route path='*'>
