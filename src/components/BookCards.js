@@ -2,7 +2,7 @@ import React from 'react';
 import { useFetch } from '../helpers/useFetch';
 import BookCard from './BookCard';
 
-let url = 'http://localhost:8080/api/book';
+let url = 'http://localhost:8080/api/books';
 
 function BookCards(searchBy, searchTerm) {
   // searchBy = toString(searchBy) || '';
