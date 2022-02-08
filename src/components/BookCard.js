@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import defaultCover from '../images/no_image_book_v2.jpg';
 
-const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection, imageLink }) => {
+const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection, imageLink, bookTags }) => {
   subtitle = subtitle || '';
   imageLink = imageLink || defaultCover;
   librarySection = librarySection || 'NA';
   let bookBy = authors || publisher;
+
+  let allTags = bookTags.split(' ');
 
   let displayTitle = title;
 
@@ -16,10 +18,10 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
 
   return (
     <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3'>
-      <div className='card' style={{ width: '250px', height: '380px', overflow: 'hidden' }}>
+      <div className='card' style={{ width: '250px', maxHeight: '390px', overflow: 'hidden' }}>
         <Link to={`/books/${bookId}`} style={{ textDecoration: 'none' }}>
           <img className='card-img-top' src={imageLink} style={{ width: '100%', height: '250px', objectFit: 'contain' }} />
-          <div className='card-body pt-2'>
+          <div className='card-body py-1'>
             <p
               className='card-text font-weight-bolder my-1'
               style={{
@@ -44,8 +46,8 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 display: '-webkit-box',
-                WebkitLineClamp: '2',
-                lineClamp: '2',
+                WebkitLineClamp: '1',
+                lineClamp: '1',
                 WebkitBoxOrient: 'vertical',
               }}
             >
@@ -53,20 +55,42 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
             </p>
 
             <p
-              className='card-text my-1'
+              className='card-text'
               style={{
-                fontSize: '14px',
+                fontSize: '13px',
                 color: '#000000',
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 display: '-webkit-box',
-                WebkitLineClamp: '2',
-                lineClamp: '2',
+                WebkitLineClamp: '1',
+                lineClamp: '1',
                 WebkitBoxOrient: 'vertical',
               }}
             >
               Section: {librarySection}
             </p>
+          </div>
+          <div
+            className='card-body py-0 px-3 mb-2'
+            style={{
+              fontSize: '15px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: '1',
+              lineClamp: '1',
+              WebkitBoxOrient: 'vertical',
+            }}
+          >
+            {allTags.map((tag) => {
+              return (
+                <React.Fragment>
+                  <span key={`${bookId} ${tag}`} className='badge bg-primary mx-1 text-white'>
+                    {tag}
+                  </span>
+                </React.Fragment>
+              );
+            })}
           </div>
         </Link>
       </div>
