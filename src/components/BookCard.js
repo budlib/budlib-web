@@ -20,7 +20,7 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
     <div className='col-xl-3 col-lg-4 col-md-6 col-sm-6 my-3'>
       <div className='card' style={{ width: '250px', maxHeight: '390px', overflow: 'hidden' }}>
         <Link to={`/books/${bookId}`} style={{ textDecoration: 'none' }}>
-          <img className='card-img-top' src={imageLink} style={{ width: '100%', height: '250px', objectFit: 'contain' }} />
+          <img className='card-img-top' alt='' src={imageLink} style={{ width: '100%', height: '250px', objectFit: 'contain' }} />
           <div className='card-body py-1'>
             <p
               className='card-text font-weight-bolder my-1'
