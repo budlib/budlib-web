@@ -51,7 +51,7 @@ const Sidebar = () => {
             <Link className='collapse-item active' to='/books/search'>
               Search books
             </Link>
-            <Link className='collapse-item' to='/books/addBook'>
+            <Link className='collapse-item' to='/books/add-book'>
               Add a book
             </Link>
           </div>
