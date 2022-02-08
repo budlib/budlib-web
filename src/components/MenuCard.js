@@ -10,9 +10,16 @@ const MenuCard = ({ id, head, url, src }) => {
             <h6 className='m-0 font-weight-bold text-primary'>{head}</h6>
           </div>
 
-          <div className='card-body'>
-            <div className='pt-4' style={{ backgroundImage: `url(${process.env.PUBLIC_URL + src})` }}>
-              <canvas id='myPieChart'></canvas>
+          <div className='card-body p-0'>
+            <div
+              className='pt-0 pb-0'
+              style={{
+                backgroundImage: `url(${process.env.PUBLIC_URL + src})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className='pt-0' style={{ height: '250px', width: '250px' }}></div>
             </div>
           </div>
         </div>
