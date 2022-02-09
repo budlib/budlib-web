@@ -17,16 +17,15 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
 
   return (
     <div className='col-xxl-2 col-xl-3 col-lg-5 col-md-6 col-sm-6 my-3'>
-      <div className='card shadow' style={{ height: '390px', overflow: 'hidden' }}>
+      <div className='card shadow o-hidden' style={{ height: '390px' }}>
         <Link to={`/books/${bookId}`} style={{ textDecoration: 'none' }}>
           <img className='card-img-top' alt='' src={imageLink} style={{ width: '100%', height: '250px', objectFit: 'contain' }} />
           <div className='card-body py-1'>
             <p
-              className='card-text font-weight-bolder my-1'
+              className='card-text o-hidden font-weight-bolder my-1'
               style={{
                 fontSize: '15px',
                 color: '#000000',
-                overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 display: '-webkit-box',
                 WebkitLineClamp: '2',
@@ -38,11 +37,10 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
             </p>
 
             <p
-              className='card-text my-0'
+              className='card-text o-hidden my-0'
               style={{
                 fontSize: '13px',
                 color: '#888888',
-                overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 display: '-webkit-box',
                 WebkitLineClamp: '1',
@@ -54,11 +52,10 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
             </p>
 
             <p
-              className='card-text'
+              className='card-text o-hidden'
               style={{
                 fontSize: '13px',
                 color: '#000000',
-                overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 display: '-webkit-box',
                 WebkitLineClamp: '1',
@@ -70,10 +67,9 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
             </p>
           </div>
           <div
-            className='card-body py-0 px-3 mb-2'
+            className='card-body o-hidden py-0 px-3 mb-2'
             style={{
               fontSize: '15px',
-              overflow: 'hidden',
               textOverflow: 'ellipsis',
               display: '-webkit-box',
               WebkitLineClamp: '1',
