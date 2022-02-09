@@ -1,6 +1,6 @@
 import React from 'react';
 import { useFetch } from '../helpers/useFetch';
-// import { useDateFormat } from '../helpers/useDateFormat';
+import { Link } from 'react-router-dom';
 
 const url = 'http://localhost:8080/api/loaners';
 
@@ -46,7 +46,18 @@ const LoanerList = () => {
 
                 return (
                   <tr key={loanerId}>
-                    <td>{loanerId}</td>
+                    <td>
+                      <Link
+                        to={`/loaners/view/${loanerId}`}
+                        style={{
+                          display: 'block',
+                          width: '100%',
+                          color: 'inherit',
+                        }}
+                      >
+                        {loanerId}
+                      </Link>
+                    </td>
                     <td>{schoolId}</td>
                     <td>{fullName}</td>
                     <td>{student}</td>
