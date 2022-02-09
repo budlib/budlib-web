@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import SearchBooks from './pages/Books/SearchBooks';
 import SearchLoaners from './pages/Loaners/SearchLoaners';
 import Transactions from './pages/Transactions';
+import Error from './pages/Error';
 
 function App() {
   return (
@@ -23,16 +24,7 @@ function App() {
         <Route path='/books/search' element={<SearchBooks />} />
         <Route path='/loaners/search' element={<SearchLoaners />} />
         <Route path='/transactions' element={<Transactions />} />
-
-        {/* <Route path='*'>
-          <ErrorPage />
-        </Route> */}
-        {/* <Route path='/thank-you'>
-          <ThankYouPage />
-        </Route>
-        <Route path='/'>
-          <MainLandingPage />
-        </Route> */}
+        <Route path='*' element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
