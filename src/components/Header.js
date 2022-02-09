@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import profilePic from '../assets/img/undraw_profile_3.svg';
 
 const Header = (props) => {
@@ -19,10 +21,10 @@ const Header = (props) => {
           </a>
 
           <div className='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
-            <a className='dropdown-item' href='#'>
+            <Link className='dropdown-item' to='/librarian/profile'>
               <i className='fas fa-user fa-sm fa-fw mr-2 text-gray-400'></i>
               Profile
-            </a>
+            </Link>
             <div className='dropdown-divider'></div>
             <a className='dropdown-item' href='#' data-toggle='modal' data-target='#logoutModal'>
               <i className='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>

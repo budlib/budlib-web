@@ -16,24 +16,24 @@ const Sidebar = () => {
       <div className='sidebar-heading'>Action</div>
 
       <li className='nav-item'>
-        <a className='nav-link' href='index.html'>
+        <Link className='nav-link' to='/loaners/borrow-books'>
           <i className='fas fa-fw fa-anchor'></i>
           <span>Borrow books</span>
-        </a>
+        </Link>
       </li>
 
       <li className='nav-item'>
-        <a className='nav-link' href='index.html'>
+        <Link className='nav-link' to='/loaners/return-books'>
           <i className='fas fa-fw fa-award'></i>
           <span>Return books</span>
-        </a>
+        </Link>
       </li>
 
       <li className='nav-item'>
-        <a className='nav-link' href='index.html'>
+        <Link className='nav-link' to='/loaners/provide-extension'>
           <i className='far fa-fw fa-calendar-check'></i>
           <span>Provide extension</span>
-        </a>
+        </Link>
       </li>
 
       <hr className='sidebar-divider' />
