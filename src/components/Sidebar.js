@@ -16,21 +16,21 @@ const Sidebar = () => {
       <div className='sidebar-heading'>Action</div>
 
       <li className='nav-item'>
-        <Link className='nav-link' to='/loaners/borrow-books'>
+        <Link className='nav-link text-white' to='/loaners/borrow-books'>
           <i className='fas fa-fw fa-anchor'></i>
           <span>Borrow books</span>
         </Link>
       </li>
 
       <li className='nav-item'>
-        <Link className='nav-link' to='/loaners/return-books'>
+        <Link className='nav-link text-white' to='/loaners/return-books'>
           <i className='fas fa-fw fa-award'></i>
           <span>Return books</span>
         </Link>
       </li>
 
       <li className='nav-item'>
-        <Link className='nav-link' to='/loaners/provide-extension'>
+        <Link className='nav-link text-white' to='/loaners/provide-extension'>
           <i className='far fa-fw fa-calendar-check'></i>
           <span>Provide extension</span>
         </Link>
@@ -40,15 +40,14 @@ const Sidebar = () => {
 
       <div className='sidebar-heading'>Database</div>
 
-      {/* classes - active and show are toggled */}
-      <li className='nav-item active'>
-        <a className='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseBooks' aria-expanded='true' aria-controls='collapseBooks'>
+      <li className='nav-item'>
+        <a className='nav-link collapsed text-white' href='#' data-toggle='collapse' data-target='#collapseBooks' aria-expanded='true' aria-controls='collapseBooks'>
           <i className='fas fa-fw fa-book'></i>
           <span>Books</span>
         </a>
-        <div id='collapseBooks' className='collapse show' aria-labelledby='headingTwo' data-parent='#accordionSidebar'>
+        <div id='collapseBooks' className='collapse' aria-labelledby='headingTwo' data-parent='#accordionSidebar'>
           <div className='bg-white py-2 collapse-inner rounded'>
-            <Link className='collapse-item active' to='/books/search'>
+            <Link className='collapse-item' to='/books/search'>
               Search books
             </Link>
             <Link className='collapse-item' to='/books/add-book'>
@@ -59,7 +58,7 @@ const Sidebar = () => {
       </li>
 
       <li className='nav-item'>
-        <a className='nav-link collapsed' href='#' data-toggle='collapse' data-target='#collapseLoaners' aria-expanded='true' aria-controls='collapseLoaners'>
+        <a className='nav-link collapsed text-white' href='#' data-toggle='collapse' data-target='#collapseLoaners' aria-expanded='true' aria-controls='collapseLoaners'>
           <i className='fas fa-fw fa-user'></i>
           <span>Loaners</span>
         </a>
@@ -76,7 +75,7 @@ const Sidebar = () => {
       </li>
 
       <li className='nav-item'>
-        <Link className='nav-link' to='/transactions'>
+        <Link className='nav-link text-white' to='/transactions'>
           <i className='fas fa-fw fa-chart-area'></i>
           <span>Transactions</span>
         </Link>
@@ -87,7 +86,7 @@ const Sidebar = () => {
       <div className='sidebar-heading'>Admin</div>
 
       <li className='nav-item'>
-        <Link className='nav-link' to='/dashboard'>
+        <Link className='nav-link text-white' to='/dashboard'>
           <i className='fas fa-fw fa-tachometer-alt'></i>
           <span>Dashboard</span>
         </Link>
