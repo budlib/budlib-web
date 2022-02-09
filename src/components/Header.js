@@ -1,12 +1,16 @@
 import React from 'react';
 import profilePic from '../assets/img/undraw_profile_3.svg';
 
-const Header = () => {
+const Header = (props) => {
+  let { heading } = props;
+  heading = heading || '';
+
   return (
     <nav className='navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow'>
       <button id='sidebarToggleTop' className='btn btn-link d-md-none rounded-circle mr-3'>
         <i className='fa fa-bars'></i>
       </button>
+      <h4 className='text-dark px-3 text-capitalize font-weight-bold'>{heading}</h4>
       <ul className='navbar-nav ml-auto'>
         <li className='nav-item dropdown no-arrow'>
           <a className='nav-link dropdown-toggle' href='#' id='userDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>

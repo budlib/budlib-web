@@ -14,7 +14,7 @@ const Transactions = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header />
+            <Header heading='Home' />
             <div className='container-fluid'>
               <Menu />
             </div>

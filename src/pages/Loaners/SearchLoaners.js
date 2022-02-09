@@ -14,7 +14,7 @@ const SearchLoaners = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header />
+            <Header heading='Search loaners' />
             <div className='container-fluid'>
               <LoanerList />
             </div>

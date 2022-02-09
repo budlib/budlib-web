@@ -14,7 +14,7 @@ function SearchBooks() {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header />
+            <Header heading='Search books' />
             <div className='container-fluid'>
               <BookCards />
             </div>
