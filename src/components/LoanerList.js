@@ -32,16 +32,12 @@ const LoanerList = () => {
             </tfoot>
             <tbody>
               {data.map((dataItem) => {
-                let { loanerId, schoolId, salutation, fullName, student } = dataItem;
+                let { loanerId, schoolId, fullNameWithSalutation, isStudent, totalOutstanding } = dataItem;
 
-                if (student === true || student === 'true') {
-                  student = 'Student';
+                if (isStudent === true || isStudent === 'true') {
+                  isStudent = 'Student';
                 } else {
-                  student = 'Faculty';
-
-                  if (salutation != null && salutation.length !== 0) {
-                    fullName = salutation + ' ' + fullName;
-                  }
+                  isStudent = 'Faculty';
                 }
 
                 return (
@@ -59,9 +55,9 @@ const LoanerList = () => {
                       </Link>
                     </td>
                     <td>{schoolId}</td>
-                    <td>{fullName}</td>
-                    <td>{student}</td>
-                    <td>{0}</td>
+                    <td>{fullNameWithSalutation}</td>
+                    <td>{isStudent}</td>
+                    <td>{totalOutstanding}</td>
                   </tr>
                 );
               })}

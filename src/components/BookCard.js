@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection, imageLink, bookTags }) => {
+const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection, imageLink, tags }) => {
   subtitle = subtitle || '';
   imageLink = imageLink || `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
   librarySection = librarySection || 'NA';
   let bookBy = authors || publisher;
-
-  let allTags = bookTags.split(' ');
 
   let displayTitle = title;
 
@@ -16,8 +14,8 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
   }
 
   return (
-    <div className='col-xxl-2 col-xl-3 col-lg-5 col-md-6 col-sm-6 my-3'>
-      <div className='card shadow o-hidden' style={{ height: '390px' }}>
+    <div className='col-xxl-2 col-xl-3 col-lg-5 col-md-6 col-sm-6 p-4'>
+      <div className='card shadow o-hidden' style={{ maxHeight: '390px' }}>
         <Link to={`/books/${bookId}`} style={{ textDecoration: 'none' }}>
           <img className='card-img-top' alt='' src={imageLink} style={{ width: '100%', height: '250px', objectFit: 'contain' }} />
           <div className='card-body py-1'>
@@ -77,11 +75,11 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
               WebkitBoxOrient: 'vertical',
             }}
           >
-            {allTags.map((tag) => {
+            {tags.map((tag) => {
               return (
                 <React.Fragment>
-                  <span key={`${bookId} ${tag}`} className='badge bg-primary mx-1 text-white'>
-                    {tag}
+                  <span key={`${bookId} ${tag['id']}`} className='badge bg-primary mx-1 text-white'>
+                    {tag['tagName']}
                   </span>
                 </React.Fragment>
               );

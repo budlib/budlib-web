@@ -18,7 +18,6 @@ const TransactionList = () => {
                 <th>Date</th>
                 <th>Time</th>
                 <th>Type</th>
-                <th>Branch</th>
                 <th>Loaner</th>
               </tr>
             </thead>
@@ -28,13 +27,12 @@ const TransactionList = () => {
                 <th>Date</th>
                 <th>Time</th>
                 <th>Type</th>
-                <th>Branch</th>
                 <th>Loaner</th>
               </tr>
             </tfoot>
             <tbody>
               {data.map((dataItem) => {
-                const { transactionId, branchId, transactionDateTime, transactionType, loanerId } = dataItem;
+                const { transactionId, transactionDateTime, transactionType, loaner } = dataItem;
 
                 const trnDateTime = new Date(transactionDateTime);
 
@@ -62,8 +60,7 @@ const TransactionList = () => {
                     <td>{trnDate}</td>
                     <td>{trnTime}</td>
                     <td>{trnType}</td>
-                    <td>{branchId['branchName']}</td>
-                    <td>{loanerId['fullName']}</td>
+                    <td>{loaner['fullNameWithSalutation']}</td>
                   </tr>
                 );
               })}
