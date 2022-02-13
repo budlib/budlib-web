@@ -2,14 +2,14 @@ import React from 'react';
 import { useFetch } from '../helpers/useFetch';
 import BookCard from './BookCard';
 
-let url = 'http://localhost:8080/api/books';
+let url = '/api/books';
 
 function BookCards(searchBy, searchTerm) {
   // searchBy = toString(searchBy) || '';
 
   // url = url + '?searchBy=' + searchBy + '&searchTerm=' + searchTerm;
 
-  const { loading, data } = useFetch(url);
+  const { data } = useFetch(url);
 
   return (
     <div className='row pt-3'>

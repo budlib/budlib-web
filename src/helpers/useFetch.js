@@ -1,6 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export const useFetch = (url) => {
+export const useFetch = (endpoint) => {
+  const hosting = 'http://localhost:8080';
+  let url = '';
+
+  if (endpoint !== '' && endpoint !== undefined && endpoint.charAt(0) !== '/') {
+    url = hosting.concat('/', endpoint);
+  } else {
+    url = hosting.concat(endpoint);
+  }
+
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
