@@ -11,7 +11,7 @@ const LoanAddForm = () => {
   }
 
   return (
-    <div className='card shadow mb-4 text-dark' style={{ maxWidth: '50rem' }}>
+    <div className='card shadow mb-4 p-3 text-dark' style={{ maxWidth: '50rem' }}>
       <div className='card-body'>
         <form>
           <div className='form-group row'>
@@ -42,6 +42,14 @@ const LoanAddForm = () => {
             </label>
             <div className='col-sm-8'>
               <input type='text' className='form-control' placeholder='XJKDKS' />
+            </div>
+          </div>
+          <div className='form-group row'>
+            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formEmail'>
+              Email
+            </label>
+            <div className='col-sm-8'>
+              <input type='email' className='form-control' placeholder='john.doe@waldorf.ca' />
             </div>
           </div>
           <div className='form-group row'>
@@ -100,10 +108,10 @@ const LoanAddForm = () => {
             </div>
           </div>
 
-          <button type='submit' className='btn btn-primary m-3'>
+          <button type='submit' className='btn btn-primary my-2'>
             Add loaner
           </button>
-          <button type='button' className='btn btn-outline-danger m-3'>
+          <button type='button' className='btn btn-outline-danger mx-4 my-2'>
             Cancel
           </button>
         </form>
