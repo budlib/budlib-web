@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import ScrollTop from '../components/ScrollTop';
-import TransactionList from '../components/TransactionList';
+import Sidebar from '../../components/Sidebar';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import ScrollTop from '../../components/ScrollTop';
+import TransactionList from '../../components/TransactionList';
 
-const Transactions = () => {
+const SearchTransactions = () => {
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -29,4 +29,4 @@ const Transactions = () => {
   );
 };
 
-export default Transactions;
+export default SearchTransactions;
