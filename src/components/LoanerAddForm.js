@@ -21,7 +21,7 @@ const LoanAddForm = () => {
             {/* change structure of form based on this */}
             <div className='col-sm-8'>
               <select name='formLoanerType' className='form-control' id='formLoanerType' onChange={handleTypeChange}>
-                <option value='Student' selected>
+                <option value='Student' defaultValue>
                   Student
                 </option>
                 <option value='Faculty'>Faculty</option>
