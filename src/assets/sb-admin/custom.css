@@ -1,0 +1,9 @@
+/* making placeholder text lighter */
+.form-control::placeholder {
+  color: #e5e5e5;
+}
+
+/* for toggling form elements*/
+.bg-hide {
+  display: none;
+}
