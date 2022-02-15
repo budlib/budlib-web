@@ -1,29 +1,53 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { postCall } from '../helpers/postCall';
 
 const LoanAddForm = () => {
-  const handleSubmit = () => {
-    console.log('You pressed submit button');
-  };
+  let navigate = useNavigate();
 
-  function handleTypeChange(event) {
-    console.log(event);
+  const [details, setDetails] = useState({
+    schoolId: '',
+    email: '',
+    salutation: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    motherName: '',
+    fatherName: '',
+    isStudent: true,
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    postCall('/api/loaners', details);
   }
 
   return (
     <div className='card shadow mb-4 p-3 text-dark' style={{ maxWidth: '50rem' }}>
       <div className='card-body'>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLoanerType'>
               Loaner Type
             </label>
-            {/* change structure of form based on this */}
             <div className='col-sm-8'>
-              <select name='formLoanerType' className='form-control' id='formLoanerType' onChange={handleTypeChange}>
-                <option value='Student' defaultValue>
-                  Student
-                </option>
+              <select
+                className='form-control'
+                id='formLoanerType'
+                name='formLoanerType'
+                defaultValue='Student'
+                onChange={(e) => {
+                  setDetails({ ...details, isStudent: e.target.value === 'Student' ? true : false });
+
+                  document.getElementById('formSalutation').parentElement.parentElement.classList.toggle('bg-hide');
+                  document.getElementById('formFatherName').parentElement.parentElement.classList.toggle('bg-hide');
+                  document.getElementById('formMotherName').parentElement.parentElement.classList.toggle('bg-hide');
+
+                  let idLabel = document.getElementById('formSchoolId').parentElement.previousElementSibling;
+                  e.target.value === 'Student' ? (idLabel.innerHTML = 'School ID') : (idLabel.innerHTML = 'Employee ID');
+                }}
+              >
+                <option value='Student'>Student</option>
                 <option value='Faculty'>Faculty</option>
               </select>
             </div>
@@ -33,15 +57,17 @@ const LoanAddForm = () => {
               School ID
             </label>
             <div className='col-sm-8'>
-              <input type='text' className='form-control' placeholder='XJKDKS' />
-            </div>
-          </div>
-          <div className='form-group row'>
-            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formEmployeeId'>
-              Employee ID
-            </label>
-            <div className='col-sm-8'>
-              <input type='text' className='form-control' placeholder='XJKDKS' />
+              <input
+                type='text'
+                className='form-control'
+                id='formSchoolId'
+                name='formSchoolId'
+                placeholder='XJKDKS'
+                value={details['schoolId']}
+                onChange={(e) => {
+                  setDetails({ ...details, schoolId: e.target.value });
+                }}
+              />
             </div>
           </div>
           <div className='form-group row'>
@@ -49,21 +75,42 @@ const LoanAddForm = () => {
               Email
             </label>
             <div className='col-sm-8'>
-              <input type='email' className='form-control' placeholder='john.doe@waldorf.ca' />
+              <input
+                type='email'
+                className='form-control'
+                id='formEmail'
+                name='formEmail'
+                placeholder='john.doe@waldorf.ca'
+                value={details['email']}
+                onChange={(e) => {
+                  setDetails({ ...details, email: e.target.value });
+                }}
+              />
             </div>
           </div>
-          <div className='form-group row'>
-            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formSchoolId'>
+          <div className='form-group row bg-hide'>
+            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formSalutation'>
               Salutation
             </label>
             <div className='col-sm-8'>
-              <input type='text' className='form-control' list='salutationList' placeholder='Mr' />
+              <input
+                type='text'
+                className='form-control'
+                id='formSalutation'
+                name='formSalutation'
+                list='salutationList'
+                placeholder='Mr'
+                value={details['salutation']}
+                onChange={(e) => {
+                  setDetails({ ...details, salutation: e.target.value });
+                }}
+              />
               <datalist id='salutationList'>
                 <option value='Mr'></option>
                 <option value='Ms'></option>
                 <option value='Miss'></option>
                 <option value='Mrs'></option>
-                <option value='Doc'></option>
+                <option value='Dr'></option>
               </datalist>
             </div>
           </div>
@@ -72,7 +119,18 @@ const LoanAddForm = () => {
               First name
             </label>
             <div className='col-sm-8'>
-              <input type='text' className='form-control' placeholder='John' />
+              <input
+                type='text'
+                className='form-control'
+                id='formFirstName'
+                name='formFirstName'
+                placeholder='John'
+                required
+                value={details['firstName']}
+                onChange={(e) => {
+                  setDetails({ ...details, firstName: e.target.value });
+                }}
+              />
             </div>
           </div>
           <div className='form-group row'>
@@ -80,7 +138,17 @@ const LoanAddForm = () => {
               Middle name
             </label>
             <div className='col-sm-8'>
-              <input type='text' className='form-control' placeholder='Michael' />
+              <input
+                type='text'
+                className='form-control'
+                id='formMiddleName'
+                name='formMiddleName'
+                placeholder='Michael'
+                value={details['middleName']}
+                onChange={(e) => {
+                  setDetails({ ...details, middleName: e.target.value });
+                }}
+              />
             </div>
           </div>
           <div className='form-group row'>
@@ -88,7 +156,17 @@ const LoanAddForm = () => {
               Last name
             </label>
             <div className='col-sm-8'>
-              <input type='text' className='form-control' placeholder='Doe' />
+              <input
+                type='text'
+                className='form-control'
+                id='formLastName'
+                name='formLastName'
+                placeholder='Doe'
+                value={details['lastName']}
+                onChange={(e) => {
+                  setDetails({ ...details, lastName: e.target.value });
+                }}
+              />
             </div>
           </div>
           <div className='form-group row'>
@@ -96,7 +174,17 @@ const LoanAddForm = () => {
               Father's name
             </label>
             <div className='col-sm-8'>
-              <input type='text' className='form-control' placeholder='Michael Jake Doe' />
+              <input
+                type='text'
+                className='form-control'
+                id='formFatherName'
+                name='formFatherName'
+                placeholder='Michael Jake Doe'
+                value={details['fatherName']}
+                onChange={(e) => {
+                  setDetails({ ...details, fatherName: e.target.value });
+                }}
+              />
             </div>
           </div>
           <div className='form-group row'>
@@ -104,14 +192,31 @@ const LoanAddForm = () => {
               Mother's name
             </label>
             <div className='col-sm-8'>
-              <input type='text' className='form-control' placeholder='Emily Doe' />
+              <input
+                type='text'
+                className='form-control'
+                id='formMotherName'
+                name='formMotherName'
+                placeholder='Emily Doe'
+                value={details['motherName']}
+                onChange={(e) => {
+                  setDetails({ ...details, motherName: e.target.value });
+                }}
+              />
             </div>
           </div>
 
           <button type='submit' className='btn btn-primary my-2'>
             Add loaner
           </button>
-          <button type='button' className='btn btn-outline-danger mx-4 my-2'>
+          <button
+            type='button'
+            className='btn btn-outline-danger mx-4 my-2'
+            onClick={() => {
+              let path = `/home`;
+              navigate(path);
+            }}
+          >
             Cancel
           </button>
         </form>
