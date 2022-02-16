@@ -1,15 +1,20 @@
 import React from 'react';
 import { useFetch } from '../helpers/useFetch';
 import BookCard from './BookCard';
+import { useEffect, useState } from 'react';
 
 let url = '/api/books';
 
-function BookCards(searchBy, searchTerm) {
-  // searchBy = toString(searchBy) || '';
+function BookCards(props) {
 
-  // url = url + '?searchBy=' + searchBy + '&searchTerm=' + searchTerm;
 
-  const { data } = useFetch(url);
+  let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
+  console.log(thisurl);
+
+
+  const { data } = useFetch(thisurl);
+
+
 
   return (
     <div className='row pt-3'>
