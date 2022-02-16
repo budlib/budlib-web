@@ -4,8 +4,11 @@ import { Link } from 'react-router-dom';
 
 const url = '/api/loaners';
 
-const LoanerList = () => {
-  const { data } = useFetch(url);
+const LoanerList = (props) => {
+  let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
+  console.log(thisurl);
+
+  const { data } = useFetch(thisurl);
 
   return (
     <div className='row'>
