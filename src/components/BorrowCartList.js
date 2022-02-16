@@ -10,32 +10,40 @@ const BorrowCartList = (props) => {
   let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
   console.log(thisurl);
   const [cart, setCart] = useState([]);
-  const librarianId = 9;
+  const librarianId = 1;
   const { id } = useParams();
   const { data } = useFetch(thisurl);
 
   const handleAdd =(e)=>{
     let newCart = cart;
     let exist = false;
-    for(var i = 0; i < newCart.length; i++)
+    let st = e.target.value.split("@")
+    console.log(st[2]);
+    if(parseInt(st[2])>0){
+      for(var i = 0; i < newCart.length; i++)
       {
         console.log(i);
-        let st = e.target.value.split("@")
-        if(newCart[i]["bookId"] == parseInt(st[0]))
+
+        if(newCart[i]["bookId"] == parseInt(st[0])  )
         {
-          newCart[i]["copies"] = parseInt(newCart[i]["copies"])+1;
+          if(newCart[i]["copies"]<parseInt(st[2])){
+            newCart[i]["copies"] = parseInt(newCart[i]["copies"])+1;
+
+          }else{
+            window.alert("No More Availability. ");
+          }
+
           exist = true;
         }
       }
 
       if(exist == false){
-        let st = e.target.value.split("@")
 
         newCart.push({
 
           "bookId": parseInt(st[0]),
           "title":st[1],
-
+          "available":st[2],
           "copies": 1
         })
 
@@ -46,6 +54,11 @@ const BorrowCartList = (props) => {
 
     console.log(cart);
 
+    }else{
+      window.alert("No More Availability. " );
+    }
+
+
 
   };
 
@@ -55,10 +68,15 @@ const BorrowCartList = (props) => {
       {
         console.log(e.target.value);
 
+
         if(newCart[i]["bookId"] == e.target.value)
         {
+          if(newCart[i]["copies"]<parseInt(newCart[i]["available"])){
           newCart[i]["copies"] = parseInt(newCart[i]["copies"])+1;
           setCart([...newCart]);
+          }else{
+            window.alert("No More Availability. ");
+          }
 
         }
       }
@@ -144,6 +162,7 @@ const BorrowCartList = (props) => {
         "bookCopies": bookCopies
 
       }
+      console.log(message);
 
       postCall('api/transactions?borrowDate=20220211&dueDate=20220411', message);
       window.alert("Transaction complete");
@@ -181,7 +200,7 @@ const BorrowCartList = (props) => {
                 </tfoot>
                 <tbody>
                   {data.map((dataItem) => {
-                    let { bookId, title } = dataItem;
+                    let { bookId, title, availableQuantity } = dataItem;
 
 
 
@@ -193,7 +212,7 @@ const BorrowCartList = (props) => {
 
                         </td>
                         <td>{title}</td>
-                        <td><button onClick={(e) => handleAdd(e)} value={bookId + "@" + title}  className="btn btn-secondary btn-sm">Add</button></td>
+                        <td><button onClick={(e) => handleAdd(e)} value={bookId + "@" + title + "@" + availableQuantity}  className="btn btn-secondary btn-sm">Add</button></td>
 
                       </tr>
                     );

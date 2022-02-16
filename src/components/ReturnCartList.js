@@ -10,35 +10,48 @@ const ReturnCartList = (props) => {
   let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
   console.log(thisurl);
   const [cart, setCart] = useState([]);
-  const librarianId = 9;
+  const librarianId = 1;
   const { id } = useParams();
   const { data } = useFetch(thisurl);
 
   const handleAdd =(e)=>{
     let newCart = cart;
     let exist = false;
+    let st = e.target.value.split("@")
+    let loanedOut = parseInt(st[3]) - parseInt(st[2])
+    console.log(loanedOut);
     for(var i = 0; i < newCart.length; i++)
       {
         console.log(i);
-        let st = e.target.value.split("@")
+
+
         if(newCart[i]["bookId"] == parseInt(st[0]))
         {
-          newCart[i]["copies"] = parseInt(newCart[i]["copies"])+1;
+          if(newCart[i]["copies"]<loanedOut){
+            newCart[i]["copies"] = parseInt(newCart[i]["copies"])+1;
+
+          }else{
+            window.alert("Cannot Return More Than Loaned Out");
+          }
+
           exist = true;
         }
       }
 
-      if(exist == false){
-        let st = e.target.value.split("@")
+      if(exist == false && loanedOut>0){
+
+
 
         newCart.push({
 
           "bookId": parseInt(st[0]),
           "title":st[1],
-
+          "loanedOut":loanedOut,
           "copies": 1
         })
 
+      }else{
+        window.alert("Cannot Return More Than Loaned Out");
       }
 
 
@@ -55,7 +68,7 @@ const ReturnCartList = (props) => {
       {
         console.log(e.target.value);
 
-        if(newCart[i]["bookId"] == e.target.value)
+        if(newCart[i]["bookId"] == e.target.value &&newCart[i]["copies"]<newCart[i]["loanedOut"])
         {
           newCart[i]["copies"] = parseInt(newCart[i]["copies"])+1;
           setCart([...newCart]);
@@ -181,7 +194,7 @@ const ReturnCartList = (props) => {
                 </tfoot>
                 <tbody>
                   {data.map((dataItem) => {
-                    let { bookId, title } = dataItem;
+                    let { bookId, title, availableQuantity, totalQuantity } = dataItem;
 
 
 
@@ -193,7 +206,7 @@ const ReturnCartList = (props) => {
 
                         </td>
                         <td>{title}</td>
-                        <td><button onClick={(e) => handleAdd(e)} value={bookId + "@" + title}  className="btn btn-secondary btn-sm">Add</button></td>
+                        <td><button onClick={(e) => handleAdd(e)} value={bookId + "@" + title + "@" + availableQuantity + '@' + totalQuantity}  className="btn btn-secondary btn-sm">Add</button></td>
 
                       </tr>
                     );
