@@ -1,5 +1,5 @@
 export async function postCall(endpoint, payload) {
-  const hosting = 'https://budlib.herokuapp.com';
+  const hosting = 'http://localhost:8080';
   let url = '';
 
   if (endpoint !== '' && endpoint !== undefined && endpoint.charAt(0) !== '/') {
