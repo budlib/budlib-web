@@ -145,7 +145,7 @@ const ReturnCartList = (props) => {
 
       }
 
-      postCall('/api/transactions', message);
+      postCall('api/transactions?borrowDate=20220211&dueDate=20220411', message);
       window.alert("Transaction complete");
       setCart([]);
 
