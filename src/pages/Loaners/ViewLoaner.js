@@ -10,6 +10,13 @@ import ViewLoanerDetailsCard from '../../components/ViewLoanerDetailsCard';
 import ViewCurrentLoansCard from '../../components/ViewCurrentLoansCard';
 import ViewLoanerHistoryCard from '../../components/ViewLoanerHistoryCard';
 
+
+
+const handleDel =(e)=>{
+  console.log("Deleting");
+
+}
+
 const ViewLoaner = () => {
   const { id } = useParams();
 
@@ -37,7 +44,7 @@ const ViewLoaner = () => {
                     <button type='button' className='btn btn-secondary'>
                       Edit details
                     </button>
-                    <button type='button' className='btn btn-danger'>
+                    <button type='button' onClick={(e) => handleDel(e)} className='btn btn-danger'>
                       Delete loaner
                     </button>
                   </div>
