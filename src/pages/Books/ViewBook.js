@@ -16,6 +16,11 @@ const ViewBook = () => {
   let customImg = '';
   let defaultImg = customImg || `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
 
+  const handleDel =(e)=>{
+    console.log("Deleting");
+
+  }
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -34,7 +39,7 @@ const ViewBook = () => {
                     <button type='button' className='btn btn-secondary'>
                       Edit details
                     </button>
-                    <button type='button' className='btn btn-danger'>
+                    <button type='button' onClick={(e) => handleDel(e)} className='btn btn-danger'>
                       Delete Book
                     </button>
                   </div>
