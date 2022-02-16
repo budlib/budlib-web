@@ -14,12 +14,16 @@ import SearchTransactions from './pages/Transactions/SearchTransactions';
 import Error from './pages/Error';
 import BorrowCart from './pages/Loaners/BorrowCart';
 import SelectBorrower from './pages/Loaners/SelectBorrower';
+import SelectReturner from './pages/Loaners/SelectReturner';
+import ReturnCart from './pages/Loaners/ReturnCart';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Navigate to='/home' />} />
+        <Route path='/loaners/return-books/:id' element={<ReturnCart />} />
+        <Route path='/loaners/return-books' element={<SelectReturner />} />
         <Route path='/loaners/borrow-books/:id' element={<BorrowCart />} />
         <Route path='/loaners/borrow-books' element={<SelectBorrower />} />
         <Route path='/home' element={<Home />} />
