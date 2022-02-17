@@ -19,13 +19,30 @@ const LoanAddForm = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    postCall('/api/loaners', details);
+
+    postCall('/api/loaners', details).then((result) => {
+      window.alert(result['data']['message']);
+
+      if (result['status'] == 200) {
+        setDetails({
+          schoolId: '',
+          email: '',
+          salutation: '',
+          firstName: '',
+          middleName: '',
+          lastName: '',
+          motherName: '',
+          fatherName: '',
+          isStudent: true,
+        });
+      }
+    });
   }
 
   return (
     <div className='card shadow mb-4 p-3 text-dark' style={{ maxWidth: '50rem' }}>
       <div className='card-body'>
-        <form onSubmit={handleSubmit}>
+        <form id='loanerForm' onSubmit={handleSubmit}>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLoanerType'>
               Loaner Type
