@@ -21,7 +21,8 @@ export async function postCall(endpoint, payload) {
     body: JSON.stringify(payload),
   });
 
+  const status = response.status;
   const data = await response.json();
 
-  return data;
+  return { status, data };
 }
