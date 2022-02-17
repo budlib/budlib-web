@@ -1,5 +1,6 @@
+import hosting from './baseUrlAPI';
+
 export async function deleteCall(endpoint) {
-  const hosting = 'http://localhost:8080';
   let url = '';
 
   if (endpoint !== '' && endpoint !== undefined && endpoint.charAt(0) !== '/') {

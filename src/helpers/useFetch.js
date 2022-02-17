@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
+import hosting from './baseUrlAPI';
 
 export const useFetch = (endpoint) => {
-  const hosting = 'http://localhost:8080';
   let url = '';
 
   if (endpoint !== '' && endpoint !== undefined && endpoint.charAt(0) !== '/') {
