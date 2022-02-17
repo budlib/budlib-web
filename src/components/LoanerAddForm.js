@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { postCall } from '../helpers/postCall';
 
 const LoanAddForm = () => {
@@ -23,7 +23,7 @@ const LoanAddForm = () => {
     postCall('/api/loaners', details).then((result) => {
       window.alert(result['data']['message']);
 
-      if (result['status'] == 200) {
+      if (result['status'] === 200) {
         setDetails({
           schoolId: '',
           email: '',
