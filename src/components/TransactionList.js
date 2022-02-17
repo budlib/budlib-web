@@ -62,7 +62,7 @@ const TransactionList = () => {
                         <td>{trnDate}</td>
                         <td>{trnTime}</td>
                         <td>{trnType}</td>
-                        <td>{loaner['fullNameWithSalutation']}</td>
+                        <td>{loaner == null ? '<removed>' : loaner['fullNameWithSalutation']}</td>
                       </tr>
                     );
                   })}
