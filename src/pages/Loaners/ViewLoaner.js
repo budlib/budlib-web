@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useFetch } from '../../helpers/useFetch';
+import { deleteCall } from '../../helpers/deleteCall';
 
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
@@ -10,13 +11,6 @@ import ViewLoanerDetailsCard from '../../components/ViewLoanerDetailsCard';
 import ViewCurrentLoansCard from '../../components/ViewCurrentLoansCard';
 import ViewLoanerHistoryCard from '../../components/ViewLoanerHistoryCard';
 
-
-
-const handleDel =(e)=>{
-  console.log("Deleting");
-
-}
-
 const ViewLoaner = () => {
   const { id } = useParams();
 
@@ -25,6 +19,19 @@ const ViewLoaner = () => {
 
   let loanerLoansUrl = `/api/loaners/${id}/loans`;
   const { data: loanData } = useFetch(loanerLoansUrl);
+
+  let navigate = useNavigate();
+
+  function handleDelete(e) {
+    deleteCall(loanerDetailUrl).then((result) => {
+      window.alert(result['data']['message']);
+
+      if (result['status'] == 200) {
+        let path = `/loaners/search`;
+        navigate(path);
+      }
+    });
+  }
 
   return (
     <React.Fragment>
@@ -44,7 +51,7 @@ const ViewLoaner = () => {
                     <button type='button' className='btn btn-secondary'>
                       Edit details
                     </button>
-                    <button type='button' onClick={(e) => handleDel(e)} className='btn btn-danger'>
+                    <button type='button' className='btn btn-danger' onClick={handleDelete}>
                       Delete loaner
                     </button>
                   </div>
