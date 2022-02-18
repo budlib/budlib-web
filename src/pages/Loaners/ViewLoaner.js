@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useFetch } from '../../helpers/useFetch';
 import { deleteCall } from '../../helpers/deleteCall';
 
@@ -33,6 +33,11 @@ const ViewLoaner = () => {
     });
   }
 
+  function handleEdit(e) {
+    let path = `/loaners/${id}/edit`;
+    navigate(path);
+  }
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -48,7 +53,7 @@ const ViewLoaner = () => {
 
                 <div className='col-sm-4 px-4 p-2'>
                   <div className='btn-group'>
-                    <button type='button' className='btn btn-secondary'>
+                    <button type='button' className='btn btn-secondary' onClick={handleEdit}>
                       Edit details
                     </button>
                     <button type='button' className='btn btn-danger' onClick={handleDelete}>
