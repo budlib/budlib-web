@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { postCall } from '../helpers/postCall';
+
 function get_book_details(isbn_number) {
-
-
-
-
   let isbn_number_formatted = isbn_number.trim().replaceAll('-', '');
   let url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn_number_formatted}`;
 
@@ -16,132 +13,155 @@ function get_book_details(isbn_number) {
   return details;
 }
 
-async function isbnPrepopulate() {
-  let messageSpan = document.getElementById('isbnMessage');
-  let isbnSearchInput = document.getElementById('formIsbn');
-
-  if (isbnSearchInput.value === '') {
-    messageSpan.innerHTML = 'Enter ISBN before searching!';
-    messageSpan.setAttribute('display', 'inline');
-    messageSpan.className = 'px-4 text-danger';
-  } else {
-    messageSpan.innerHTML = '';
-
-    const bookDetails = await get_book_details(isbnSearchInput.value);
-
-    if (bookDetails['totalItems'] === 0) {
-      messageSpan.innerHTML = 'Details not found! Please fill manually.';
-      messageSpan.setAttribute('display', 'inline');
-      messageSpan.className = 'px-4 text-danger';
-    } else {
-      messageSpan.innerHTML = 'Details populated! You may edit them accordingly.';
-      messageSpan.setAttribute('display', 'inline');
-      messageSpan.className = 'px-4 text-success';
-
-      const theVolumeDetail = bookDetails['items'][0]['volumeInfo'];
-      let possibleISBNIinfo = theVolumeDetail['industryIdentifiers'] || '';
-
-      for (let i = 0; i < possibleISBNIinfo.length; i++) {
-        if (possibleISBNIinfo[i]['type'] === 'ISBN_10') {
-          document.getElementById('formIsbn10').value = possibleISBNIinfo[i]['identifier'];
-        }
-
-        if (possibleISBNIinfo[i]['type'] === 'ISBN_13') {
-          document.getElementById('formIsbn13').value = possibleISBNIinfo[i]['identifier'];
-        }
-      }
-
-      if (theVolumeDetail['imageLinks'] !== undefined) {
-        document.getElementById('formImageLink').value = theVolumeDetail['imageLinks']['thumbnail'] || '';
-        document.getElementById('formThumbnail').src = theVolumeDetail['imageLinks']['thumbnail'] || '';
-      }
-
-      document.getElementById('formTitle').value = theVolumeDetail['title'] || '';
-      document.getElementById('formSubtitle').value = theVolumeDetail['subtitle'] || '';
-      document.getElementById('formAuthor').value = theVolumeDetail['authors'].toString() || '';
-      document.getElementById('formLanguage').value = theVolumeDetail['language'] || '';
-      document.getElementById('formPublisher').value = theVolumeDetail['publisher'] || '';
-      document.getElementById('formYear').value = theVolumeDetail['publishedDate'] || '';
-    }
-  }
-}
-
 const BookAddForm = () => {
   let navigate = useNavigate();
+  let defaultImg = `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
 
-  const [bookcontent, setBookContent] = useState({
-    isb_10: '',
-    isbn_13: '',
-    totalQuantity: '',
-    availableQuantity: '',
-    priceRetail: '',
-    priceLibrary: '',
-    librarySection: '',
-    imageLink: '',
+  const [details, setDetails] = useState({
     title: '',
     subtitle: '',
     authors: '',
-    language: '',
     publisher: '',
-    year: '',
     edition: '',
-    tags:'',
+    year: '',
+    language: '',
+    isbn_10: '',
+    isbn_13: '',
+    librarySection: '',
+    totalQuantity: '',
+    availableQuantity: '',
     notes: '',
+    tags: [],
+    imageLink: defaultImg,
+    priceRetail: '',
+    priceLibrary: '',
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    let tags = [];
-    let tagstr = bookcontent['tags'].split(',');
-    for(var i = 0; i<tagstr.length;i++){
-      tags.push(tagstr[i]);
-    }
-    let tempBook = bookcontent;
-    tempBook['tags'] = tags;
+  // tagString to temporary hold the comma separated tags before tagArray is sent to postCall
+  const [tagString, setTagString] = useState('');
 
-    setBookContent(tempBook);
-    if(tempBook['tags'] == ""){
-      delete tempBook['tags'];
-    }
+  async function isbnPrepopulate() {
+    let messageSpan = document.getElementById('isbnMessage');
+    let isbnSearchInput = document.getElementById('formIsbn');
 
-    console.log(tempBook);
+    if (isbnSearchInput.value === '') {
+      messageSpan.innerHTML = 'Enter ISBN before searching!';
+      messageSpan.setAttribute('display', 'inline');
+      messageSpan.className = 'px-4 text-danger';
+    } else {
+      messageSpan.innerHTML = '';
 
-    postCall('/api/books', tempBook).then((result) => {
-      window.alert(result['data']['message']);
+      const fetchedDetails = await get_book_details(isbnSearchInput.value);
 
-      if (result['status'] == 200) {
-        setBookContent({
-          isb_10: '',
-          isbn_13: '',
-          totalQuantity: '',
-          availableQuantity: '',
-          priceRetail: '',
-          priceLibrary: '',
-          librarySection: '',
-          imageLink: '',
+      if (fetchedDetails['totalItems'] === 0) {
+        messageSpan.innerHTML = 'Details not found! Please fill manually.';
+        messageSpan.setAttribute('display', 'inline');
+        messageSpan.className = 'px-4 text-danger';
+      } else {
+        messageSpan.innerHTML = 'Details populated! You may edit them accordingly.';
+        messageSpan.setAttribute('display', 'inline');
+        messageSpan.className = 'px-4 text-success';
+
+        let filledDetails = {
           title: '',
           subtitle: '',
           authors: '',
-          language: '',
           publisher: '',
-          year: '',
           edition: '',
-          tags:'',
+          year: '',
+          language: '',
+          isbn_10: '',
+          isbn_13: '',
+          librarySection: '',
+          totalQuantity: '',
+          availableQuantity: '',
           notes: '',
-        });
-      }
-    });
+          tags: [],
+          imageLink: defaultImg,
+          priceRetail: '',
+          priceLibrary: '',
+        };
 
+        const theVolumeDetail = fetchedDetails['items'][0]['volumeInfo'];
+        let possibleISBNIinfo = theVolumeDetail['industryIdentifiers'] || '';
+
+        for (let i = 0; i < possibleISBNIinfo.length; i++) {
+          if (possibleISBNIinfo[i]['type'] === 'ISBN_10') {
+            filledDetails['isbn_10'] = possibleISBNIinfo[i]['identifier'];
+          }
+
+          if (possibleISBNIinfo[i]['type'] === 'ISBN_13') {
+            filledDetails['isbn_13'] = possibleISBNIinfo[i]['identifier'];
+          }
+        }
+
+        if (theVolumeDetail['imageLinks'] !== undefined) {
+          filledDetails['imageLink'] = theVolumeDetail['imageLinks']['thumbnail'] || '';
+        }
+
+        filledDetails['title'] = theVolumeDetail['title'] || '';
+        filledDetails['subtitle'] = theVolumeDetail['subtitle'] || '';
+        filledDetails['authors'] = theVolumeDetail['authors'].toString() || '';
+        filledDetails['language'] = theVolumeDetail['language'] || '';
+        filledDetails['publisher'] = theVolumeDetail['publisher'] || '';
+        filledDetails['year'] = theVolumeDetail['publishedDate'] || '';
+
+        setDetails(filledDetails);
+      }
+    }
   }
 
-  let customImg = '';
-  let defaultImg = customImg || `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    // fix tags list
+    console.log(tagString);
+    let tempTagArray = tagString.split(',');
+    let finalTagArray = [];
+
+    tempTagArray.map((eachTag) => {
+      finalTagArray.push({ tagName: eachTag });
+    });
+
+    let sendDetails = { ...details, tags: finalTagArray };
+
+    postCall('/api/books', sendDetails).then((result) => {
+      window.alert(result['data']['message']);
+
+      if (result['status'] === 200) {
+        setDetails({
+          title: '',
+          subtitle: '',
+          authors: '',
+          publisher: '',
+          edition: '',
+          year: '',
+          language: '',
+          isbn_10: '',
+          isbn_13: '',
+          librarySection: '',
+          totalQuantity: '',
+          availableQuantity: '',
+          notes: '',
+          tags: [],
+          imageLink: defaultImg,
+          priceRetail: '',
+          priceLibrary: '',
+        });
+
+        document.getElementById('isbnMessage').innerHTML = '';
+        document.getElementById('isbnMessage').className = 'px-4';
+        document.getElementById('formIsbn').value = '';
+        setTagString('');
+      }
+    });
+  }
 
   return (
     <div>
       <div className='card shadow mb-4 text-dark p-3'>
         <div className='card-body'>
-          <form id='bookForm' onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <div className='row'>
               <div className='col-md-8'>
                 <div className='form-row'>
@@ -177,34 +197,64 @@ const BookAddForm = () => {
                 <div className='form-row'>
                   <div className='form-group col-md-6'>
                     <label htmlFor='formIsbn10'>ISBN-10</label>
-                    <input type='text' id='formIsbn10' className='form-control' placeholder='156838517X' min='0' value={bookcontent['isb_10']}
+                    <input
+                      type='text'
+                      id='formIsbn10'
+                      className='form-control'
+                      placeholder='156838517X'
+                      min='0'
+                      value={details['isbn_10']}
                       onChange={(e) => {
-                        setBookContent({ ...bookcontent, isb_10: e.target.value });
-                      }}/>
+                        setDetails({ ...details, isbn_10: e.target.value });
+                      }}
+                    />
                   </div>
                   <div className='form-group col-md-6'>
                     <label htmlFor='formIsbn13'>ISBN-13</label>
-                    <input type='text' id='formIsbn13' className='form-control' placeholder='9781568385174' min='0' value={bookcontent['isb_13']}
+                    <input
+                      type='text'
+                      id='formIsbn13'
+                      className='form-control'
+                      placeholder='9781568385174'
+                      min='0'
+                      value={details['isbn_13']}
                       onChange={(e) => {
-                        setBookContent({ ...bookcontent, isb_13: e.target.value });
-                      }}/>
+                        setDetails({ ...details, isbn_13: e.target.value });
+                      }}
+                    />
                   </div>
                 </div>
 
                 <div className='form-row'>
                   <div className='form-group col-md-6'>
                     <label htmlFor='formTotalQty'>Total copies</label>
-                    <input type='number' id='formTotalQty' className='form-control' placeholder='5' min='0' required value={bookcontent['totalQuantity']}
+                    <input
+                      type='number'
+                      id='formTotalQty'
+                      className='form-control'
+                      placeholder='5'
+                      min='0'
+                      required
+                      value={details['totalQuantity']}
                       onChange={(e) => {
-                        setBookContent({ ...bookcontent, totalQuantity: e.target.value });
-                      }}/>
+                        setDetails({ ...details, totalQuantity: e.target.value });
+                      }}
+                    />
                   </div>
                   <div className='form-group col-md-6'>
                     <label htmlFor='formAvailableQty'>Available copies</label>
-                    <input type='number' id='formAvailableQty' className='form-control' placeholder='3' min='0' required value={bookcontent['availableQuantity']}
+                    <input
+                      type='number'
+                      id='formAvailableQty'
+                      className='form-control'
+                      placeholder='3'
+                      min='0'
+                      required
+                      value={details['availableQuantity']}
                       onChange={(e) => {
-                        setBookContent({ ...bookcontent, availableQuantity: e.target.value });
-                      }}/>
+                        setDetails({ ...details, availableQuantity: e.target.value });
+                      }}
+                    />
                   </div>
                 </div>
 
@@ -215,10 +265,18 @@ const BookAddForm = () => {
                       <div className='input-group-prepend'>
                         <span className='input-group-text'>$</span>
                       </div>
-                      <input type='number' id='formRetailPrice' className='form-control' placeholder='10.99' min='0' step='0.01' value={bookcontent['priceRetail']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, priceRetail: e.target.value });
-                      }}/>
+                      <input
+                        type='number'
+                        id='formRetailPrice'
+                        className='form-control'
+                        placeholder='10.99'
+                        min='0'
+                        step='0.01'
+                        value={details['priceRetail']}
+                        onChange={(e) => {
+                          setDetails({ ...details, priceRetail: e.target.value });
+                        }}
+                      />
                     </div>
                   </div>
                   <div className='form-group col-md-6'>
@@ -227,20 +285,34 @@ const BookAddForm = () => {
                       <div className='input-group-prepend'>
                         <span className='input-group-text'>$</span>
                       </div>
-                      <input type='number' id='formLibraryPrice' className='form-control' placeholder='6.99' min='0' step='0.01' value={bookcontent['priceLibrary']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, priceLibrary: e.target.value });
-                      }}/>
+                      <input
+                        type='number'
+                        id='formLibraryPrice'
+                        className='form-control'
+                        placeholder='6.99'
+                        min='0'
+                        step='0.01'
+                        value={details['priceLibrary']}
+                        onChange={(e) => {
+                          setDetails({ ...details, priceLibrary: e.target.value });
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
                 <div className='form-row'>
                   <div className='form-group col-md-4'>
                     <label htmlFor='formSection'>Section in library</label>
-                    <input type='text' id='formSection' className='form-control' placeholder='Section AB12' value={bookcontent['librarySection']}
+                    <input
+                      type='text'
+                      id='formSection'
+                      className='form-control'
+                      placeholder='Section AB12'
+                      value={details['librarySection']}
                       onChange={(e) => {
-                        setBookContent({ ...bookcontent, librarySection: e.target.value });
-                      }}/>
+                        setDetails({ ...details, librarySection: e.target.value });
+                      }}
+                    />
                   </div>
                   <div className='form-group col-md-8'>
                     <label htmlFor='formImageLink'>Image link</label>
@@ -251,18 +323,16 @@ const BookAddForm = () => {
                         id='formImageLink'
                         className='form-control'
                         placeholder='http://books.google.com/books/content?id=_THywAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'
-                        value={bookcontent['imageLink']}
+                        value={details['imageLink']}
                         onChange={(e) => {
-                          document.getElementById('formThumbnail').src = e.target.value;
-                          setBookContent({ ...bookcontent, imageLink: e.target.value });
+                          setDetails({ ...details, imageLink: e.target.value });
                         }}
                       />
                       <div className='input-group-append' style={{ cursor: 'pointer' }}>
                         <span
                           className='input-group-text'
                           onClick={() => {
-                            document.getElementById('formThumbnail').src = defaultImg;
-                            document.getElementById('formImageLink').value = '';
+                            setDetails({ ...details, imageLink: defaultImg });
                           }}
                         >
                           <i className='fas fa-undo'></i>
@@ -276,7 +346,7 @@ const BookAddForm = () => {
               <div className='col-md-4 px-5 pb-4 o-hidden'>
                 <div className='card' style={{ height: '300px', width: '230px' }}>
                   <div className='card-body p-0'>
-                    <img id='formThumbnail' className='card-img-top' alt='' src={defaultImg} style={{ height: '100%', objectFit: 'scale-down' }} />
+                    <img id='formThumbnail' className='card-img-top' alt='' src={details['imageLink']} style={{ height: '100%', objectFit: 'scale-down' }} />
                   </div>
                 </div>
               </div>
@@ -285,85 +355,148 @@ const BookAddForm = () => {
             <div className='form-row'>
               <div className='form-group col-md-5'>
                 <label htmlFor='formTitle'>Title</label>
-                <input type='text' id='formTitle' className='form-control' placeholder="The Parent's Book about Bullying" value={bookcontent['title']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, title: e.target.value });
-                      }}/>
+                <input
+                  type='text'
+                  id='formTitle'
+                  className='form-control'
+                  placeholder="The Parent's Book about Bullying"
+                  value={details['title']}
+                  onChange={(e) => {
+                    setDetails({ ...details, title: e.target.value });
+                  }}
+                />
               </div>
               <div className='form-group col-md-7'>
                 <label htmlFor='formSubtitle'>Subtitle</label>
-                <input type='text' id='formSubtitle' className='form-control' placeholder="Changing the Course of Your Child's Life" value={bookcontent['subtitle']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, subtitle: e.target.value });
-                      }}/>
+                <input
+                  type='text'
+                  id='formSubtitle'
+                  className='form-control'
+                  placeholder="Changing the Course of Your Child's Life"
+                  value={details['subtitle']}
+                  onChange={(e) => {
+                    setDetails({ ...details, subtitle: e.target.value });
+                  }}
+                />
               </div>
             </div>
 
             <div className='form-row'>
               <div className='form-group col-md-8'>
                 <label htmlFor='formAuthor'>Author(s)</label>
-                <input type='text' id='formAuthor' className='form-control' placeholder='William Voors' value={bookcontent['authors']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, authors: e.target.value });
-                      }}/>
+                <input
+                  type='text'
+                  id='formAuthor'
+                  className='form-control'
+                  placeholder='William Voors'
+                  value={details['authors']}
+                  onChange={(e) => {
+                    setDetails({ ...details, authors: e.target.value });
+                  }}
+                />
               </div>
               <div className='form-group col-md-4'>
                 <label htmlFor='formLanguage'>Language</label>
-                <input type='text' id='formLanguage' className='form-control' placeholder='English' value={bookcontent['language']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, language: e.target.value });
-                      }}/>
+                <input
+                  type='text'
+                  id='formLanguage'
+                  className='form-control'
+                  placeholder='English'
+                  value={details['language']}
+                  onChange={(e) => {
+                    setDetails({ ...details, language: e.target.value });
+                  }}
+                />
               </div>
             </div>
 
             <div className='form-row'>
               <div className='form-group col-md-6'>
                 <label htmlFor='formPublisher'>Publisher</label>
-                <input type='text' id='formPublisher' className='form-control' placeholder='Hazelden Publishing' value={bookcontent['publisher']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, publisher: e.target.value });
-                      }}/>
+                <input
+                  type='text'
+                  id='formPublisher'
+                  className='form-control'
+                  placeholder='Hazelden Publishing'
+                  value={details['publisher']}
+                  onChange={(e) => {
+                    setDetails({ ...details, publisher: e.target.value });
+                  }}
+                />
               </div>
               <div className='form-group col-md-3'>
                 <label htmlFor='formYear'>Year of publication</label>
-                <input type='text' id='formYear' className='form-control' placeholder='2000' value={bookcontent['year']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, year: e.target.value });
-                      }}/>
+                <input
+                  type='text'
+                  id='formYear'
+                  className='form-control'
+                  placeholder='2000'
+                  value={details['year']}
+                  onChange={(e) => {
+                    setDetails({ ...details, year: e.target.value });
+                  }}
+                />
               </div>
               <div className='form-group col-md-3'>
                 <label htmlFor='formEdition'>Edition</label>
-                <input type='text' id='formEdition' className='form-control' placeholder='1' value={bookcontent['edition']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, edition: e.target.value });
-                      }}/>
+                <input
+                  type='text'
+                  id='formEdition'
+                  className='form-control'
+                  placeholder='1'
+                  value={details['edition']}
+                  onChange={(e) => {
+                    setDetails({ ...details, edition: e.target.value });
+                  }}
+                />
               </div>
             </div>
 
             <div className='form-row'>
               <div className='form-group col-md-12'>
                 <label htmlFor='formTags'>Tags (comma separated)</label>
-                <input type='text' id='formTags' className='form-control' placeholder='family, relationships' value={bookcontent['tags']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, tags: e.target.value });
-                      }}/>
+                <input
+                  type='text'
+                  id='formTags'
+                  className='form-control'
+                  placeholder='family, relationships'
+                  value={tagString}
+                  onChange={(e) => {
+                    // setDetails({ ...details, tags: e.target.value });
+                    setTagString(e.target.value);
+                  }}
+                />
               </div>
             </div>
 
             <div className='form-row'>
               <div className='form-group col-md-6'>
                 <label htmlFor='formNotes'>Additional notes</label>
-                <textarea type='textarea' id='formNotes' className='form-control' rows='5' placeholder='Additional information' value={bookcontent['notes']}
-                      onChange={(e) => {
-                        setBookContent({ ...bookcontent, notes: e.target.value });
-                      }}/>
+                <textarea
+                  type='textarea'
+                  id='formNotes'
+                  className='form-control'
+                  rows='5'
+                  placeholder='Additional information'
+                  value={details['notes']}
+                  onChange={(e) => {
+                    setDetails({ ...details, notes: e.target.value });
+                  }}
+                />
               </div>
             </div>
 
             <button type='submit' className='btn btn-primary my-2'>
               Add book
             </button>
-            <button type='button' className='btn btn-outline-danger mx-4 my-2'>
+            <button
+              type='button'
+              className='btn btn-outline-danger mx-4 my-2'
+              onClick={() => {
+                let path = `/home`;
+                navigate(path);
+              }}
+            >
               Cancel
             </button>
           </form>
