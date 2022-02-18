@@ -1,6 +1,11 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { postCall } from '../helpers/postCall';
 function get_book_details(isbn_number) {
+
+
+
+
   let isbn_number_formatted = isbn_number.trim().replaceAll('-', '');
   let url = `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn_number_formatted}`;
 
@@ -62,6 +67,73 @@ async function isbnPrepopulate() {
 }
 
 const BookAddForm = () => {
+  let navigate = useNavigate();
+
+  const [bookcontent, setBookContent] = useState({
+    isb_10: '',
+    isbn_13: '',
+    totalQuantity: '',
+    availableQuantity: '',
+    priceRetail: '',
+    priceLibrary: '',
+    librarySection: '',
+    imageLink: '',
+    title: '',
+    subtitle: '',
+    authors: '',
+    language: '',
+    publisher: '',
+    year: '',
+    edition: '',
+    tags:'',
+    notes: '',
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    let tags = [];
+    let tagstr = bookcontent['tags'].split(',');
+    for(var i = 0; i<tagstr.length;i++){
+      tags.push(tagstr[i]);
+    }
+    let tempBook = bookcontent;
+    tempBook['tags'] = tags;
+
+    setBookContent(tempBook);
+    if(tempBook['tags'] == ""){
+      delete tempBook['tags'];
+    }
+
+    console.log(tempBook);
+
+    postCall('/api/books', tempBook).then((result) => {
+      window.alert(result['data']['message']);
+
+      if (result['status'] == 200) {
+        setBookContent({
+          isb_10: '',
+          isbn_13: '',
+          totalQuantity: '',
+          availableQuantity: '',
+          priceRetail: '',
+          priceLibrary: '',
+          librarySection: '',
+          imageLink: '',
+          title: '',
+          subtitle: '',
+          authors: '',
+          language: '',
+          publisher: '',
+          year: '',
+          edition: '',
+          tags:'',
+          notes: '',
+        });
+      }
+    });
+
+  }
+
   let customImg = '';
   let defaultImg = customImg || `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
 
@@ -69,7 +141,7 @@ const BookAddForm = () => {
     <div>
       <div className='card shadow mb-4 text-dark p-3'>
         <div className='card-body'>
-          <form>
+          <form id='bookForm' onSubmit={handleSubmit}>
             <div className='row'>
               <div className='col-md-8'>
                 <div className='form-row'>
@@ -105,22 +177,34 @@ const BookAddForm = () => {
                 <div className='form-row'>
                   <div className='form-group col-md-6'>
                     <label htmlFor='formIsbn10'>ISBN-10</label>
-                    <input type='text' id='formIsbn10' className='form-control' placeholder='156838517X' min='0' />
+                    <input type='text' id='formIsbn10' className='form-control' placeholder='156838517X' min='0' value={bookcontent['isb_10']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, isb_10: e.target.value });
+                      }}/>
                   </div>
                   <div className='form-group col-md-6'>
                     <label htmlFor='formIsbn13'>ISBN-13</label>
-                    <input type='text' id='formIsbn13' className='form-control' placeholder='9781568385174' min='0' />
+                    <input type='text' id='formIsbn13' className='form-control' placeholder='9781568385174' min='0' value={bookcontent['isb_13']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, isb_13: e.target.value });
+                      }}/>
                   </div>
                 </div>
 
                 <div className='form-row'>
                   <div className='form-group col-md-6'>
                     <label htmlFor='formTotalQty'>Total copies</label>
-                    <input type='number' id='formTotalQty' className='form-control' placeholder='5' min='0' required />
+                    <input type='number' id='formTotalQty' className='form-control' placeholder='5' min='0' required value={bookcontent['totalQuantity']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, totalQuantity: e.target.value });
+                      }}/>
                   </div>
                   <div className='form-group col-md-6'>
                     <label htmlFor='formAvailableQty'>Available copies</label>
-                    <input type='number' id='formAvailableQty' className='form-control' placeholder='3' min='0' required />
+                    <input type='number' id='formAvailableQty' className='form-control' placeholder='3' min='0' required value={bookcontent['availableQuantity']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, availableQuantity: e.target.value });
+                      }}/>
                   </div>
                 </div>
 
@@ -131,7 +215,10 @@ const BookAddForm = () => {
                       <div className='input-group-prepend'>
                         <span className='input-group-text'>$</span>
                       </div>
-                      <input type='number' id='formRetailPrice' className='form-control' placeholder='10.99' min='0' step='0.01' />
+                      <input type='number' id='formRetailPrice' className='form-control' placeholder='10.99' min='0' step='0.01' value={bookcontent['priceRetail']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, priceRetail: e.target.value });
+                      }}/>
                     </div>
                   </div>
                   <div className='form-group col-md-6'>
@@ -140,14 +227,20 @@ const BookAddForm = () => {
                       <div className='input-group-prepend'>
                         <span className='input-group-text'>$</span>
                       </div>
-                      <input type='number' id='formLibraryPrice' className='form-control' placeholder='6.99' min='0' step='0.01' />
+                      <input type='number' id='formLibraryPrice' className='form-control' placeholder='6.99' min='0' step='0.01' value={bookcontent['priceLibrary']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, priceLibrary: e.target.value });
+                      }}/>
                     </div>
                   </div>
                 </div>
                 <div className='form-row'>
                   <div className='form-group col-md-4'>
                     <label htmlFor='formSection'>Section in library</label>
-                    <input type='text' id='formSection' className='form-control' placeholder='Section AB12' />
+                    <input type='text' id='formSection' className='form-control' placeholder='Section AB12' value={bookcontent['librarySection']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, librarySection: e.target.value });
+                      }}/>
                   </div>
                   <div className='form-group col-md-8'>
                     <label htmlFor='formImageLink'>Image link</label>
@@ -158,8 +251,10 @@ const BookAddForm = () => {
                         id='formImageLink'
                         className='form-control'
                         placeholder='http://books.google.com/books/content?id=_THywAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'
+                        value={bookcontent['imageLink']}
                         onChange={(e) => {
                           document.getElementById('formThumbnail').src = e.target.value;
+                          setBookContent({ ...bookcontent, imageLink: e.target.value });
                         }}
                       />
                       <div className='input-group-append' style={{ cursor: 'pointer' }}>
@@ -190,51 +285,78 @@ const BookAddForm = () => {
             <div className='form-row'>
               <div className='form-group col-md-5'>
                 <label htmlFor='formTitle'>Title</label>
-                <input type='text' id='formTitle' className='form-control' placeholder="The Parent's Book about Bullying" />
+                <input type='text' id='formTitle' className='form-control' placeholder="The Parent's Book about Bullying" value={bookcontent['title']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, title: e.target.value });
+                      }}/>
               </div>
               <div className='form-group col-md-7'>
                 <label htmlFor='formSubtitle'>Subtitle</label>
-                <input type='text' id='formSubtitle' className='form-control' placeholder="Changing the Course of Your Child's Life" />
+                <input type='text' id='formSubtitle' className='form-control' placeholder="Changing the Course of Your Child's Life" value={bookcontent['subtitle']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, subtitle: e.target.value });
+                      }}/>
               </div>
             </div>
 
             <div className='form-row'>
               <div className='form-group col-md-8'>
                 <label htmlFor='formAuthor'>Author(s)</label>
-                <input type='text' id='formAuthor' className='form-control' placeholder='William Voors' />
+                <input type='text' id='formAuthor' className='form-control' placeholder='William Voors' value={bookcontent['authors']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, authors: e.target.value });
+                      }}/>
               </div>
               <div className='form-group col-md-4'>
                 <label htmlFor='formLanguage'>Language</label>
-                <input type='text' id='formLanguage' className='form-control' placeholder='English' />
+                <input type='text' id='formLanguage' className='form-control' placeholder='English' value={bookcontent['language']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, language: e.target.value });
+                      }}/>
               </div>
             </div>
 
             <div className='form-row'>
               <div className='form-group col-md-6'>
                 <label htmlFor='formPublisher'>Publisher</label>
-                <input type='text' id='formPublisher' className='form-control' placeholder='Hazelden Publishing' />
+                <input type='text' id='formPublisher' className='form-control' placeholder='Hazelden Publishing' value={bookcontent['publisher']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, publisher: e.target.value });
+                      }}/>
               </div>
               <div className='form-group col-md-3'>
                 <label htmlFor='formYear'>Year of publication</label>
-                <input type='text' id='formYear' className='form-control' placeholder='2000' />
+                <input type='text' id='formYear' className='form-control' placeholder='2000' value={bookcontent['year']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, year: e.target.value });
+                      }}/>
               </div>
               <div className='form-group col-md-3'>
                 <label htmlFor='formEdition'>Edition</label>
-                <input type='text' id='formEdition' className='form-control' placeholder='1' />
+                <input type='text' id='formEdition' className='form-control' placeholder='1' value={bookcontent['edition']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, edition: e.target.value });
+                      }}/>
               </div>
             </div>
 
             <div className='form-row'>
               <div className='form-group col-md-12'>
                 <label htmlFor='formTags'>Tags (comma separated)</label>
-                <input type='text' id='formTags' className='form-control' placeholder='family, relationships' />
+                <input type='text' id='formTags' className='form-control' placeholder='family, relationships' value={bookcontent['tags']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, tags: e.target.value });
+                      }}/>
               </div>
             </div>
 
             <div className='form-row'>
               <div className='form-group col-md-6'>
                 <label htmlFor='formNotes'>Additional notes</label>
-                <textarea type='textarea' id='formNotes' className='form-control' rows='5' placeholder='Additional information' />
+                <textarea type='textarea' id='formNotes' className='form-control' rows='5' placeholder='Additional information' value={bookcontent['notes']}
+                      onChange={(e) => {
+                        setBookContent({ ...bookcontent, notes: e.target.value });
+                      }}/>
               </div>
             </div>
 
