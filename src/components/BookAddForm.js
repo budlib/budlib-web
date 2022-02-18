@@ -203,7 +203,7 @@ const BookAddForm = () => {
                       className='form-control'
                       placeholder='156838517X'
                       min='0'
-                      maxlength='250'
+                      maxLength='250'
                       value={details['isbn_10']}
                       onChange={(e) => {
                         setDetails({ ...details, isbn_10: e.target.value });
@@ -218,7 +218,7 @@ const BookAddForm = () => {
                       className='form-control'
                       placeholder='9781568385174'
                       min='0'
-                      maxlength='250'
+                      maxLength='250'
                       value={details['isbn_13']}
                       onChange={(e) => {
                         setDetails({ ...details, isbn_13: e.target.value });
@@ -236,7 +236,7 @@ const BookAddForm = () => {
                       className='form-control'
                       placeholder='5'
                       min='0'
-                      maxlength='250'
+                      maxLength='250'
                       required
                       value={details['totalQuantity']}
                       onChange={(e) => {
@@ -252,7 +252,7 @@ const BookAddForm = () => {
                       className='form-control'
                       placeholder='3'
                       min='0'
-                      maxlength='250'
+                      maxLength='250'
                       required
                       value={details['availableQuantity']}
                       onChange={(e) => {
@@ -275,7 +275,7 @@ const BookAddForm = () => {
                         className='form-control'
                         placeholder='10.99'
                         min='0'
-                        maxlength='250'
+                        maxLength='250'
                         step='0.01'
                         value={details['priceRetail']}
                         onChange={(e) => {
@@ -296,7 +296,7 @@ const BookAddForm = () => {
                         className='form-control'
                         placeholder='6.99'
                         min='0'
-                        maxlength='250'
+                        maxLength='250'
                         step='0.01'
                         value={details['priceLibrary']}
                         onChange={(e) => {
@@ -312,7 +312,7 @@ const BookAddForm = () => {
                     <input
                       type='text'
                       id='formSection'
-                      maxlength='250'
+                      maxLength='250'
                       className='form-control'
                       placeholder='Section AB12'
                       value={details['librarySection']}
@@ -329,7 +329,7 @@ const BookAddForm = () => {
                         type='text'
                         id='formImageLink'
                         className='form-control'
-                        maxlength='250'
+                        maxLength='250'
                         placeholder='http://books.google.com/books/content?id=_THywAEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'
                         value={details['imageLink']}
                         onChange={(e) => {
@@ -368,7 +368,7 @@ const BookAddForm = () => {
                   id='formTitle'
                   className='form-control'
                   placeholder="The Parent's Book about Bullying"
-                  maxlength='250'
+                  maxLength='250'
                   value={details['title']}
                   onChange={(e) => {
                     setDetails({ ...details, title: e.target.value });
@@ -382,7 +382,7 @@ const BookAddForm = () => {
                   id='formSubtitle'
                   className='form-control'
                   placeholder="Changing the Course of Your Child's Life"
-                  maxlength='250'
+                  maxLength='250'
                   value={details['subtitle']}
                   onChange={(e) => {
                     setDetails({ ...details, subtitle: e.target.value });
@@ -399,7 +399,7 @@ const BookAddForm = () => {
                   id='formAuthor'
                   className='form-control'
                   placeholder='William Voors'
-                  maxlength='250'
+                  maxLength='250'
                   value={details['authors']}
                   onChange={(e) => {
                     setDetails({ ...details, authors: e.target.value });
@@ -413,7 +413,7 @@ const BookAddForm = () => {
                   id='formLanguage'
                   className='form-control'
                   placeholder='English'
-                  maxlength='250'
+                  maxLength='250'
                   value={details['language']}
                   onChange={(e) => {
                     setDetails({ ...details, language: e.target.value });
@@ -430,7 +430,7 @@ const BookAddForm = () => {
                   id='formPublisher'
                   className='form-control'
                   placeholder='Hazelden Publishing'
-                  maxlength='250'
+                  maxLength='250'
                   value={details['publisher']}
                   onChange={(e) => {
                     setDetails({ ...details, publisher: e.target.value });
@@ -444,7 +444,7 @@ const BookAddForm = () => {
                   id='formYear'
                   className='form-control'
                   placeholder='2000'
-                  maxlength='250'
+                  maxLength='250'
                   value={details['year']}
                   onChange={(e) => {
                     setDetails({ ...details, year: e.target.value });
@@ -458,7 +458,7 @@ const BookAddForm = () => {
                   id='formEdition'
                   className='form-control'
                   placeholder='1'
-                  maxlength='250'
+                  maxLength='250'
                   value={details['edition']}
                   onChange={(e) => {
                     setDetails({ ...details, edition: e.target.value });
@@ -475,7 +475,7 @@ const BookAddForm = () => {
                   id='formTags'
                   className='form-control'
                   placeholder='family, relationships'
-                  maxlength='250'
+                  maxLength='250'
                   value={tagString}
                   onChange={(e) => {
                     // setDetails({ ...details, tags: e.target.value });
@@ -494,7 +494,7 @@ const BookAddForm = () => {
                   className='form-control'
                   rows='5'
                   placeholder='Additional information'
-                  maxlength='250'
+                  maxLength='250'
                   value={details['notes']}
                   onChange={(e) => {
                     setDetails({ ...details, notes: e.target.value });

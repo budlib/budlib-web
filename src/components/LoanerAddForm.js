@@ -80,7 +80,7 @@ const LoanAddForm = () => {
                 id='formSchoolId'
                 name='formSchoolId'
                 placeholder='XJKDKS'
-                maxlength='250'
+                maxLength='250'
                 value={details['schoolId']}
                 onChange={(e) => {
                   setDetails({ ...details, schoolId: e.target.value });
@@ -99,7 +99,7 @@ const LoanAddForm = () => {
                 id='formEmail'
                 name='formEmail'
                 placeholder='john.doe@waldorf.ca'
-                maxlength='250'
+                maxLength='250'
                 value={details['email']}
                 onChange={(e) => {
                   setDetails({ ...details, email: e.target.value });
@@ -119,7 +119,7 @@ const LoanAddForm = () => {
                 name='formSalutation'
                 list='salutationList'
                 placeholder='Mr'
-                maxlength='250'
+                maxLength='250'
                 value={details['salutation']}
                 onChange={(e) => {
                   setDetails({ ...details, salutation: e.target.value });
@@ -145,7 +145,7 @@ const LoanAddForm = () => {
                 id='formFirstName'
                 name='formFirstName'
                 placeholder='John'
-                maxlength='250'
+                maxLength='250'
                 required
                 value={details['firstName']}
                 onChange={(e) => {
@@ -165,7 +165,7 @@ const LoanAddForm = () => {
                 id='formMiddleName'
                 name='formMiddleName'
                 placeholder='Michael'
-                maxlength='250'
+                maxLength='250'
                 value={details['middleName']}
                 onChange={(e) => {
                   setDetails({ ...details, middleName: e.target.value });
@@ -184,7 +184,7 @@ const LoanAddForm = () => {
                 id='formLastName'
                 name='formLastName'
                 placeholder='Doe'
-                maxlength='250'
+                maxLength='250'
                 value={details['lastName']}
                 onChange={(e) => {
                   setDetails({ ...details, lastName: e.target.value });
@@ -203,7 +203,7 @@ const LoanAddForm = () => {
                 id='formFatherName'
                 name='formFatherName'
                 placeholder='Michael Jake Doe'
-                maxlength='250'
+                maxLength='250'
                 value={details['fatherName']}
                 onChange={(e) => {
                   setDetails({ ...details, fatherName: e.target.value });
@@ -222,7 +222,7 @@ const LoanAddForm = () => {
                 id='formMotherName'
                 name='formMotherName'
                 placeholder='Emily Doe'
-                maxlength='250'
+                maxLength='250'
                 value={details['motherName']}
                 onChange={(e) => {
                   setDetails({ ...details, motherName: e.target.value });
