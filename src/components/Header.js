@@ -12,7 +12,19 @@ const Header = (props) => {
       <button id='sidebarToggleTop' className='btn btn-link d-md-none rounded-circle mr-3'>
         <i className='fa fa-bars'></i>
       </button>
-      <h4 className='text-dark px-3 text-capitalize font-weight-bold'>{heading}</h4>
+      <h4
+        className='text-dark px-3 text-capitalize font-weight-bold o-hidden'
+        style={{
+          maxWidth: '70%',
+          textOverflow: 'ellipsis',
+          WebkitLineClamp: '1',
+          lineClamp: '1',
+          display: '-webkit-box',
+          WebkitBoxOrient: 'vertical',
+        }}
+      >
+        {heading}
+      </h4>
       <ul className='navbar-nav ml-auto'>
         <li className='nav-item dropdown no-arrow'>
           <a className='nav-link dropdown-toggle' href='#' id='userDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
