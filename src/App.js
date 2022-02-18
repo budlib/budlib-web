@@ -5,17 +5,19 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import SearchBooks from './pages/Books/SearchBooks';
+import ViewBook from './pages/Books/ViewBook';
 import AddBook from './pages/Books/AddBook';
+import EditBook from './pages/Books/EditBook';
 import SearchLoaners from './pages/Loaners/SearchLoaners';
 import ViewLoaner from './pages/Loaners/ViewLoaner';
 import AddLoaner from './pages/Loaners/AddLoaner';
-import ViewBook from './pages/Books/ViewBook';
+import EditLoaner from './pages/Loaners/EditLoaner';
 import SearchTransactions from './pages/Transactions/SearchTransactions';
-import Error from './pages/Error';
 import BorrowCart from './pages/Loaners/BorrowCart';
 import SelectBorrower from './pages/Loaners/SelectBorrower';
 import SelectReturner from './pages/Loaners/SelectReturner';
 import ReturnCart from './pages/Loaners/ReturnCart';
+import Error from './pages/Error';
 
 function App() {
   return (
@@ -29,11 +31,11 @@ function App() {
         <Route path='/home' element={<Home />} />
         <Route path='/books/search' element={<SearchBooks />} />
         <Route path='/books/:id/' element={<ViewBook />} />
-        {/* <Route path='/books/:id/edit' element={<ViewBook />} /> */}
+        <Route path='/books/:id/edit' element={<EditBook />} />
         <Route path='/books/add-book' element={<AddBook />} />
         <Route path='/loaners/search' element={<SearchLoaners />} />
         <Route path='/loaners/:id/view' element={<ViewLoaner />} />
-        {/* <Route path='/loaners/:id/edit' element={<EditLoaner />} /> */}
+        <Route path='/loaners/:id/edit' element={<EditLoaner />} />
         <Route path='/loaners/add-loaner' element={<AddLoaner />} />
         <Route path='/transactions' element={<SearchTransactions />} />
         {/* <Route path='/transactions/:id/view' element={<ViewTransaction />} /> */}
