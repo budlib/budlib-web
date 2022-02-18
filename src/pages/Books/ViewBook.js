@@ -1,24 +1,36 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useFetch } from '../../helpers/useFetch';
-import ViewBookDetailsCard from '../../components/ViewBookDetailsCard';
+import { deleteCall } from '../../helpers/deleteCall';
+
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
-let url = '/api/books';
+import ViewBookDetailsCard from '../../components/ViewBookDetailsCard';
 
 const ViewBook = () => {
   const { id } = useParams();
-  let thisurl = url+'/'+id;
-  const { data: bookData } = useFetch(thisurl);
 
-  let customImg = '';
-  let defaultImg = customImg || `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
+  let bookDetailUrl = `/api/books/${id}`;
+  const { data: bookData } = useFetch(bookDetailUrl);
 
-  const handleDel =(e)=>{
-    console.log("Deleting");
+  let navigate = useNavigate();
 
+  function handleDelete(e) {
+    deleteCall(bookDetailUrl).then((result) => {
+      window.alert(result['data']['message']);
+
+      if (result['status'] == 200) {
+        let path = `/books/search`;
+        navigate(path);
+      }
+    });
+  }
+
+  function handleEdit(e) {
+    let path = `/books/${id}/edit`;
+    navigate(path);
   }
 
   return (
@@ -36,17 +48,15 @@ const ViewBook = () => {
 
                 <div className='col-sm-4 px-4 p-2'>
                   <div className='btn-group'>
-                    <button type='button' className='btn btn-secondary'>
+                    <button type='button' className='btn btn-secondary' onClick={handleEdit}>
                       Edit details
                     </button>
-                    <button type='button' onClick={(e) => handleDel(e)} className='btn btn-danger'>
+                    <button type='button' className='btn btn-danger' onClick={handleDelete}>
                       Delete Book
                     </button>
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
 
