@@ -16,7 +16,7 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
   return (
     <div className='col-xxl-2 col-xl-3 col-lg-5 col-md-6 col-sm-6 p-4'>
       <div className='card shadow o-hidden' style={{ maxHeight: '390px' }}>
-        <Link to={`/books/${bookId}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/books/${bookId}/view`} style={{ textDecoration: 'none' }}>
           <img className='card-img-top' alt='' src={imageLink} style={{ width: '100%', height: '250px', objectFit: 'contain' }} />
           <div className='card-body py-1'>
             <p

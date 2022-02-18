@@ -24,21 +24,21 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Navigate to='/home' />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/books/search' element={<SearchBooks />} />
+        <Route path='/books/:id/view' element={<ViewBook />} />
+        <Route path='/books/add-book' element={<AddBook />} />
+        <Route path='/books/:id/edit' element={<EditBook />} />
+        <Route path='/loaners/search' element={<SearchLoaners />} />
+        <Route path='/loaners/:id/view' element={<ViewLoaner />} />
+        <Route path='/loaners/add-loaner' element={<AddLoaner />} />
+        <Route path='/loaners/:id/edit' element={<EditLoaner />} />
+        <Route path='/transactions' element={<SearchTransactions />} />
+        {/* <Route path='/transactions/:id/view' element={<ViewTransaction />} /> */}
         <Route path='/loaners/return-books/:id' element={<ReturnCart />} />
         <Route path='/loaners/return-books' element={<SelectReturner />} />
         <Route path='/loaners/borrow-books/:id' element={<BorrowCart />} />
         <Route path='/loaners/borrow-books' element={<SelectBorrower />} />
-        <Route path='/home' element={<Home />} />
-        <Route path='/books/search' element={<SearchBooks />} />
-        <Route path='/books/:id/' element={<ViewBook />} />
-        <Route path='/books/:id/edit' element={<EditBook />} />
-        <Route path='/books/add-book' element={<AddBook />} />
-        <Route path='/loaners/search' element={<SearchLoaners />} />
-        <Route path='/loaners/:id/view' element={<ViewLoaner />} />
-        <Route path='/loaners/:id/edit' element={<EditLoaner />} />
-        <Route path='/loaners/add-loaner' element={<AddLoaner />} />
-        <Route path='/transactions' element={<SearchTransactions />} />
-        {/* <Route path='/transactions/:id/view' element={<ViewTransaction />} /> */}
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='*' element={<Error />} />
       </Routes>
