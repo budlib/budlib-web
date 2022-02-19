@@ -1,9 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
+import {useAuth} from '../helpers/useAuth';
 
 import profilePic from '../assets/img/undraw_profile_3.svg';
 
 const Header = (props) => {
+  const {authed, logout } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    //calls api to verify login, stores jwt tokens here
+
+
+    //////////carry on if successful
+    logout().then(() => {
+
+      navigate("/");
+    });
+  };
+
+
   let { heading } = props;
   heading = heading || '';
 
@@ -38,10 +55,10 @@ const Header = (props) => {
               Profile
             </Link>
             <div className='dropdown-divider'></div>
-            <a className='dropdown-item' href='#' data-toggle='modal' data-target='#logoutModal'>
+            <button className='dropdown-item' onClick={handleLogout} data-toggle='modal' data-target='#logoutModal'>
               <i className='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>
               Logout
-            </a>
+            </button>
           </div>
         </li>
       </ul>
