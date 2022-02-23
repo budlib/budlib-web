@@ -1,25 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-
-import {useAuth} from '../helpers/useAuth';
-
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../helpers/useAuth';
 import profilePic from '../assets/img/undraw_profile_3.svg';
 
 const Header = (props) => {
-  const {authed, logout } = useAuth();
+  const { authed, logout } = useAuth();
   const navigate = useNavigate();
+
   const handleLogout = () => {
-    //calls api to verify login, stores jwt tokens here
+    // calls api to verify login, stores jwt tokens here
 
-
-    //////////carry on if successful
+    // carry on if successful
     logout().then(() => {
-
-      navigate("/");
+      navigate('/');
     });
   };
-
 
   let { heading } = props;
   heading = heading || '';

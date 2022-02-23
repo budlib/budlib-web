@@ -7,3 +7,9 @@
 .bg-hide {
   display: none;
 }
+
+/* image styling for pages like login */
+.bg-common-page-image {
+  background-position: center;
+  background-size: cover;
+}
