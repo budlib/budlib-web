@@ -22,8 +22,13 @@ function LoanerSearchBar(props) {
     };
 
     const handleSearch = (e) => {
+        console.log(filterOption);
 
-        props.func([filterOption, filterText]);
+        if(filterOption !=""){
+            props.func([filterOption, filterText]);
+        }else{
+            window.alert("Searching Requires Filter" );
+        }
 
 
     };

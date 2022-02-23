@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 function BookSearchBar(props) {
-    const [filterOption, setfilterOption] = useState("0");
+    const [filterOption, setfilterOption] = useState("");
 
     const [filterText, setfilterText] = useState("");
 
@@ -22,8 +22,14 @@ function BookSearchBar(props) {
     };
 
     const handleSearch = (e) => {
+        console.log(filterOption);
+        if(filterOption !=""){
+            props.func([filterOption, filterText]);
+        }else{
+            window.alert("Searching Requires Filter" );
+        }
 
-        props.func([filterOption, filterText]);
+
 
 
     };
