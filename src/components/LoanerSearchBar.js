@@ -9,17 +9,26 @@ function LoanerSearchBar(props) {
     const handleFilter = (e) => {
         setfilterOption(e.target.value);
         console.log(filterOption);
-        props.func([filterOption, filterText]);
+
 
     };
 
     const handleFilterText = (e) => {
         setfilterText(e.target.value);
         console.log(filterText);
+
+
+
+    };
+
+    const handleSearch = (e) => {
+
         props.func([filterOption, filterText]);
 
 
     };
+
+
     return(
 
 
@@ -44,7 +53,14 @@ function LoanerSearchBar(props) {
 
             <div className="input-group mb-3">
                 < input type="text" id="inputFilter" onChange={(e) => handleFilterText(e)} value={filterText} className="form-control" placeholder="Enter Your Search Term Here" aria-label="Enter Your Search Term Here" aria-describedby="basic-addon2" />
+                <button
+              type='button'
+              onClick={(e) => handleSearch(e)}
+              className='btn btn-primary'
 
+            >
+              Search
+            </button>
             </div>
         </React.Fragment>
 
