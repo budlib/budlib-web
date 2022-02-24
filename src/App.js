@@ -21,6 +21,8 @@ import Error from './pages/Error';
 import Login from './pages/Login';
 
 import { RequireAuth } from './components/RequireAuth';
+import SelectExtender from './pages/Loaners/SelectExtender';
+import ExtendCart from './pages/Loaners/ExtendCart';
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
         <Route path='/loaners/return-books' element={<RequireAuth><SelectReturner /></RequireAuth>} />
         <Route path='/loaners/borrow-books/:id' element={<RequireAuth><BorrowCart /></RequireAuth>} />
         <Route path='/loaners/borrow-books' element={<RequireAuth><SelectBorrower /></RequireAuth>} />
+        <Route path='/loaners/extend-books/:id' element={<RequireAuth><ExtendCart /></RequireAuth>} />
+        <Route path='/loaners/extend-books' element={<RequireAuth><SelectExtender /></RequireAuth>} />
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />
         <Route path="/login" element={<Login />} />
         <Route path='*' element={<Error />} />
