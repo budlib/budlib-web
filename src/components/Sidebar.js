@@ -30,7 +30,7 @@ const Sidebar = () => {
       </li>
 
       <li className='nav-item'>
-        <Link className='nav-link text-white' to='/loaners/provide-extension'>
+        <Link className='nav-link text-white' to='/loaners/extend-books'>
           <i className='far fa-fw fa-calendar-check'></i>
           <span>Provide extension</span>
         </Link>
