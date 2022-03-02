@@ -4,7 +4,7 @@ A web based front end for the [budlib-api](https://github.com/budlib/budlib-api)
 
 ## Dependencies
 
-- Node version 8.1 or above
+- Node version 16.13.1 or above
 
 ## How to run
 
