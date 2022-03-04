@@ -8,19 +8,19 @@ const MenuList = [
   {
     id: 2,
     head: 'Borrow books',
-    url: '',
+    url: '/loaners/borrow-books',
     src: '/images/menu_borrow_books.svg',
   },
   {
     id: 3,
     head: 'Return books',
-    url: '',
+    url: '/loaners/return-books',
     src: '/images/menu_return_books.svg',
   },
   {
     id: 4,
     head: 'Provide extension',
-    url: '',
+    url: '/loaners/extend-books',
     src: '/images/menu_provide_extension.svg',
   },
   {
