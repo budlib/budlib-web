@@ -17,7 +17,7 @@ const ExtendCartList = (props) => {
   console.log(thisurl);
   const { data } = useFetch(thisurl);
   console.log(data);
-  const [date, setDate] = useState(new Date());
+  const [datex, setDate] = useState(new Date());
   const handleAdd =(e)=>{
     let newCart = cart;
     let exist = false;
@@ -167,8 +167,20 @@ const ExtendCartList = (props) => {
 
       }
       console.log(message);
+      let monthstr = datex.getMonth().toString();
+      if( datex.getMonth()<10){
+        monthstr = "0" + datex.getMonth().toString()
+      }
+      let daystr = datex.getDay().toString();
+      if( datex.getDay()<10){
+        daystr = "0" + datex.getDay().toString()
+      }
+      let datString = datex.getFullYear().toString() + monthstr+daystr;
 
-      postCall('api/transactions?borrowDate=20220211&dueDate=20220411', message);
+
+      console.log(datString);
+
+      postCall('api/transactions?borrowDate=20220211&dueDate=' + datString, message);
       window.alert("Transaction complete");
       setCart([]);
 
@@ -243,11 +255,11 @@ const ExtendCartList = (props) => {
           <div className='card-body'>
           <h3>Extend Date</h3>
           <div className='calendar-container'>
-                <Calendar onChange={setDate} value={date} />
+                <Calendar onChange={setDate} value={datex} />
 
               <p className='text-center'>
                 <span className='bold'>Selected Date:</span>{' '}
-                {date.toDateString()}
+                {datex.toDateString()}
               </p>
             </div>
             <div className='table-responsive'>
