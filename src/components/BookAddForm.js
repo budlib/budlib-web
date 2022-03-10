@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { postCall } from '../helpers/postCall';
 
 function get_book_details(isbn_number) {
@@ -124,6 +124,10 @@ const BookAddForm = () => {
     });
 
     let sendDetails = { ...details, tags: finalTagArray };
+
+    if (details['imageLink'] === defaultImg) {
+      sendDetails = { ...details, imageLink: '' };
+    }
 
     postCall('/api/books', sendDetails).then((result) => {
       window.alert(result['data']['message']);

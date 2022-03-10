@@ -69,6 +69,10 @@ const BookEditForm = () => {
 
     let sendDetails = { ...details, tags: finalTagArray };
 
+    if (details['imageLink'] === defaultImg) {
+      sendDetails = { ...details, imageLink: '' };
+    }
+
     putCall(bookDetailUrl, sendDetails).then((result) => {
       window.alert(result['data']['message']);
 
