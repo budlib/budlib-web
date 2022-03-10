@@ -1,6 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
+//import HashRouter
+import {HashRouter} from 'react-router-dom';
+
+
 // pages
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
@@ -19,18 +23,32 @@ import SelectReturner from './pages/Loaners/SelectReturner';
 import ReturnCart from './pages/Loaners/ReturnCart';
 import Error from './pages/Error';
 import Login from './pages/Login';
-
-import { RequireAuth } from './components/RequireAuth';
 import SelectExtender from './pages/Loaners/SelectExtender';
 import ExtendCart from './pages/Loaners/ExtendCart';
 
+import { RequireAuth } from './components/RequireAuth';
+import BookBatchUpload from './pages/Books/BookBatchUpload';
+import DataDump from './pages/DataDump';
+import SearchLibrarians from './pages/Librarian/SearchLibrarians';
+import ViewLibrarian from './pages/Librarian/ViewLibrarian';
+import EditLibrarian from './pages/Librarian/EditLibrarian';
+import AddLibrarian from './pages/Librarian/AddLibrarian';
+
+
+
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path='/' element={<RequireAuth><Navigate to='/home' /></RequireAuth>} />
         <Route path='/home' element={<RequireAuth><Home /></RequireAuth>} />
+        <Route path='/librarian' element={<RequireAuth><SearchLibrarians /></RequireAuth>} />
+        <Route path='/librarian/:id/view' element={<RequireAuth><ViewLibrarian /></RequireAuth>} />
+        <Route path='/librarian/add-librarian' element={<RequireAuth><AddLibrarian /></RequireAuth>} />
+        <Route path='/librarian/:id/edit' element={<RequireAuth><EditLibrarian /></RequireAuth>} />
+        <Route path='/exportreports' element={<RequireAuth><DataDump /></RequireAuth>} />
         <Route path='/books/search' element={<RequireAuth><SearchBooks /></RequireAuth>} />
+        <Route path='/books/batch' element={<RequireAuth><BookBatchUpload /></RequireAuth>} />
         <Route path='/books/:id/view' element={<RequireAuth><ViewBook /></RequireAuth>} />
         <Route path='/books/add-book' element={<RequireAuth><AddBook /></RequireAuth>} />
         <Route path='/books/:id/edit' element={<RequireAuth><EditBook /></RequireAuth>} />
@@ -50,7 +68,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path='*' element={<Error />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
+
   );
 }
 
