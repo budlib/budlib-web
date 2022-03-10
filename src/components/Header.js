@@ -17,12 +17,17 @@ const Header = (props) => {
     });
   };
 
+  function handleToggle() {
+    document.body.classList.toggle('sidebar-toggled');
+    document.getElementById('accordionSidebar').classList.toggle('toggled');
+  }
+
   let { heading } = props;
   heading = heading || '';
 
   return (
     <nav className='navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow'>
-      <button id='sidebarToggleTop' className='btn btn-link d-md-none rounded-circle mr-3'>
+      <button id='sidebarToggleTop' className='btn btn-link d-md-none rounded-circle mr-3' onClick={handleToggle}>
         <i className='fa fa-bars'></i>
       </button>
       <h4
