@@ -8,6 +8,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
 import ViewBookDetailsCard from '../../components/ViewBookDetailsCard';
+import ViewBookLoansCard from '../../components/ViewBookLoansCard';
 
 const ViewBook = () => {
   const { id } = useParams();
@@ -15,13 +16,16 @@ const ViewBook = () => {
   let bookDetailUrl = `/api/books/${id}`;
   const { data: bookData } = useFetch(bookDetailUrl);
 
+  let bookLoansUrl = `/api/books/${id}/loans`;
+  const { data: bookLoanData } = useFetch(bookLoansUrl);
+
   let navigate = useNavigate();
 
   function handleDelete(e) {
     deleteCall(bookDetailUrl).then((result) => {
       window.alert(result['data']['message']);
 
-      if (result['status'] == 200) {
+      if (result['status'] === 200) {
         let path = `/books/search`;
         navigate(path);
       }
@@ -56,6 +60,10 @@ const ViewBook = () => {
                     </button>
                   </div>
                 </div>
+              </div>
+
+              <div className='row'>
+                <ViewBookLoansCard data={bookLoanData} />
               </div>
             </div>
           </div>
