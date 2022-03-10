@@ -156,7 +156,7 @@ const ExtendCartList = (props) => {
         }
       let message = {
         "transactionDateTime": "2022-02-11T09:15:23",
-        "transactionType": "BORROW",
+        "transactionType": "EXTEND",
         "loaner": {
           "loanerId": id
         },

@@ -44,6 +44,8 @@ function BookSearchBar(props) {
                       <option value='publisher'>Publisher</option>
                       <option value='isbn'>ISBN</option>
                       <option value='tags'>Tags</option>
+                      <option value='librarysection'>Library Section</option>
+                      <option value='language'>Language</option>
                     </select>
                   </div>
                 </div>
