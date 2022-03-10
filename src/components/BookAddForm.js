@@ -115,19 +115,20 @@ const BookAddForm = () => {
     e.preventDefault();
 
     // fix tags list
-    console.log(tagString);
     let tempTagArray = tagString.split(',');
     let finalTagArray = [];
 
     tempTagArray.map((eachTag) => {
-      finalTagArray.push({ tagName: eachTag });
+      let eachTagTrim = eachTag.trim();
+      eachTagTrim !== '' ? finalTagArray.push({ tagName: eachTagTrim }) : console.log('Skipping empty tag');
     });
 
     let sendDetails = { ...details, tags: finalTagArray };
 
-    if (details['imageLink'] === defaultImg) {
-      sendDetails = { ...details, imageLink: '' };
-    }
+    // creates problems with tags
+    // if (details['imageLink'] === defaultImg) {
+    //   sendDetails = { ...details, imageLink: '' };
+    // }
 
     postCall('/api/books', sendDetails).then((result) => {
       window.alert(result['data']['message']);
