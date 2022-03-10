@@ -24,7 +24,7 @@ const ViewLoanerDetailsCard = ({ data }) => {
                 {data['salutation'] ? (
                   <tr>
                     <th style={{ width: '30%' }}>Salutation</th>
-                    <td>{data['salutation'] || 'not given'}</td>
+                    <td>{data['salutation'] || '-'}</td>
                   </tr>
                 ) : (
                   <></>
@@ -40,22 +40,22 @@ const ViewLoanerDetailsCard = ({ data }) => {
                 </tr>
                 <tr>
                   <th style={{ width: '30%' }}>Middle Name</th>
-                  <td>{data['middleName'] || 'not given'}</td>
+                  <td>{data['middleName'] || '-'}</td>
                 </tr>
                 <tr>
                   <th style={{ width: '30%' }}>Last Name</th>
-                  <td>{data['lastName'] || 'not given'}</td>
+                  <td>{data['lastName'] || '-'}</td>
                 </tr>
 
                 <tr>
                   <th style={{ width: '30%' }}>Email</th>
-                  <td>{data['email'] || 'not given'}</td>
+                  <td>{data['email'] || '-'}</td>
                 </tr>
 
                 {data['isStudent'] ? (
                   <tr>
                     <th style={{ width: '30%' }}>Father's name</th>
-                    <td>{data['fatherName'] || 'not given'}</td>
+                    <td>{data['fatherName'] || '-'}</td>
                   </tr>
                 ) : (
                   <></>
@@ -64,7 +64,7 @@ const ViewLoanerDetailsCard = ({ data }) => {
                 {data['isStudent'] ? (
                   <tr>
                     <th style={{ width: '30%' }}>Mother's name</th>
-                    <td>{data['motherName'] || 'not given'}</td>
+                    <td>{data['motherName'] || '-'}</td>
                   </tr>
                 ) : (
                   <></>

@@ -26,7 +26,7 @@ const ViewLoaner = () => {
     deleteCall(loanerDetailUrl).then((result) => {
       window.alert(result['data']['message']);
 
-      if (result['status'] == 200) {
+      if (result['status'] === 200) {
         let path = `/loaners/search`;
         navigate(path);
       }

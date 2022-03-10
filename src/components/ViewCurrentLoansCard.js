@@ -29,7 +29,7 @@ const ViewCurrentLoansCard = ({ data }) => {
                       return (
                         <React.Fragment key={dataItem['loanId']}>
                           <tr>
-                            <td>{dataItem['book']['isbn_10'] || dataItem['book']['isbn_13']}</td>
+                            <td>{dataItem['book']['isbn_10'] || dataItem['book']['isbn_13'] || '-'}</td>
                             <td>{dataItem['book']['title']}</td>
                             <td>{dataItem['copies']}</td>
                             <td>{dataItem['borrowDate']}</td>
