@@ -1,10 +1,12 @@
 import React from 'react';
-import { useFetch } from '../helpers/useFetch';
 
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ScrollTop from '../components/ScrollTop';
+import { useFetch } from '../helpers/useFetch';
+import Menu from '../components/Menu';
+import DashboardMenu from '../components/DashboardMenu';
 
 const Dashboard = () => {
   const statsUrl = '/api/dashboard/stats';
@@ -12,7 +14,6 @@ const Dashboard = () => {
 
   let ratioOutstanding = statsData['totalOutstandingCopies'] / statsData['totalCopies'];
   let percentageOutstanding = ratioOutstanding.toFixed(2) * 100;
-
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -22,7 +23,7 @@ const Dashboard = () => {
           <div id='content'>
             <Header heading='Dashboard' />
             <div className='container-fluid'>
-              <div className='row'>
+            <div className='row'>
                 <div className='col-xl-3 col-md-6 mb-4'>
                   <div className='card border-left-primary shadow h-100 py-2'>
                     <div className='card-body'>
@@ -103,6 +104,9 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
+
+              <DashboardMenu />
+
             </div>
           </div>
 
