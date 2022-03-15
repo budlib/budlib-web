@@ -32,8 +32,18 @@ const LoanEditForm = () => {
       lastName: existingDetails['lastName'] || '',
       motherName: existingDetails['motherName'] || '',
       fatherName: existingDetails['fatherName'] || '',
-      isStudent: existingDetails['isStudent'] || '',
+      isStudent: existingDetails['isStudent'],
     });
+
+    if (existingDetails['isStudent'] === true) {
+      document.getElementById('formSalutation').parentElement.parentElement.classList.add('bg-hide');
+      document.getElementById('formFatherName').parentElement.parentElement.classList.remove('bg-hide');
+      document.getElementById('formMotherName').parentElement.parentElement.classList.remove('bg-hide');
+    } else {
+      document.getElementById('formSalutation').parentElement.parentElement.classList.remove('bg-hide');
+      document.getElementById('formFatherName').parentElement.parentElement.classList.add('bg-hide');
+      document.getElementById('formMotherName').parentElement.parentElement.classList.add('bg-hide');
+    }
   }, [loadStatus]);
 
   function handleSubmit(e) {
@@ -43,17 +53,8 @@ const LoanEditForm = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
-        setDetails({
-          schoolId: '',
-          email: '',
-          salutation: '',
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          motherName: '',
-          fatherName: '',
-          isStudent: true,
-        });
+        let path = `/loaners/${id}/view`;
+        navigate(path);
       }
     });
   }
@@ -71,7 +72,7 @@ const LoanEditForm = () => {
                 className='form-control'
                 id='formLoanerType'
                 name='formLoanerType'
-                defaultValue='Student'
+                value={details['isStudent'] === true ? 'Student' : 'Faculty'}
                 onChange={(e) => {
                   setDetails({ ...details, isStudent: e.target.value === 'Student' ? true : false });
 
@@ -126,7 +127,7 @@ const LoanEditForm = () => {
               />
             </div>
           </div>
-          <div className='form-group row bg-hide'>
+          <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formSalutation'>
               Salutation
             </label>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFetch } from '../helpers/useFetch';
 import { putCall } from '../helpers/putCall';
 
@@ -47,8 +47,8 @@ const BookEditForm = () => {
       isbn_10: existingDetails['isbn_10'] || '',
       isbn_13: existingDetails['isbn_13'] || '',
       librarySection: existingDetails['librarySection'] || '',
-      totalQuantity: existingDetails['totalQuantity'] || '',
-      availableQuantity: existingDetails['availableQuantity'] || '',
+      totalQuantity: existingDetails['totalQuantity'],
+      availableQuantity: existingDetails['availableQuantity'],
       notes: existingDetails['notes'] || '',
       tags: existingDetails['tags'] || [],
       imageLink: existingDetails['imageLink'] || defaultImg,
@@ -88,27 +88,8 @@ const BookEditForm = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
-        setDetails({
-          title: '',
-          subtitle: '',
-          authors: '',
-          publisher: '',
-          edition: '',
-          year: '',
-          language: '',
-          isbn_10: '',
-          isbn_13: '',
-          librarySection: '',
-          totalQuantity: '',
-          availableQuantity: '',
-          notes: '',
-          tags: [],
-          imageLink: defaultImg,
-          priceRetail: '',
-          priceLibrary: '',
-        });
-
-        setTagString('');
+        let path = `/books/${id}/view`;
+        navigate(path);
       }
     });
   }
