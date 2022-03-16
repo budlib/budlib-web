@@ -33,6 +33,7 @@ import SearchLibrarians from './pages/Librarian/SearchLibrarians';
 import ViewLibrarian from './pages/Librarian/ViewLibrarian';
 import EditLibrarian from './pages/Librarian/EditLibrarian';
 import AddLibrarian from './pages/Librarian/AddLibrarian';
+import LoanerBatchUpload from './pages/Loaners/LoanerBatchUpload';
 
 
 
@@ -49,6 +50,7 @@ function App() {
         <Route path='/exportreports' element={<RequireAuth><DataDump /></RequireAuth>} />
         <Route path='/books/search' element={<RequireAuth><SearchBooks /></RequireAuth>} />
         <Route path='/books/batch' element={<RequireAuth><BookBatchUpload /></RequireAuth>} />
+        <Route path='/loaners/batch' element={<RequireAuth><LoanerBatchUpload /></RequireAuth>} />
         <Route path='/books/:id/view' element={<RequireAuth><ViewBook /></RequireAuth>} />
         <Route path='/books/add-book' element={<RequireAuth><AddBook /></RequireAuth>} />
         <Route path='/books/:id/edit' element={<RequireAuth><EditBook /></RequireAuth>} />
