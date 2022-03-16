@@ -4,10 +4,12 @@ import { useFetch } from './../helpers/useFetch';
 import { deleteCall } from './../helpers/deleteCall';
 import * as xlsx from "xlsx";
 import isWindows from 'cross-env/src/is-windows';
+import { postCall } from '../helpers/postCall';
 
 const BookBatchLoad = () => {
     const [file, setFile] = useState();
     const [json, setJson] = useState([]);
+    let navigate = useNavigate();
 
     const readUploadFile = (e) => {
         try {
@@ -40,6 +42,19 @@ const BookBatchLoad = () => {
             setJson(tempJson);
             console.log(tempJson);
 
+            postCall('/api/books/multiple', tempJson).then((result) => {
+              window.alert(result['data']['message']);
+              if (result['status'] === 200) {
+                let path = `/books/search`;
+                navigate(path);
+              }
+
+
+
+            });
+
+
+
     }
 
 
@@ -58,7 +73,7 @@ const BookBatchLoad = () => {
 
 
             >
-            Read File
+            Upload File
             </button>
         </div>
 
