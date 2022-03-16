@@ -39,16 +39,16 @@ const LoanerBatchLoad = () => {
             setJson(tempJson);
             console.log(tempJson);
 
-            // postCall('/api/books/multiple', tempJson).then((result) => {
-            //   window.alert(result['data']['message']);
-            //   if (result['status'] === 200) {
-            //     let path = `/books/search`;
-            //     navigate(path);
-            //   }
+            postCall('/api/loaners/multiple', tempJson).then((result) => {
+              window.alert(result['data']['message']);
+              if (result['status'] === 200) {
+                let path = `/loaners/search`;
+                navigate(path);
+              }
 
 
 
-            // });
+            });
 
 
 
