@@ -23,6 +23,12 @@ const DashboardMenuList = [
     url: '/books/batch',
     src: '/images/menu_provide_extension.svg',
   },
+  {
+    id: 5,
+    head: 'Bath Upload Loaners Data',
+    url: '/loaners/batch',
+    src: '/images/menu_provide_extension.svg',
+  },
 
 ];
 
