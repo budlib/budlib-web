@@ -1,18 +1,35 @@
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../helpers/useAuth';
+import { postCall } from '../helpers/postCall';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { authed, login } = useAuth();
+  const { login } = useAuth();
+
+  const [message, setMessage] = useState({
+    email: '',
+    password: '',
+  });
 
   const logicPic = 'images/login_library_chair.jpg';
 
-  const handleLogin = () => {
-    // calls api to verify login, stores jwt tokens here
+  const handleLogin = (e) => {
+    e.preventDefault();
 
-    // carry on if successful
-    login().then(() => {
-      navigate('/');
+    postCall('/api/auth', message).then((result) => {
+      if (result['status'] === 200) {
+        window.localStorage.setItem('id', result['data']['id']);
+        window.localStorage.setItem('username', result['data']['username']);
+        window.localStorage.setItem('role', result['data']['role']);
+        window.localStorage.setItem('token', result['data']['token']);
+
+        login().then(() => {
+          navigate('/');
+        });
+      } else {
+        window.alert(result['data']['message']);
+      }
     });
   };
 
@@ -29,43 +46,54 @@ const Login = () => {
                     className='col-lg-6 d-none d-lg-block bg-common-page-image'
                     style={{
                       backgroundImage: `url(${process.env.PUBLIC_URL + logicPic})`,
+                      minHeight: '500px',
                     }}
                   ></div>
                   <div className='col-lg-6'>
                     <div className='p-5'>
-                      <div className='text-center'>
-                        <h1 className='h4 text-gray-900 mb-4'>Welcome Back!</h1>
+                      <div className='text-center pb-5'>
+                        <h1 className='h4 text-gray-900 mb-4'>Login to BudLib</h1>
                       </div>
-                      <form className='user'>
+                      <form id='loginForm' className='user' onSubmit={handleLogin}>
                         <div className='form-group'>
-                          <input type='email' className='form-control form-control-user' id='exampleInputEmail' aria-describedby='emailHelp' placeholder='Enter Email Address...' />
+                          <input
+                            type='email'
+                            id='email'
+                            name='email'
+                            className='form-control form-control-user'
+                            maxLength='100'
+                            value={message['email']}
+                            required
+                            placeholder='Enter Email Address...'
+                            onChange={(e) => {
+                              setMessage({ ...message, email: e.target.value });
+                            }}
+                          />
                         </div>
-                        <div className='form-group'>
-                          <input type='password' className='form-control form-control-user' id='exampleInputPassword' placeholder='Password' />
+                        <div className='form-group pb-4'>
+                          <input
+                            type='password'
+                            id='password'
+                            name='password'
+                            className='form-control form-control-user'
+                            value={message['password']}
+                            required
+                            placeholder='Password'
+                            onChange={(e) => {
+                              setMessage({ ...message, password: e.target.value });
+                            }}
+                          />
                         </div>
-                        <div className='form-group'>
-                          <div className='custom-control custom-checkbox small'>
-                            <input type='checkbox' className='custom-control-input' id='customCheck' />
-                            <label className='custom-control-label' htmlFor='customCheck'>
-                              Remember Me
-                            </label>
-                          </div>
-                        </div>
-                        <button className='btn btn-primary btn-user btn-block' onClick={handleLogin}>
+                        <button type='submit' className='btn btn-primary btn-user btn-block'>
                           Login
                         </button>
                       </form>
-                      <hr />
+                      {/* <hr />
                       <div className='text-center'>
                         <a className='small' href='#'>
                           Forgot Password?
                         </a>
-                      </div>
-                      <div className='text-center'>
-                        <a className='small' href='#'>
-                          Create an Account!
-                        </a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

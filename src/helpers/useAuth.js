@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const authContext = React.createContext();
 
 export function useAuth() {
-  const [authed, setAuthed] = useState('yes');
-
   return {
-    authed,
-
     login() {
       return new Promise((res) => {
-        setAuthed(1);
-
-        localStorage.setItem('Auth', 1);
+        localStorage.setItem('Authenticated', '1');
         res();
       });
     },
 
     logout() {
       return new Promise((res) => {
-        setAuthed(1);
-        localStorage.setItem('Auth', 0);
+        localStorage.setItem('Authenticated', '0');
         res();
       });
     },
@@ -29,7 +22,6 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const auth = useAuth();
-
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 
