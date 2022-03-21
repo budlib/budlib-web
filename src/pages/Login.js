@@ -12,7 +12,7 @@ const Login = () => {
     password: '',
   });
 
-  const logicPic = 'images/login_library_chair.jpg';
+  const logicPic = '/images/login_library_chair.jpg';
 
   const handleLogin = (e) => {
     e.preventDefault();
