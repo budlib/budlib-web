@@ -9,6 +9,7 @@ const Header = (props) => {
   const navigate = useNavigate();
 
   let loggedName = window.localStorage.getItem('username');
+  let loggedId = window.localStorage.getItem('id');
 
   const handleLogout = () => {
     window.localStorage.removeItem('id');
@@ -55,7 +56,7 @@ const Header = (props) => {
           </a>
 
           <div className='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
-            <Link className='dropdown-item' to='/librarian/profile'>
+            <Link className='dropdown-item' to={`/librarian/${loggedId}/view`}>
               <i className='fas fa-user fa-sm fa-fw mr-2 text-gray-400'></i>
               Profile
             </Link>

@@ -1,35 +1,47 @@
 import React from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { RequireAuth } from './components/RequireAuth';
 
-// pages
+// other
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
+import Error from './pages/Error';
+import Login from './pages/Login';
+
+// books
 import SearchBooks from './pages/Books/SearchBooks';
 import ViewBook from './pages/Books/ViewBook';
 import AddBook from './pages/Books/AddBook';
 import EditBook from './pages/Books/EditBook';
+
+// loaners
 import SearchLoaners from './pages/Loaners/SearchLoaners';
 import ViewLoaner from './pages/Loaners/ViewLoaner';
 import AddLoaner from './pages/Loaners/AddLoaner';
 import EditLoaner from './pages/Loaners/EditLoaner';
-import SearchTransactions from './pages/Transactions/SearchTransactions';
-import BorrowCart from './pages/Loaners/BorrowCart';
-import SelectBorrower from './pages/Loaners/SelectBorrower';
-import SelectReturner from './pages/Loaners/SelectReturner';
-import ReturnCart from './pages/Loaners/ReturnCart';
-import Error from './pages/Error';
-import Login from './pages/Login';
-import SelectExtender from './pages/Loaners/SelectExtender';
-import ExtendCart from './pages/Loaners/ExtendCart';
-import { RequireAuth } from './components/RequireAuth';
-import BookBatchUpload from './pages/Books/BookBatchUpload';
-import DataDump from './pages/DataDump';
+
+// librarian
 import SearchLibrarians from './pages/Librarian/SearchLibrarians';
 import ViewLibrarian from './pages/Librarian/ViewLibrarian';
+import AddLibrarian from './pages/Librarian/AddLibrarian';
 import EditLibrarian from './pages/Librarian/EditLibrarian';
 import ChangePasswordLibrarian from './pages/Librarian/ChangePasswordLibrarian';
-import AddLibrarian from './pages/Librarian/AddLibrarian';
+
+// transactions
+import SearchTransactions from './pages/Transactions/SearchTransactions';
+// import ViewTransaction from './pages/Transactions/ViewTransaction';
+import BorrowCart from './pages/Loaners/BorrowCart';
+import ReturnCart from './pages/Loaners/ReturnCart';
+import ExtendCart from './pages/Loaners/ExtendCart';
+import SelectBorrower from './pages/Loaners/SelectBorrower';
+import SelectReturner from './pages/Loaners/SelectReturner';
+import SelectExtender from './pages/Loaners/SelectExtender';
+
+// batch processing
+import BookBatchUpload from './pages/Books/BookBatchUpload';
+import DataDump from './pages/DataDump';
 import LoanerBatchUpload from './pages/Loaners/LoanerBatchUpload';
+
 
 function App() {
   return (
@@ -52,6 +64,13 @@ function App() {
         <Route path='/loaners/add-loaner' element={<RequireAuth><AddLoaner /></RequireAuth>} />
         <Route path='/loaners/:id/edit' element={<RequireAuth><EditLoaner /></RequireAuth>} />
 
+        {/* routes for librarian */}
+        <Route path='/librarian/search' element={<RequireAuth><SearchLibrarians /></RequireAuth>} />
+        <Route path='/librarian/:id/view' element={<RequireAuth><ViewLibrarian /></RequireAuth>} />
+        <Route path='/librarian/add-librarian' element={<RequireAuth><AddLibrarian /></RequireAuth>} />
+        <Route path='/librarian/:id/edit' element={<RequireAuth><EditLibrarian /></RequireAuth>} />
+        <Route path='/librarian/:id/change-password' element={<RequireAuth><ChangePasswordLibrarian /></RequireAuth>} />
+
         {/* routes for transactions */}
         <Route path='/transactions' element={<RequireAuth><SearchTransactions /></RequireAuth>} />
         {/* <Route path='/transactions/:id/view' element={<ViewTransaction />} /> */}
@@ -64,12 +83,6 @@ function App() {
 
         {/* routes for dashboard */}
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />
-        <Route path='/librarian' element={<RequireAuth><SearchLibrarians /></RequireAuth>} />
-        <Route path='/librarian/:id/view' element={<RequireAuth><ViewLibrarian /></RequireAuth>} />
-        <Route path='/librarian/add-librarian' element={<RequireAuth><AddLibrarian /></RequireAuth>} />
-        <Route path='/librarian/:id/edit' element={<RequireAuth><EditLibrarian /></RequireAuth>} />
-        <Route path='/librarian/:id/change-password' element={<RequireAuth><ChangePasswordLibrarian /></RequireAuth>} />
-        {/* <Route path="/librarian/profile" element={<Login />} /> */}
         <Route path='/exportreports' element={<RequireAuth><DataDump /></RequireAuth>} />
 
         {/* other routes */}

@@ -28,27 +28,27 @@ const LibrarianList = (props) => {
                     {data.map((dataItem) => {
                       let { librarianId, userName, email, role } = dataItem;
 
-                      if (librarianId.toString() !== window.localStorage.getItem('id')) {
-                        return (
-                          <tr key={librarianId}>
-                            <td>
-                              <Link
-                                to={`/librarian/${librarianId}/view`}
-                                style={{
-                                  display: 'block',
-                                  width: '100%',
-                                  color: 'inherit',
-                                }}
-                              >
-                                {librarianId}
-                              </Link>
-                            </td>
-                            <td>{userName}</td>
-                            <td>{email}</td>
-                            <td>{role}</td>
-                          </tr>
-                        );
-                      }
+                      // if (librarianId.toString() !== window.localStorage.getItem('id')) {
+                      return (
+                        <tr key={librarianId}>
+                          <td>
+                            <Link
+                              to={`/librarian/${librarianId}/view`}
+                              style={{
+                                display: 'block',
+                                width: '100%',
+                                color: 'inherit',
+                              }}
+                            >
+                              {librarianId}
+                            </Link>
+                          </td>
+                          <td>{userName}</td>
+                          <td>{email}</td>
+                          <td>{role}</td>
+                        </tr>
+                      );
+                      // }
                     })}
                   </tbody>
                 </table>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useFetch } from '../../helpers/useFetch';
 import { deleteCall } from '../../helpers/deleteCall';
@@ -17,7 +17,7 @@ const ViewLibrarian = () => {
 
   let navigate = useNavigate();
 
-  function handleDelete(e) {
+  function handleDelete() {
     let librarianDeleteUrl = `${librarianDetailUrl}?deleteBy=${window.localStorage.getItem('id')}`;
 
     deleteCall(librarianDeleteUrl).then((result) => {
@@ -39,6 +39,12 @@ const ViewLibrarian = () => {
     let path = `/librarian/${id}/change-password`;
     navigate(path);
   }
+
+  useEffect(() => {
+    if (id.toString() === window.localStorage.getItem('id')) {
+      document.getElementById('deleteButton').style.display = 'none';
+    }
+  }, []);
 
   return (
     <React.Fragment>
@@ -66,7 +72,7 @@ const ViewLibrarian = () => {
                       </div>
                     </div>
                   </div>
-                  <div className='row'>
+                  <div className='row' id='deleteButton'>
                     <div className='col-lg-12 px-4 p-2'>
                       <button type='button' className='btn btn-danger btn-block' onClick={handleDelete}>
                         Delete Librarian

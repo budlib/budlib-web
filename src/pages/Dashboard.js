@@ -110,7 +110,7 @@ const Dashboard = () => {
                   <div className='row'>
                     <div className='col-lg-6 mb-4'>
                       <div className='card bg-info text-white shadow'>
-                        <Link to='/librarian' style={{ textDecoration: 'none' }}>
+                        <Link to='/librarian/search' style={{ textDecoration: 'none' }}>
                           <div className='card-body'>
                             <h5 className='text-white'>Librarian management</h5>
                             <div className='text-white-50 small'>Add or update librarians</div>
