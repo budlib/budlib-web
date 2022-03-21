@@ -7,9 +7,6 @@ import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
-import ViewLoanerDetailsCard from '../../components/ViewLoanerDetailsCard';
-import ViewCurrentLoansCard from '../../components/ViewCurrentLoansCard';
-import ViewLoanerHistoryCard from '../../components/ViewLoanerHistoryCard';
 import ViewLibrarianDetailsCard from '../../components/ViewLibrarianDetailsCard';
 
 const ViewLibrarian = () => {
@@ -18,12 +15,12 @@ const ViewLibrarian = () => {
   let librarianDetailUrl = `/api/librarian/${id}`;
   const { data: librarianData } = useFetch(librarianDetailUrl);
 
-
-
   let navigate = useNavigate();
 
   function handleDelete(e) {
-    deleteCall(librarianDetailUrl).then((result) => {
+    let librarianDeleteUrl = `${librarianDetailUrl}?deleteBy=${window.localStorage.getItem('id')}`;
+
+    deleteCall(librarianDeleteUrl).then((result) => {
       window.alert(result['data']['message']);
 
       if (result['status'] == 200) {
@@ -33,8 +30,13 @@ const ViewLibrarian = () => {
     });
   }
 
-  function handleEdit(e) {
+  function handleEdit() {
     let path = `/librarian/${id}/edit`;
+    navigate(path);
+  }
+
+  function handlePasswordChange() {
+    let path = `/librarian/${id}/change-password`;
     navigate(path);
   }
 
@@ -45,25 +47,34 @@ const ViewLibrarian = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading={librarianData['userName']} />
+            <Header heading={librarianData['fullName']} />
 
             <div className='container-fluid'>
               <div className='row'>
                 <ViewLibrarianDetailsCard data={librarianData} />
 
-                <div className='col-sm-4 px-4 p-2'>
-                  <div className='btn-group'>
-                    <button type='button' className='btn btn-secondary' onClick={handleEdit}>
-                      Edit details
-                    </button>
-                    <button type='button' className='btn btn-danger' onClick={handleDelete}>
-                      Delete Librarian
-                    </button>
+                <div className='col-lg-4 px-4 p-2'>
+                  <div className='row'>
+                    <div className='col-lg-12 px-4 p-2'>
+                      <div className='btn-group btn-block'>
+                        <button type='button' className='btn btn-secondary' onClick={handleEdit}>
+                          Edit details
+                        </button>
+                        <button type='button' className='btn btn-info' onClick={handlePasswordChange}>
+                          Change password
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-lg-12 px-4 p-2'>
+                      <button type='button' className='btn btn-danger btn-block' onClick={handleDelete}>
+                        Delete Librarian
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
 

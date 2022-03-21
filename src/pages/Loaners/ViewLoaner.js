@@ -52,7 +52,7 @@ const ViewLoaner = () => {
                 <ViewLoanerDetailsCard data={loanerData} />
 
                 <div className='col-sm-4 px-4 p-2'>
-                  <div className='btn-group'>
+                  <div className='btn-group btn-block'>
                     <button type='button' className='btn btn-secondary' onClick={handleEdit}>
                       Edit details
                     </button>
