@@ -88,8 +88,15 @@ const Login = () => {
                           Login
                         </button>
                       </form>
-                      {/* <hr />
+
+                      <hr />
+
                       <div className='text-center'>
+                        <a className='small' href='https://forms.gle/ws4trPgHjW7mtfmM8' target='_blank' rel='noopener noreferrer'>
+                          Provide feedback
+                        </a>
+                      </div>
+                      {/*<div className='text-center'>
                         <a className='small' href='#'>
                           Forgot Password?
                         </a>
