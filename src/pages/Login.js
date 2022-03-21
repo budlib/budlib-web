@@ -12,7 +12,7 @@ const Login = () => {
     password: '',
   });
 
-  const logicPic = '/images/login_library_chair.jpg';
+  const loginPic = '/images/login_library_chair.jpg';
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -45,7 +45,7 @@ const Login = () => {
                   <div
                     className='col-lg-6 d-none d-lg-block bg-common-page-image'
                     style={{
-                      backgroundImage: `url(${process.env.PUBLIC_URL + logicPic})`,
+                      backgroundImage: `url(${process.env.PUBLIC_URL + loginPic})`,
                       minHeight: '500px',
                     }}
                   ></div>
