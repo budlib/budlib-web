@@ -24,20 +24,17 @@ const ViewLibrarian = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] == 200) {
-        let path = `/librarian/`;
-        navigate(path);
+        navigate(`/librarian/search`);
       }
     });
   }
 
   function handleEdit() {
-    let path = `/librarian/${id}/edit`;
-    navigate(path);
+    navigate(`/librarian/${id}/edit`);
   }
 
   function handlePasswordChange() {
-    let path = `/librarian/${id}/change-password`;
-    navigate(path);
+    navigate(`/librarian/${id}/change-password`);
   }
 
   useEffect(() => {
