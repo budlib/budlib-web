@@ -4,9 +4,9 @@ import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
-import LibrarianAddForm from '../../components/LibrarianAddForm';
+import LibrarianPasswordChangeForm from '../../components/LibrarianPasswordChangeForm';
 
-function AddLibrarian() {
+function EditLibrarian() {
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -14,9 +14,9 @@ function AddLibrarian() {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Add Librarian' />
+            <Header heading='Change password' />
             <div className='container-fluid'>
-              <LibrarianAddForm />
+              <LibrarianPasswordChangeForm />
             </div>
           </div>
 
@@ -29,4 +29,4 @@ function AddLibrarian() {
   );
 }
 
-export default AddLibrarian;
+export default EditLibrarian;

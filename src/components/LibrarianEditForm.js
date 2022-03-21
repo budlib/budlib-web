@@ -18,7 +18,6 @@ const LibrarianEditForm = () => {
     middleName: '',
     lastName: '',
     email: '',
-    password: '',
     role: '',
   });
 
@@ -31,7 +30,6 @@ const LibrarianEditForm = () => {
       middleName: existingDetails['middleName'] || '',
       lastName: existingDetails['lastName'] || '',
       email: existingDetails['email'] || '',
-      password: existingDetails['password'] || '',
       role: existingDetails['role'] || '',
     });
   }, [loadStatus]);
@@ -43,33 +41,54 @@ const LibrarianEditForm = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
-        setDetails({
-          librarianId: '',
-          email: '',
-          userName: '',
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          email: '',
-          password: '',
-          role: '',
-        });
+        let path = `/librarian/${id}/view`;
+        navigate(path);
       }
     });
-    navigate('/librarian')
-
   }
 
   return (
     <div className='card shadow mb-4 p-3 text-dark' style={{ maxWidth: '50rem' }}>
       <div className='card-body'>
-        <form id='loanerForm' onSubmit={handleSubmit}>
-
+        <form id='librarianForm' onSubmit={handleSubmit}>
           <div className='form-group row'>
-            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formSchoolId'>
-              {"Librarian ID" + details['librarianId']}
+            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLibrarianType'>
+              Role
             </label>
-
+            <div className='col-sm-8'>
+              <select
+                className='form-control'
+                id='formLibrarianType'
+                name='formLibrarianType'
+                value={details['role']}
+                onChange={(e) => {
+                  setDetails({ ...details, role: e.target.value });
+                }}
+              >
+                <option value='ADMIN'>ADMIN</option>
+                <option value='FACULTY'>FACULTY</option>
+              </select>
+            </div>
+          </div>
+          <div className='form-group row'>
+            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFirstName'>
+              Username
+            </label>
+            <div className='col-sm-8'>
+              <input
+                type='text'
+                className='form-control'
+                id='formuserName'
+                name='formuserName'
+                placeholder='John'
+                maxLength='250'
+                required
+                value={details['userName']}
+                onChange={(e) => {
+                  setDetails({ ...details, userName: e.target.value });
+                }}
+              />
+            </div>
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formEmail'>
@@ -89,26 +108,7 @@ const LibrarianEditForm = () => {
                 }}
               />
             </div>
-            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFirstName'>
-              User Name
-            </label>
-            <div className='col-sm-8'>
-              <input
-                type='text'
-                className='form-control'
-                id='formuserName'
-                name='formuserName'
-                placeholder='John'
-                maxLength='250'
-                required
-                value={details['userName']}
-                onChange={(e) => {
-                  setDetails({ ...details, userName: e.target.value });
-                }}
-              />
-            </div>
           </div>
-
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFirstName'>
               First name
@@ -168,26 +168,6 @@ const LibrarianEditForm = () => {
             </div>
           </div>
 
-          <div className='form-group row'>
-            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formMotherName'>
-              Role
-            </label>
-            <div className='col-sm-8'>
-              <input
-                type='text'
-                className='form-control'
-                id='formrole'
-                name='formrole'
-                placeholder='admin'
-                maxLength='250'
-                value={details['role']}
-                onChange={(e) => {
-                  setDetails({ ...details, role: e.target.value });
-                }}
-              />
-            </div>
-          </div>
-
           <button type='submit' className='btn btn-primary my-2'>
             Update
           </button>
@@ -195,7 +175,7 @@ const LibrarianEditForm = () => {
             type='button'
             className='btn btn-outline-danger mx-4 my-2'
             onClick={() => {
-              let path = `/home`;
+              let path = `/librarian/${id}/view`;
               navigate(path);
             }}
           >

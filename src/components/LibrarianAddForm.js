@@ -6,58 +6,74 @@ const LibrarianAddForm = () => {
   let navigate = useNavigate();
 
   const [details, setDetails] = useState({
-
-    email: '',
     userName: '',
     firstName: '',
     middleName: '',
     lastName: '',
     email: '',
     password: '',
-    role: '',
+    role: 'FACULTY',
   });
 
   function handleSubmit(e) {
     e.preventDefault();
 
+    let password1 = document.getElementById('formCreatePassword').value;
+    let password2 = document.getElementById('formConfirmPassword').value;
+
+    if (password1 !== password2) {
+      window.alert("Password don't match");
+      return;
+    }
+
+    console.log(details);
+
     postCall('/api/librarian', details).then((result) => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
-        setDetails({
-
-          email: '',
-          userName: '',
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          email: '',
-          password: '',
-          role: '',
-        });
+        let path = `/librarian`;
+        navigate(path);
       }
     });
-    let path = `/librarian`;
-              navigate(path);
   }
 
   return (
     <div className='card shadow mb-4 p-3 text-dark' style={{ maxWidth: '50rem' }}>
       <div className='card-body'>
-        <form id='loanerForm' onSubmit={handleSubmit}>
-
+        <form id='librarianForm' onSubmit={handleSubmit}>
           <div className='form-group row'>
-            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formSchoolId'>
-              User Name
+            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLibrarianType'>
+              Role
+            </label>
+            <div className='col-sm-8'>
+              <select
+                className='form-control'
+                id='formLibrarianType'
+                name='formLibrarianType'
+                defaultValue='FACULTY'
+                onChange={(e) => {
+                  setDetails({ ...details, role: e.target.value });
+                }}
+              >
+                <option value='ADMIN'>ADMIN</option>
+                <option value='FACULTY'>FACULTY</option>
+              </select>
+            </div>
+          </div>
+          <div className='form-group row'>
+            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formUserName'>
+              Username
             </label>
             <div className='col-sm-8'>
               <input
                 type='text'
                 className='form-control'
-                id='formSchoolId'
-                name='formSchoolId'
-                placeholder='XJKDKS'
+                id='formUserName'
+                name='formUserName'
+                placeholder='johnrocks'
                 maxLength='250'
+                required
                 value={details['userName']}
                 onChange={(e) => {
                   setDetails({ ...details, userName: e.target.value });
@@ -75,8 +91,9 @@ const LibrarianAddForm = () => {
                 className='form-control'
                 id='formEmail'
                 name='formEmail'
-                placeholder='john.doe@waldorf.ca'
-                maxLength='250'
+                placeholder='john.doe@waldorf.org'
+                maxLength='100'
+                required
                 value={details['email']}
                 onChange={(e) => {
                   setDetails({ ...details, email: e.target.value });
@@ -84,7 +101,6 @@ const LibrarianAddForm = () => {
               />
             </div>
           </div>
-
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFirstName'>
               First name
@@ -144,17 +160,17 @@ const LibrarianAddForm = () => {
             </div>
           </div>
           <div className='form-group row'>
-            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFatherName'>
-              Temporary Password
+            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formCreatePassword'>
+              Create password
             </label>
             <div className='col-sm-8'>
               <input
-                type='text'
+                type='password'
                 className='form-control'
-                id='formFatherName'
-                name='formFatherName'
-                placeholder='password'
-                maxLength='250'
+                id='formCreatePassword'
+                name='formCreatePassword'
+                placeholder='Enter a password'
+                required
                 value={details['password']}
                 onChange={(e) => {
                   setDetails({ ...details, password: e.target.value });
@@ -163,22 +179,11 @@ const LibrarianAddForm = () => {
             </div>
           </div>
           <div className='form-group row'>
-            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formMotherName'>
-              Role
+            <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formConfirmPassword'>
+              Confirm password
             </label>
             <div className='col-sm-8'>
-              <input
-                type='text'
-                className='form-control'
-                id='formMotherName'
-                name='formMotherName'
-                placeholder='admin'
-                maxLength='250'
-                value={details['role']}
-                onChange={(e) => {
-                  setDetails({ ...details, role: e.target.value });
-                }}
-              />
+              <input type='password' className='form-control' id='formConfirmPassword' name='formConfirmPassword' placeholder='Confirm password' required />
             </div>
           </div>
 

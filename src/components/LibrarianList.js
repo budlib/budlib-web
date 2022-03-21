@@ -2,12 +2,8 @@ import React from 'react';
 import { useFetch } from '../helpers/useFetch';
 import { Link } from 'react-router-dom';
 
-const url = '/api/librarian';
-
 const LibrarianList = (props) => {
-  let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
-  console.log(thisurl);
-
+  const thisurl = '/api/librarian';
   const { data } = useFetch(thisurl);
 
   return (
@@ -16,54 +12,47 @@ const LibrarianList = (props) => {
         <div className='card shadow mb-4'>
           <div className='card-body'>
             <div className='table-responsive'>
-              <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0'>
-                <thead className='table-secondary text-dark'>
-                  <tr>
-                    <th>Librarian ID</th>
-                    <th>User Name</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                  <th>Librarian ID</th>
-                    <th>User Name</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  {data.map((dataItem) => {
-                    let { librarianId, userName, firstName, lastName, email, role } = dataItem;
+              {data.length === 1 ? (
+                'No other librarians found'
+              ) : (
+                <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0'>
+                  <thead className='table-secondary text-dark'>
+                    <tr>
+                      <th>Librarian ID</th>
+                      <th>Username</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.map((dataItem) => {
+                      let { librarianId, userName, email, role } = dataItem;
 
-
-
-                    return (
-                      <tr key={librarianId}>
-                        <td>
-                          <Link
-                            to={`/librarian/${librarianId}/view`}
-                            style={{
-                              display: 'block',
-                              width: '100%',
-                              color: 'inherit',
-                            }}
-                          >
-                            {librarianId}
-                          </Link>
-                        </td>
-                        <td>{userName}</td>
-                        <td>{firstName+" "+lastName}</td>
-                        <td>{email}</td>
-                        <td>{role}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+                      if (librarianId.toString() !== window.localStorage.getItem('id')) {
+                        return (
+                          <tr key={librarianId}>
+                            <td>
+                              <Link
+                                to={`/librarian/${librarianId}/view`}
+                                style={{
+                                  display: 'block',
+                                  width: '100%',
+                                  color: 'inherit',
+                                }}
+                              >
+                                {librarianId}
+                              </Link>
+                            </td>
+                            <td>{userName}</td>
+                            <td>{email}</td>
+                            <td>{role}</td>
+                          </tr>
+                        );
+                      }
+                    })}
+                  </tbody>
+                </table>
+              )}
             </div>
           </div>
         </div>

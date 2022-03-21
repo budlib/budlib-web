@@ -4,14 +4,12 @@ import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
-import LoanerList from '../../components/LoanerList';
-import LoanerSearchBar from '../../components/LoanerSearchBar';
-import { useEffect, useState } from 'react';
-import LibrarianSearchBar from '../../components/LibrarianSearchBar';
 import LibrarianList from '../../components/LibrarianList';
+import { useNavigate } from 'react-router-dom';
+
 const SearchLibrarians = () => {
-  const [psearchBy, setSearchBy] = useState(["",""]);
-  const [psearchTerm, setSearchTerm] = useState("");
+  let navigate = useNavigate();
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -19,10 +17,30 @@ const SearchLibrarians = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Search loaners' />
+            <Header heading='Librarian management' />
             <div className='container-fluid'>
-            <LibrarianSearchBar func={setSearchBy}/>
-              <LibrarianList searchBy={psearchBy[0]} searchTerm = {psearchBy[1]}/>
+              <LibrarianList />
+
+              <button
+                type='button'
+                className='btn btn-primary my-2'
+                onClick={() => {
+                  let path = `/librarian/add-librarian`;
+                  navigate(path);
+                }}
+              >
+                Add new librarian
+              </button>
+              <button
+                type='button'
+                className='btn btn-outline-danger mx-4 my-2'
+                onClick={() => {
+                  let path = `/dashboard`;
+                  navigate(path);
+                }}
+              >
+                Back to dashboard
+              </button>
             </div>
           </div>
 

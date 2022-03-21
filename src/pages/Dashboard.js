@@ -5,8 +5,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ScrollTop from '../components/ScrollTop';
 import { useFetch } from '../helpers/useFetch';
-import Menu from '../components/Menu';
 import DashboardMenu from '../components/DashboardMenu';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const statsUrl = '/api/dashboard/stats';
@@ -23,7 +23,7 @@ const Dashboard = () => {
           <div id='content'>
             <Header heading='Dashboard' />
             <div className='container-fluid'>
-            <div className='row'>
+              <div className='row'>
                 <div className='col-xl-3 col-md-6 mb-4'>
                   <div className='card border-left-primary shadow h-100 py-2'>
                     <div className='card-body'>
@@ -105,8 +105,34 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <DashboardMenu />
+              <div className='row pt-4'>
+                <div className='col-lg-6 mb-4'>
+                  <div className='row'>
+                    <div className='col-lg-6 mb-4'>
+                      <div className='card bg-info text-white shadow'>
+                        <Link to='/librarian' style={{ textDecoration: 'none' }}>
+                          <div className='card-body'>
+                            <h5 className='text-white'>Librarian management</h5>
+                            <div className='text-white-50 small'>Add or update librarians</div>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className='col-lg-6 mb-4'>
+                      <div className='card bg-success text-white shadow'>
+                        <Link to='/dashboard/batch-import-export' style={{ textDecoration: 'none' }}>
+                          <div className='card-body'>
+                            <h5 className='text-white'>Data management</h5>
+                            <div className='text-white-50 small'>Batch import and export</div>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
+              <DashboardMenu />
             </div>
           </div>
 

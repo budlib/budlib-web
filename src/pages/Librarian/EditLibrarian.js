@@ -4,8 +4,8 @@ import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
-import LoanerEditForm from '../../components/LoanerEditForm';
 import LibrarianEditForm from '../../components/LibrarianEditForm';
+import LibrarianPasswordChangeForm from '../../components/LibrarianPasswordChangeForm';
 
 function EditLibrarian() {
   return (
