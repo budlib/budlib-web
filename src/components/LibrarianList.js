@@ -33,7 +33,7 @@ const LibrarianList = (props) => {
                           <tr key={librarianId}>
                             <td>
                               <Link
-                                to={`/librarian/${librarianId}/view`}
+                                to={`/dashboard/librarian/${librarianId}/view`}
                                 style={{
                                   display: 'block',
                                   width: '100%',

@@ -27,7 +27,7 @@ const LibrarianEditForm = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
-        let path = `/librarian/${id}/view`;
+        let path = `/dashboard/librarian/${id}/view`;
         navigate(path);
       }
     });
@@ -72,7 +72,7 @@ const LibrarianEditForm = () => {
             type='button'
             className='btn btn-outline-danger mx-4 my-2'
             onClick={() => {
-              let path = `/librarian/${id}/view`;
+              let path = `/dashboard/librarian/${id}/view`;
               navigate(path);
             }}
           >

@@ -25,7 +25,7 @@ const SearchLibrarians = () => {
                 type='button'
                 className='btn btn-primary my-2'
                 onClick={() => {
-                  let path = `/librarian/add-librarian`;
+                  let path = `/dashboard/librarian/add-librarian`;
                   navigate(path);
                 }}
               >

@@ -32,7 +32,7 @@ const LibrarianAddForm = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
-        navigate(`/librarian/search`);
+        navigate(`/dashboard/librarian/search`);
       }
     });
   }
@@ -193,7 +193,7 @@ const LibrarianAddForm = () => {
             type='button'
             className='btn btn-outline-danger mx-4 my-2'
             onClick={() => {
-              navigate(`/librarian/search`);
+              navigate(`/dashboard/librarian/search`);
             }}
           >
             Cancel

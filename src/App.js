@@ -65,11 +65,11 @@ function App() {
         <Route path='/loaners/:id/edit' element={<RequireAuth><EditLoaner /></RequireAuth>} />
 
         {/* routes for librarian */}
-        <Route path='/librarian/search' element={<RequireAuth><SearchLibrarians /></RequireAuth>} />
-        <Route path='/librarian/:id/view' element={<RequireAuth><ViewLibrarian /></RequireAuth>} />
-        <Route path='/librarian/add-librarian' element={<RequireAuth><AddLibrarian /></RequireAuth>} />
-        <Route path='/librarian/:id/edit' element={<RequireAuth><EditLibrarian /></RequireAuth>} />
-        <Route path='/librarian/:id/change-password' element={<RequireAuth><ChangePasswordLibrarian /></RequireAuth>} />
+        <Route path='/dashboard/librarian/search' element={<RequireAuth><SearchLibrarians /></RequireAuth>} />
+        <Route path='/dashboard/librarian/:id/view' element={<RequireAuth><ViewLibrarian /></RequireAuth>} />
+        <Route path='/dashboard/librarian/add-librarian' element={<RequireAuth><AddLibrarian /></RequireAuth>} />
+        <Route path='/dashboard/librarian/:id/edit' element={<RequireAuth><EditLibrarian /></RequireAuth>} />
+        <Route path='/dashboard/librarian/:id/change-password' element={<RequireAuth><ChangePasswordLibrarian /></RequireAuth>} />
 
         {/* routes for transactions */}
         <Route path='/transactions' element={<RequireAuth><SearchTransactions /></RequireAuth>} />

@@ -24,17 +24,17 @@ const ViewLibrarian = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
-        navigate(`/librarian/search`);
+        navigate(`/dashboard/librarian/search`);
       }
     });
   }
 
   function handleEdit() {
-    navigate(`/librarian/${id}/edit`);
+    navigate(`/dashboard/librarian/${id}/edit`);
   }
 
   function handlePasswordChange() {
-    navigate(`/librarian/${id}/change-password`);
+    navigate(`/dashboard/librarian/${id}/change-password`);
   }
 
   useEffect(() => {
