@@ -23,7 +23,7 @@ const ViewLibrarian = () => {
     deleteCall(librarianDeleteUrl).then((result) => {
       window.alert(result['data']['message']);
 
-      if (result['status'] == 200) {
+      if (result['status'] === 200) {
         navigate(`/librarian/search`);
       }
     });
@@ -41,7 +41,7 @@ const ViewLibrarian = () => {
     if (id.toString() === window.localStorage.getItem('id')) {
       document.getElementById('deleteButton').style.display = 'none';
     }
-  }, []);
+  }, [id]);
 
   return (
     <React.Fragment>
