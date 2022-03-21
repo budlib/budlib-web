@@ -417,7 +417,7 @@ const BookEditForm = () => {
               type='button'
               className='btn btn-outline-danger mx-4 my-2'
               onClick={() => {
-                let path = `/home`;
+                let path = `/books/${id}/view`;
                 navigate(path);
               }}
             >

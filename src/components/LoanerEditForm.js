@@ -258,7 +258,7 @@ const LoanEditForm = () => {
             type='button'
             className='btn btn-outline-danger mx-4 my-2'
             onClick={() => {
-              let path = `/home`;
+              let path = `/loaners/${id}/view`;
               navigate(path);
             }}
           >
