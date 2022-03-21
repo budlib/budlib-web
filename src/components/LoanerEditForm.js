@@ -39,10 +39,12 @@ const LoanEditForm = () => {
       document.getElementById('formSalutation').parentElement.parentElement.classList.add('bg-hide');
       document.getElementById('formFatherName').parentElement.parentElement.classList.remove('bg-hide');
       document.getElementById('formMotherName').parentElement.parentElement.classList.remove('bg-hide');
+      document.getElementById('formSchoolId').parentElement.previousElementSibling.innerText = 'School ID';
     } else {
       document.getElementById('formSalutation').parentElement.parentElement.classList.remove('bg-hide');
       document.getElementById('formFatherName').parentElement.parentElement.classList.add('bg-hide');
       document.getElementById('formMotherName').parentElement.parentElement.classList.add('bg-hide');
+      document.getElementById('formSchoolId').parentElement.previousElementSibling.innerText = 'Employee ID';
     }
   }, [loadStatus]);
 
