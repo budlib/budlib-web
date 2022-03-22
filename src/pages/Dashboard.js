@@ -12,8 +12,15 @@ const Dashboard = () => {
   const statsUrl = '/api/dashboard/stats';
   const { data: statsData } = useFetch(statsUrl);
 
+  const overdueUrl = '/api/dashboard/overdue';
+  const { data: overdueData } = useFetch(overdueUrl);
+
+  const upcomingdueUrl = '/api/dashboard/upcomingdue';
+  const { data: upcomingdueData } = useFetch(upcomingdueUrl);
+
   let ratioOutstanding = statsData['totalOutstandingCopies'] / statsData['totalCopies'];
   let percentageOutstanding = ratioOutstanding.toFixed(2) * 100;
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -106,10 +113,10 @@ const Dashboard = () => {
               </div>
 
               <div className='row pt-4'>
-                <div className='col-lg-6 mb-4'>
+                <div className='col-lg-12 mb-4'>
                   <div className='row'>
                     <div className='col-lg-6 mb-4'>
-                      <div className='card bg-info text-white shadow'>
+                      <div className='card bg-secondary text-white shadow'>
                         <Link to='/dashboard/librarian/search' style={{ textDecoration: 'none' }}>
                           <div className='card-body'>
                             <h5 className='text-white'>Librarian management</h5>
@@ -119,13 +126,154 @@ const Dashboard = () => {
                       </div>
                     </div>
                     <div className='col-lg-6 mb-4'>
-                      <div className='card bg-success text-white shadow'>
+                      <div className='card bg-secondary text-white shadow'>
                         <Link to='/dashboard/batch-import-export' style={{ textDecoration: 'none' }}>
                           <div className='card-body'>
                             <h5 className='text-white'>Data management</h5>
                             <div className='text-white-50 small'>Batch import and export</div>
                           </div>
                         </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='row pt-2'>
+                <div className='col-lg-6 mb-4'>
+                  <div className='card shadow mb-4'>
+                    <div className='card-header py-3'>
+                      <h6 className='m-0 font-weight-bold text-primary'>Overdue loans</h6>
+                    </div>
+                    <div className='card-body'>
+                      <div className='table-responsive'>
+                        {overdueData.length === 1 ? (
+                          'No overdue loans'
+                        ) : (
+                          <table className='table table-bordered table-hover' id='dataTable' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
+                            <thead className='table-secondary text-dark'>
+                              <tr>
+                                <th style={{ width: '25%' }}>Loaner</th>
+                                <th style={{ width: '35%' }}>Book</th>
+                                <th style={{ width: '15%' }}>Copies</th>
+                                <th style={{ width: '25%' }}>Due date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {overdueData.map((overDueItem) => {
+                                const { loanId, loaner, book, copies, dueDate } = overDueItem;
+
+                                return (
+                                  <tr key={loanId}>
+                                    <td>
+                                      <Link
+                                        to={`/loaners/${loaner['loanerId']}/view`}
+                                        style={{
+                                          display: 'block',
+                                          width: '100%',
+                                          color: 'inherit',
+                                          textOverflow: 'ellipsis',
+                                          overflow: 'hidden',
+                                          whiteSpace: 'nowrap',
+                                        }}
+                                      >
+                                        {loaner['fullName']}
+                                      </Link>
+                                    </td>
+                                    <td
+                                      style={{
+                                        textOverflow: 'ellipsis',
+                                        overflow: 'hidden',
+                                        whiteSpace: 'nowrap',
+                                      }}
+                                    >
+                                      {book['title']}
+                                    </td>
+                                    <td>{copies}</td>
+                                    <td
+                                      style={{
+                                        textOverflow: 'ellipsis',
+                                        overflow: 'hidden',
+                                        whiteSpace: 'nowrap',
+                                      }}
+                                    >
+                                      {dueDate}
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className='col-lg-6 mb-4'>
+                  <div className='card shadow mb-4'>
+                    <div className='card-header py-3'>
+                      <h6 className='m-0 font-weight-bold text-primary'>Upcoming due dates</h6>
+                    </div>
+                    <div className='card-body'>
+                      <div className='table-responsive'>
+                        {upcomingdueData.length === 1 ? (
+                          'No upcoming due date until next week'
+                        ) : (
+                          <table className='table table-bordered table-hover' id='dataTable' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
+                            <thead className='table-secondary text-dark'>
+                              <tr>
+                                <th style={{ width: '25%' }}>Loaner</th>
+                                <th style={{ width: '35%' }}>Book</th>
+                                <th style={{ width: '15%' }}>Copies</th>
+                                <th style={{ width: '25%' }}>Due date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {upcomingdueData.map((upcomingDueItem) => {
+                                const { loanId, loaner, book, copies, dueDate } = upcomingDueItem;
+
+                                return (
+                                  <tr key={loanId}>
+                                    <td>
+                                      <Link
+                                        to={`/loaners/${loaner['loanerId']}/view`}
+                                        style={{
+                                          display: 'block',
+                                          width: '100%',
+                                          color: 'inherit',
+                                          textOverflow: 'ellipsis',
+                                          overflow: 'hidden',
+                                          whiteSpace: 'nowrap',
+                                        }}
+                                      >
+                                        {loaner['fullName']}
+                                      </Link>
+                                    </td>
+                                    <td
+                                      style={{
+                                        textOverflow: 'ellipsis',
+                                        overflow: 'hidden',
+                                        whiteSpace: 'nowrap',
+                                      }}
+                                    >
+                                      {book['title']}
+                                    </td>
+                                    <td>{copies}</td>
+                                    <td
+                                      style={{
+                                        textOverflow: 'ellipsis',
+                                        overflow: 'hidden',
+                                        whiteSpace: 'nowrap',
+                                      }}
+                                    >
+                                      {dueDate}
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        )}
                       </div>
                     </div>
                   </div>
