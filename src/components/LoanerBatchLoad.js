@@ -9,6 +9,8 @@ import { postCall } from '../helpers/postCall';
 const LoanerBatchLoad = () => {
     const [file, setFile] = useState();
     const [json, setJson] = useState([]);
+    const [header, setHeader] = useState([]);
+    const [headerMap, setHMap] = useState({});
     let navigate = useNavigate();
 
     const readUploadFile = (e) => {
@@ -23,6 +25,8 @@ const LoanerBatchLoad = () => {
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[sheetName];
                 setJson( xlsx.utils.sheet_to_json(worksheet));
+                const columnsArray = Object.keys(xlsx.utils.sheet_to_json(worksheet)[0]);
+                setHeader(columnsArray);
                 //console.log(json);
             };
             reader.readAsArrayBuffer(e.target.files[0]);
@@ -34,10 +38,23 @@ const LoanerBatchLoad = () => {
     }
 
     const handleSubmit =(e)=>{
-        let tempJson = json;
+      let tempJson = [];
+      let jObj = {};
 
-            setJson(tempJson);
-            console.log(tempJson);
+      for (let i = 0; i < json.length; i++) {
+        jObj = {};
+        Object.keys(headerMap).forEach(function(key) {
+
+          jObj[headerMap[key]] = json[i][key];
+
+        })
+
+        tempJson.push(jObj);
+
+      }
+
+
+      console.log(tempJson);
 
             postCall('/api/loaners/multiple', tempJson).then((result) => {
               window.alert(result['data']['message']);
@@ -79,41 +96,88 @@ const LoanerBatchLoad = () => {
               <table className='table table-bordered table-hover' id='dataTable' width='50%' cellSpacing='0'>
                 <thead className='table-secondary text-dark'>
                   <tr>
-                    <th>Student ID</th>
-                    <th>Email</th>
-                    <th>Name</th>
+                  <th>Header in Source</th>
+                    <th>Database Category</th>
 
 
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                  <th>Student ID</th>
-                  <th>Email</th>
-                    <th>Name</th>
+                  <th>Header in Source</th>
+                    <th>Database Category</th>
 
                   </tr>
                 </tfoot>
                 <tbody>
-                  {json.map((dataItem) => {
-                    let { schoolId, email, firstName, middleName, lastName } = dataItem;
+                  {header.map((dataItem) => {
+
 
 
 
                     return (
-                      <tr key={schoolId}>
+                      <tr key={dataItem}>
                         <td>
 
-                            {schoolId}
+                            {dataItem}
 
                         </td>
-                        <td>{email}</td>
-                        <td>{firstName} {middleName} {lastName}</td>
+                        <td>
+                        <div className="dropdown">
+                        <div className='col-sm-8'>
+                          <select
+                            className='form-control'
+                            id='formLoanerType'
+                            name='formLoanerType'
+                            //value={dataItem+"@"+"na"}
+                            onChange={(e) => {
+
+                              let headers = e.target.value.split("@");
+
+                              let tempMap = headerMap;
+                              if(headers[1] !='na'){
+
+                                tempMap[headers[0]] = headers[1];
+
+                              }else{
+                                if(tempMap.hasOwnProperty(headers[0])){
+                                  delete tempMap[headers[0]];
+
+                                }
+
+
+                              }
+
+                              setHMap(tempMap);
+
+
+
+
+
+                            }}
+                          >
+                            <option value={dataItem+"@"+'na'}>not_use</option>
+                            <option value={dataItem+"@"+'schoolId'}>schoolId</option>
+                            <option value={dataItem+"@"+'email'}>email</option>
+                            <option value={dataItem+"@"+'salutation'}>salutation</option>
+                            <option value={dataItem+"@"+'firstName'}>firstName</option>
+                            <option value={dataItem+"@"+'middleName'}>middleName</option>
+                            <option value={dataItem+"@"+'lastName'}>lastName</option>
+                            <option value={dataItem+"@"+'motherName'}>motherName</option>
+                            <option value={dataItem+"@"+'fatherName'}>fatherName</option>
+                            <option value={dataItem+"@"+'isStudent'}>isStudent</option>
+
+                          </select>
+                          </div>
+                        </div>
+                        </td>
 
                       </tr>
                     );
                   })}
                 </tbody>
+
+
               </table>
             </div>
 
