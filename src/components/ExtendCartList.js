@@ -11,22 +11,22 @@ const ExtendCartList = (props) => {
 
 
   const [cart, setCart] = useState([]);
-  const librarianId = 1;
+  const librarianId = window.localStorage.getItem('id');
   const { id } = useParams();
   let thisurl = url +id +'/loans';
-  console.log(thisurl);
+
   const { data } = useFetch(thisurl);
-  console.log(data);
-  const [datex, setDate] = useState(new Date());
+
+  const [datex, setDate] = useState("");
   const handleAdd =(e)=>{
     let newCart = cart;
     let exist = false;
     let st = e.target.value.split("@")
-    console.log(st[2]);
+
     if(parseInt(st[2])>0){
       for(var i = 0; i < newCart.length; i++)
       {
-        console.log(i);
+
 
         if(newCart[i]["bookId"] == parseInt(st[0])  )
         {
@@ -56,7 +56,7 @@ const ExtendCartList = (props) => {
 
     setCart([...newCart]);
 
-    console.log(cart);
+
 
     }else{
       window.alert("No More Availability. " );
@@ -70,7 +70,7 @@ const ExtendCartList = (props) => {
     let newCart = cart;
     for(var i = 0; i < newCart.length; i++)
       {
-        console.log(e.target.value);
+
 
 
         if(newCart[i]["bookId"] == e.target.value)
@@ -84,7 +84,7 @@ const ExtendCartList = (props) => {
 
         }
       }
-      console.log(cart);
+
 
   }
 
@@ -99,7 +99,7 @@ const ExtendCartList = (props) => {
     let newCart = cart;
     for(var i = 0; i < newCart.length; i++)
       {
-        console.log(e.target.value);
+
 
         if(newCart[i]["bookId"] == e.target.value)
         {
@@ -109,13 +109,13 @@ const ExtendCartList = (props) => {
         }
 
         if(newCart[i]["copies"]==0){
-          console.log("Length before: " + newCart.length);
+
           newCart = arrayRemove(newCart,newCart[i]["bookId"]);
-          console.log("Length after: " + newCart.length);
+
           setCart([...newCart]);
         }
       }
-      console.log(cart);
+
 
   }
 
@@ -123,7 +123,7 @@ const ExtendCartList = (props) => {
     let newCart = cart;
     for(var i = 0; i < newCart.length; i++)
       {
-        console.log(e.target.value);
+
 
         if(newCart[i]["bookId"] == e.target.value)
         {
@@ -134,7 +134,7 @@ const ExtendCartList = (props) => {
 
 
       }
-      console.log(cart);
+
 
   }
 
@@ -150,12 +150,13 @@ const ExtendCartList = (props) => {
               "book": {
                   "bookId": cart[i]["bookId"]
               },
-              "copies": cart[i]["copies"]
+              "copies": cart[i]["copies"],
+
           }
           )
         }
       let message = {
-        "transactionDateTime": "2022-02-11T09:15:23",
+
         "transactionType": "EXTEND",
         "loaner": {
           "loanerId": id
@@ -167,20 +168,9 @@ const ExtendCartList = (props) => {
 
       }
       console.log(message);
-      let monthstr = datex.getMonth().toString();
-      if( datex.getMonth()<10){
-        monthstr = "0" + datex.getMonth().toString()
-      }
-      let daystr = datex.getDay().toString();
-      if( datex.getDay()<10){
-        daystr = "0" + datex.getDay().toString()
-      }
-      let datString = datex.getFullYear().toString() + monthstr+daystr;
 
 
-      console.log(datString);
-
-      postCall('api/transactions?borrowDate=20220211&dueDate=' + datString, message);
+      postCall('api/transactions?dueDate=' + datex, message);
       window.alert("Transaction complete");
       setCart([]);
 
@@ -192,11 +182,24 @@ const ExtendCartList = (props) => {
 
   }
 
+  const handleCalchng =(e)=>{
+    console.log(e.target.value);
+    let temp = e.target.value
+    temp = temp.replaceAll("-","");
+    console.log(temp);
+
+
+    setDate(temp);
+
+  }
+
   return (
     <div className='row'>
       <div className='col-lg-5'>
         <div className='card shadow mb-4'>
+
           <div className='card-body'>
+
             <div className='table-responsive'>
               <table className='table table-bordered table-hover' id='dataTable' width='50%' cellSpacing='0'>
                 <thead className='table-secondary text-dark'>
@@ -255,13 +258,14 @@ const ExtendCartList = (props) => {
           <div className='card-body'>
           <h3>Extend Date</h3>
           <div className='calendar-container'>
-                <Calendar onChange={setDate} value={datex} />
+            <form action="/action_page.php">
 
-              <p className='text-center'>
-                <span className='bold'>Selected Date:</span>{' '}
-                {datex.toDateString()}
-              </p>
+              <input onChange={(e) => handleCalchng(e)}  type="date" id="birthday" name="birthday"/>
+
+            </form>
+
             </div>
+            <div><p></p></div>
             <div className='table-responsive'>
               <h3>Cart</h3>
               <table className='table table-bordered table-hover' id='dataTable' width='50%' cellSpacing='0'>
