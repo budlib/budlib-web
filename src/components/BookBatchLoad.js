@@ -9,6 +9,8 @@ import { postCall } from '../helpers/postCall';
 const BookBatchLoad = () => {
     const [file, setFile] = useState();
     const [json, setJson] = useState([]);
+    const [header, setHeader] = useState([]);
+    const [headerMap, setHMap] = useState({});
     let navigate = useNavigate();
 
     const readUploadFile = (e) => {
@@ -23,7 +25,10 @@ const BookBatchLoad = () => {
                 const sheetName = workbook.SheetNames[0];
                 const worksheet = workbook.Sheets[sheetName];
                 setJson( xlsx.utils.sheet_to_json(worksheet));
-                //console.log(json);
+                const columnsArray = Object.keys(xlsx.utils.sheet_to_json(worksheet)[0]);
+                setHeader(columnsArray);
+
+
             };
             reader.readAsArrayBuffer(e.target.files[0]);
         }
@@ -34,13 +39,23 @@ const BookBatchLoad = () => {
     }
 
     const handleSubmit =(e)=>{
-        let tempJson = json;
-        for(var i = 0; i < tempJson.length; i++)
-            {
-                tempJson[i]["tags"]=[];
-            }
-            setJson(tempJson);
-            console.log(tempJson);
+        let tempJson = [];
+        let jObj = {};
+
+        for (let i = 0; i < json.length; i++) {
+          jObj = {};
+          Object.keys(headerMap).forEach(function(key) {
+
+            jObj[headerMap[key]] = json[i][key];
+
+          })
+
+          tempJson.push(jObj);
+
+        }
+
+
+        console.log(tempJson);
 
             postCall('/api/books/multiple', tempJson).then((result) => {
               window.alert(result['data']['message']);
@@ -82,33 +97,87 @@ const BookBatchLoad = () => {
               <table className='table table-bordered table-hover' id='dataTable' width='50%' cellSpacing='0'>
                 <thead className='table-secondary text-dark'>
                   <tr>
-                    <th>Title</th>
-                    <th>Authors</th>
+                  <th>Header in Source</th>
+                    <th>Database Category</th>
 
 
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                  <th>Title</th>
-                    <th>Authors</th>
+                  <th>Header in Source</th>
+                    <th>Database Category</th>
 
                   </tr>
                 </tfoot>
                 <tbody>
-                  {json.map((dataItem) => {
-                    let { authors, title, availableQuantity } = dataItem;
+                  {header.map((dataItem) => {
+
 
 
 
                     return (
-                      <tr key={title}>
+                      <tr key={dataItem}>
                         <td>
 
-                            {title}
+                            {dataItem}
 
                         </td>
-                        <td>{authors}</td>
+                        <td>
+                        <div className="dropdown">
+                        <div className='col-sm-8'>
+                          <select
+                            className='form-control'
+                            id='formLoanerType'
+                            name='formLoanerType'
+                            //value={dataItem+"@"+"na"}
+                            onChange={(e) => {
+
+                              let headers = e.target.value.split("@");
+
+                              let tempMap = headerMap;
+                              if(headers[1] !='na'){
+
+                                tempMap[headers[0]] = headers[1];
+
+                              }else{
+                                if(tempMap.hasOwnProperty(headers[0])){
+                                  delete tempMap[headers[0]];
+
+                                }
+
+
+                              }
+
+                              setHMap(tempMap);
+
+
+
+
+
+                            }}
+                          >
+                            <option value={dataItem+"@"+'na'}>not_use</option>
+                            <option value={dataItem+"@"+'title'}>title</option>
+                            <option value={dataItem+"@"+'subtitle'}>subtitle</option>
+                            <option value={dataItem+"@"+'authors'}>authors</option>
+                            <option value={dataItem+"@"+'publisher'}>publisher</option>
+                            <option value={dataItem+"@"+'edition'}>edition</option>
+                            <option value={dataItem+"@"+'year'}>year</option>
+                            <option value={dataItem+"@"+'language'}>language</option>
+                            <option value={dataItem+"@"+'isbn_10'}>isbn_10</option>
+                            <option value={dataItem+"@"+'isbn_13'}>isbn_13</option>
+                            <option value={dataItem+"@"+'librarySection'}>librarySection</option>
+                            <option value={dataItem+"@"+'totalQuantity'}>totalQuantity</option>
+                            <option value={dataItem+"@"+'availableQuantity'}>availableQuantity</option>
+                            <option value={dataItem+"@"+'notes'}>notes</option>
+
+                            <option value={dataItem+"@"+'priceRetail'}>priceRetail</option>
+                            <option value={dataItem+"@"+'priceLibrary'}>priceLibrary</option>
+                          </select>
+                          </div>
+                        </div>
+                        </td>
 
                       </tr>
                     );
