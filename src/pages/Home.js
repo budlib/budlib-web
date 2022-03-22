@@ -63,10 +63,9 @@ const Home = () => {
               >
                 Dashboard
               </h4>
-              <div className='row pt-3'>
+              <div className='row pt-3 pb-5'>
                 <MenuCard head='Dashboard home' url='/dashboard' src='/images/menu_dashboard.svg' />
                 <MenuCard head='Librarian management' url='/dashboard/librarian/search' src='/images/menu_librarian.svg' />
-                <MenuCard head='Batch import export' url='/dashboard/batch-import-export' src='/images/menu_batch.svg' />
               </div>
             </div>
           </div>

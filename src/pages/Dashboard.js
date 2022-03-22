@@ -1,12 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useFetch } from '../helpers/useFetch';
 
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ScrollTop from '../components/ScrollTop';
-import { useFetch } from '../helpers/useFetch';
-import DashboardMenu from '../components/DashboardMenu';
-import { Link } from 'react-router-dom';
+import BatchImport from '../components/BatchImport';
 
 const Dashboard = () => {
   const statsUrl = '/api/dashboard/stats';
@@ -113,24 +113,39 @@ const Dashboard = () => {
               </div>
 
               <div className='row pt-4'>
-                <div className='col-lg-12 mb-4'>
+                <div className='col-lg-6 mb-4'>
                   <div className='row'>
-                    <div className='col-lg-6 mb-4'>
-                      <div className='card bg-secondary text-white shadow'>
+                    <BatchImport />
+                  </div>
+                </div>
+                <div className='col-lg-6 mb-4'>
+                  <div className='row'>
+                    <div className='col-lg-12 mb-4'>
+                      <div className='card bg-dark text-white shadow'>
                         <Link to='/dashboard/librarian/search' style={{ textDecoration: 'none' }}>
                           <div className='card-body'>
                             <h5 className='text-white'>Librarian management</h5>
-                            <div className='text-white-50 small'>Add or update librarians</div>
+                            <div className='text-white-50 small'>Add or update librarian or faculty</div>
                           </div>
                         </Link>
                       </div>
                     </div>
                     <div className='col-lg-6 mb-4'>
-                      <div className='card bg-secondary text-white shadow'>
-                        <Link to='/dashboard/batch-import-export' style={{ textDecoration: 'none' }}>
+                      <div className='card bg-dark text-white shadow'>
+                        <Link to='/dashboard/import/books' style={{ textDecoration: 'none' }}>
                           <div className='card-body'>
-                            <h5 className='text-white'>Data management</h5>
-                            <div className='text-white-50 small'>Batch import and export</div>
+                            <h5 className='text-white'>Import books</h5>
+                            <div className='text-white-50 small'>Import books from CSV</div>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className='col-lg-6 mb-4'>
+                      <div className='card bg-dark text-white shadow'>
+                        <Link to='/dashboard/import/loaners' style={{ textDecoration: 'none' }}>
+                          <div className='card-body'>
+                            <h5 className='text-white'>Import loaners</h5>
+                            <div className='text-white-50 small'>Import loaners from CSV</div>
                           </div>
                         </Link>
                       </div>
@@ -279,8 +294,6 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
-
-              <DashboardMenu />
             </div>
           </div>
 

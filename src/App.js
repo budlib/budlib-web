@@ -39,7 +39,6 @@ import SelectExtender from './pages/Loaners/SelectExtender';
 
 // batch processing
 import BookBatchUpload from './pages/Books/BookBatchUpload';
-import DataDump from './pages/DataDump';
 import LoanerBatchUpload from './pages/Loaners/LoanerBatchUpload';
 
 
@@ -52,8 +51,6 @@ function App() {
 
         {/* routes for books */}
         <Route path='/books/search' element={<RequireAuth><SearchBooks /></RequireAuth>} />
-        <Route path='/books/batch' element={<RequireAuth><BookBatchUpload /></RequireAuth>} />
-        <Route path='/loaners/batch' element={<RequireAuth><LoanerBatchUpload /></RequireAuth>} />
         <Route path='/books/:id/view' element={<RequireAuth><ViewBook /></RequireAuth>} />
         <Route path='/books/add-book' element={<RequireAuth><AddBook /></RequireAuth>} />
         <Route path='/books/:id/edit' element={<RequireAuth><EditBook /></RequireAuth>} />
@@ -83,7 +80,8 @@ function App() {
 
         {/* routes for dashboard */}
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />
-        <Route path='/exportreports' element={<RequireAuth><DataDump /></RequireAuth>} />
+        <Route path='/dashboard/import/books' element={<RequireAuth><BookBatchUpload /></RequireAuth>} />
+        <Route path='/dashboard/import/loaners' element={<RequireAuth><LoanerBatchUpload /></RequireAuth>} />
 
         {/* other routes */}
         <Route path="/login" element={<Login />} />
