@@ -1,5 +1,5 @@
 import React from 'react';
-import MenuList from './MenuList';
+
 import MenuCard from './MenuCard';
 import DashboardMenuList from './DashboardMenuList';
 
