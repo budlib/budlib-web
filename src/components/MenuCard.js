@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const MenuCard = ({ id, head, url, src }) => {
+const MenuCard = ({ head, url, src }) => {
   return (
     <div className='col-xl-3 col-lg-5'>
       <Link to={url} style={{ textDecoration: 'none' }}>

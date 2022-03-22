@@ -18,7 +18,7 @@ const Sidebar = () => {
 
       <hr className='sidebar-divider' />
 
-      <div className='sidebar-heading'>Action</div>
+      <div className='sidebar-heading'>Transact</div>
 
       <li className='nav-item'>
         <Link className='nav-link text-white' to='/loaners/borrow-books'>
@@ -38,6 +38,13 @@ const Sidebar = () => {
         <Link className='nav-link text-white' to='/loaners/extend-books'>
           <i className='far fa-fw fa-calendar-check'></i>
           <span>Provide extension</span>
+        </Link>
+      </li>
+
+      <li className='nav-item'>
+        <Link className='nav-link text-white' to='/transactions'>
+          <i className='fas fa-fw fa-chart-area'></i>
+          <span>Past transactions</span>
         </Link>
       </li>
 
@@ -77,13 +84,6 @@ const Sidebar = () => {
             </Link>
           </div>
         </div>
-      </li>
-
-      <li className='nav-item'>
-        <Link className='nav-link text-white' to='/transactions'>
-          <i className='fas fa-fw fa-chart-area'></i>
-          <span>Transactions</span>
-        </Link>
       </li>
 
       <hr className='sidebar-divider' />
