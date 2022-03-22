@@ -17,7 +17,6 @@ const LibrarianEditForm = () => {
     firstName: '',
     middleName: '',
     lastName: '',
-    email: '',
     role: '',
   });
 
@@ -29,7 +28,6 @@ const LibrarianEditForm = () => {
       firstName: existingDetails['firstName'] || '',
       middleName: existingDetails['middleName'] || '',
       lastName: existingDetails['lastName'] || '',
-      email: existingDetails['email'] || '',
       role: existingDetails['role'] || '',
     });
   }, [loadStatus]);
