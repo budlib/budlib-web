@@ -161,7 +161,7 @@ const Dashboard = () => {
                     </div>
                     <div className='card-body'>
                       <div className='table-responsive'>
-                        {overdueData.length === 1 ? (
+                        {overdueData.length === 0 ? (
                           'No overdue loans'
                         ) : (
                           <table className='table table-bordered table-hover' id='dataTable' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
@@ -231,7 +231,7 @@ const Dashboard = () => {
                     </div>
                     <div className='card-body'>
                       <div className='table-responsive'>
-                        {upcomingdueData.length === 1 ? (
+                        {upcomingdueData.length === 0 ? (
                           'No upcoming due date until next week'
                         ) : (
                           <table className='table table-bordered table-hover' id='dataTable' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
