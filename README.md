@@ -19,6 +19,17 @@ A web based front end for the [budlib-api](https://github.com/budlib/budlib-api)
    $ npm start
    ```
 
+## Compiling Electron App
+1. Create a build of the web application first
+   ```bash
+   $ npm run build
+   ```
+2. run package script as listed in package.json. For example if we were to compile a windows application:
+   ```bash
+   $ npm run package-win
+   ```
+
+
 ## Contributors
 
 - [Bhavyai Gupta](https://github.com/zbhavyai)
