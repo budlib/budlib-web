@@ -6,7 +6,7 @@ import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ScrollTop from '../components/ScrollTop';
-import BatchImport from '../components/BatchImport';
+import BatchImport from '../components/BatchExport';
 
 const Dashboard = () => {
   const statsUrl = '/api/dashboard/stats';
