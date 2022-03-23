@@ -1,9 +1,9 @@
 import React from 'react';
-
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
+import ModalLogout from '../../components/ModalLogout';
 import LibrarianList from '../../components/LibrarianList';
 import { useNavigate } from 'react-router-dom';
 
@@ -49,6 +49,7 @@ const SearchLibrarians = () => {
       </div>
 
       <ScrollTop />
+      <ModalLogout />
     </React.Fragment>
   );
 };

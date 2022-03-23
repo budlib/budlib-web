@@ -1,16 +1,16 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
+import ModalLogout from '../../components/ModalLogout';
 import SelectBorrowerList from '../../components/SelectBorrowerList';
 import LoanerSearchBar from '../../components/LoanerSearchBar';
-import { useEffect, useState } from 'react';
 import SelectExtenderList from './../../components/SelectExtenderList';
+
 const SelectExtender = () => {
-  const [psearchBy, setSearchBy] = useState(["",""]);
-  const [psearchTerm, setSearchTerm] = useState("");
+  const [psearchBy, setSearchBy] = useState(['', '']);
+  const [psearchTerm, setSearchTerm] = useState('');
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -20,8 +20,8 @@ const SelectExtender = () => {
           <div id='content'>
             <Header heading='Select Borrower to Extend For' />
             <div className='container-fluid'>
-            <LoanerSearchBar func={setSearchBy}/>
-              <SelectExtenderList searchBy={psearchBy[0]} searchTerm = {psearchBy[1]}/>
+              <LoanerSearchBar func={setSearchBy} />
+              <SelectExtenderList searchBy={psearchBy[0]} searchTerm={psearchBy[1]} />
             </div>
           </div>
 
@@ -30,6 +30,7 @@ const SelectExtender = () => {
       </div>
 
       <ScrollTop />
+      <ModalLogout />
     </React.Fragment>
   );
 };

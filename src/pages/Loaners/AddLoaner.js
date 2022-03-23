@@ -1,9 +1,9 @@
 import React from 'react';
-
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
+import ModalLogout from '../../components/ModalLogout';
 import LoanerAddForm from '../../components/LoanerAddForm';
 
 function AddLoaner() {
@@ -25,6 +25,7 @@ function AddLoaner() {
       </div>
 
       <ScrollTop />
+      <ModalLogout />
     </React.Fragment>
   );
 }

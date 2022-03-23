@@ -1,16 +1,16 @@
-import React from 'react';
-import BorrowCartList from '../../components/BorrowCartList';
+import React, { useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
-import SelectBorrowerList from '../../components/SelectBorrowerList';
-import LoanerSearchBar from '../../components/LoanerSearchBar';
-import { useEffect, useState } from 'react';
+import ModalLogout from '../../components/ModalLogout';
 import BookSearchBar from './../../components/BookSearchBar';
+import BorrowCartList from '../../components/BorrowCartList';
+
 const BorrowCart = () => {
-  const [psearchBy, setSearchBy] = useState(["",""]);
-  const [psearchTerm, setSearchTerm] = useState("");
+  const [psearchBy, setSearchBy] = useState(['', '']);
+  const [psearchTerm, setSearchTerm] = useState('');
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -20,8 +20,8 @@ const BorrowCart = () => {
           <div id='content'>
             <Header heading='Add Books to Borrow' />
             <div className='container-fluid'>
-            <BookSearchBar func={setSearchBy}/>
-              <BorrowCartList searchBy={psearchBy[0]} searchTerm = {psearchBy[1]}/>
+              <BookSearchBar func={setSearchBy} />
+              <BorrowCartList searchBy={psearchBy[0]} searchTerm={psearchBy[1]} />
             </div>
           </div>
 
@@ -30,6 +30,7 @@ const BorrowCart = () => {
       </div>
 
       <ScrollTop />
+      <ModalLogout />
     </React.Fragment>
   );
 };

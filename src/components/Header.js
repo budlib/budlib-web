@@ -1,26 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../helpers/useAuth';
 import profilePic from '../assets/img/undraw_profile_3.svg';
 
 const Header = (props) => {
-  const { logout } = useAuth();
-  const navigate = useNavigate();
-
   let loggedName = window.localStorage.getItem('username');
   let loggedId = window.localStorage.getItem('id');
-
-  const handleLogout = () => {
-    window.localStorage.removeItem('id');
-    window.localStorage.removeItem('username');
-    window.localStorage.removeItem('role');
-    window.localStorage.removeItem('token');
-
-    logout().then(() => {
-      navigate('/');
-    });
-  };
 
   function handleToggle() {
     document.body.classList.toggle('sidebar-toggled');
@@ -61,7 +45,7 @@ const Header = (props) => {
               Profile
             </Link>
             <div className='dropdown-divider'></div>
-            <button className='dropdown-item' onClick={handleLogout} data-toggle='modal' data-target='#logoutModal'>
+            <button className='dropdown-item' data-toggle='modal' data-target='#logoutModal'>
               <i className='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>
               Logout
             </button>

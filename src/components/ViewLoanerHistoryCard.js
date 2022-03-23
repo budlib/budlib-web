@@ -32,7 +32,7 @@ const ViewLoanerHistoryCard = () => {
                   </thead>
                   <tbody>
                     {data.map((dataItem) => {
-                      const { transactionId, transactionDateTime, transactionType, loaner } = dataItem;
+                      const { transactionId, transactionDateTime, transactionType } = dataItem;
 
                       const trnDateTime = new Date(transactionDateTime);
 

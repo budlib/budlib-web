@@ -1,10 +1,10 @@
 import React from 'react';
-
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ScrollTop from '../components/ScrollTop';
 import MenuCard from '../components/MenuCard';
+import ModalLogout from '../components/ModalLogout';
 
 const Home = () => {
   return (
@@ -75,6 +75,7 @@ const Home = () => {
       </div>
 
       <ScrollTop />
+      <ModalLogout />
     </React.Fragment>
   );
 };

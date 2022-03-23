@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFetch } from '../helpers/useFetch';
-
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ScrollTop from '../components/ScrollTop';
+import ModalLogout from '../components/ModalLogout';
 import BatchImport from '../components/BatchExport';
 
 const Dashboard = () => {
@@ -302,6 +302,7 @@ const Dashboard = () => {
       </div>
 
       <ScrollTop />
+      <ModalLogout />
     </React.Fragment>
   );
 };
