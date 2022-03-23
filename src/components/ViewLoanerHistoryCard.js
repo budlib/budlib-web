@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useFetch } from '../helpers/useFetch';
 
 const ViewLoanerHistoryCard = () => {
@@ -56,7 +56,18 @@ const ViewLoanerHistoryCard = () => {
 
                       return (
                         <tr key={transactionId}>
-                          <td>{transactionId}</td>
+                          <td>
+                            <Link
+                              to={`/transactions/${transactionId}/view`}
+                              style={{
+                                display: 'block',
+                                width: '100%',
+                                color: 'inherit',
+                              }}
+                            >
+                              {transactionId}
+                            </Link>
+                          </td>
                           <td>{trnDate}</td>
                           <td>{trnTime}</td>
                           <td>{trnType}</td>

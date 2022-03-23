@@ -29,7 +29,7 @@ import ChangePasswordLibrarian from './pages/Librarian/ChangePasswordLibrarian';
 
 // transactions
 import SearchTransactions from './pages/Transactions/SearchTransactions';
-// import ViewTransaction from './pages/Transactions/ViewTransaction';
+import ViewTransaction from './pages/Transactions/ViewTransaction';
 import BorrowCart from './pages/Loaners/BorrowCart';
 import ReturnCart from './pages/Loaners/ReturnCart';
 import ExtendCart from './pages/Loaners/ExtendCart';
@@ -70,7 +70,7 @@ function App() {
 
         {/* routes for transactions */}
         <Route path='/transactions' element={<RequireAuth><SearchTransactions /></RequireAuth>} />
-        {/* <Route path='/transactions/:id/view' element={<ViewTransaction />} /> */}
+        <Route path='/transactions/:id/view' element={<ViewTransaction />} />
         <Route path='/loaners/return-books/:id' element={<RequireAuth><ReturnCart /></RequireAuth>} />
         <Route path='/loaners/return-books' element={<RequireAuth><SelectReturner /></RequireAuth>} />
         <Route path='/loaners/borrow-books/:id' element={<RequireAuth><BorrowCart /></RequireAuth>} />
