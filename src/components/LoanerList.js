@@ -2,11 +2,9 @@ import React from 'react';
 import { useFetch } from '../helpers/useFetch';
 import { Link } from 'react-router-dom';
 
-const url = '/api/loaners';
-
 const LoanerList = (props) => {
+  const url = '/api/loaners';
   let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
-  console.log(thisurl);
 
   const { data } = useFetch(thisurl);
 

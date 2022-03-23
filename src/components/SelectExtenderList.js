@@ -2,9 +2,8 @@ import React from 'react';
 import { useFetch } from '../helpers/useFetch';
 import { Link } from 'react-router-dom';
 
-const url = '/api/loaners';
-
 const SelectExtenderList = (props) => {
+  const url = '/api/loaners';
   let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
   console.log(thisurl);
 
@@ -65,7 +64,11 @@ const SelectExtenderList = (props) => {
                         <td>{fullNameWithSalutation}</td>
                         <td>{isStudent}</td>
                         <td>{totalOutstanding}</td>
-                        <td><Link to={`/loaners/extend-books/${loanerId}`} className="btn btn-primary btn-sm">Select</Link></td>
+                        <td>
+                          <Link to={`/loaners/extend-books/${loanerId}`} className='btn btn-primary btn-sm'>
+                            Select
+                          </Link>
+                        </td>
                       </tr>
                     );
                   })}

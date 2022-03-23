@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useFetch } from '../helpers/useFetch';
-import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import { postCall } from '../helpers/postCall';
 const url = '/api/books';
-
 
 const BorrowCartList = (props) => {
   let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
@@ -14,167 +12,133 @@ const BorrowCartList = (props) => {
   const { id } = useParams();
   const { data } = useFetch(thisurl);
 
-  const handleAdd =(e)=>{
+  const handleAdd = (e) => {
     let newCart = cart;
     let exist = false;
-    let st = e.target.value.split("@")
+    let st = e.target.value.split('@');
     console.log(st[2]);
-    if(parseInt(st[2])>0){
-      for(var i = 0; i < newCart.length; i++)
-      {
+    if (parseInt(st[2]) > 0) {
+      for (var i = 0; i < newCart.length; i++) {
         console.log(i);
 
-        if(newCart[i]["bookId"] == parseInt(st[0])  )
-        {
-          if(newCart[i]["copies"]<parseInt(st[2])){
-            newCart[i]["copies"] = parseInt(newCart[i]["copies"])+1;
-
-          }else{
-            window.alert("No More Availability. ");
+        if (newCart[i]['bookId'] == parseInt(st[0])) {
+          if (newCart[i]['copies'] < parseInt(st[2])) {
+            newCart[i]['copies'] = parseInt(newCart[i]['copies']) + 1;
+          } else {
+            window.alert('No More Availability. ');
           }
 
           exist = true;
         }
       }
 
-      if(exist == false){
-
+      if (exist == false) {
         newCart.push({
-
-          "bookId": parseInt(st[0]),
-          "title":st[1],
-          "available":st[2],
-          "copies": 1
-        })
-
+          bookId: parseInt(st[0]),
+          title: st[1],
+          available: st[2],
+          copies: 1,
+        });
       }
 
+      setCart([...newCart]);
 
-    setCart([...newCart]);
-
-    console.log(cart);
-
-    }else{
-      window.alert("No More Availability. " );
+      console.log(cart);
+    } else {
+      window.alert('No More Availability. ');
     }
-
-
-
   };
 
-  const handlePos =(e)=>{
+  const handlePos = (e) => {
     let newCart = cart;
-    for(var i = 0; i < newCart.length; i++)
-      {
-        console.log(e.target.value);
+    for (var i = 0; i < newCart.length; i++) {
+      console.log(e.target.value);
 
-
-        if(newCart[i]["bookId"] == e.target.value)
-        {
-          if(newCart[i]["copies"]<parseInt(newCart[i]["available"])){
-          newCart[i]["copies"] = parseInt(newCart[i]["copies"])+1;
+      if (newCart[i]['bookId'] == e.target.value) {
+        if (newCart[i]['copies'] < parseInt(newCart[i]['available'])) {
+          newCart[i]['copies'] = parseInt(newCart[i]['copies']) + 1;
           setCart([...newCart]);
-          }else{
-            window.alert("No More Availability. ");
-          }
-
+        } else {
+          window.alert('No More Availability. ');
         }
       }
-      console.log(cart);
-
-  }
+    }
+    console.log(cart);
+  };
 
   function arrayRemove(arr, value) {
-
-    return arr.filter(function(ele){
-        return ele["bookId"] != value;
+    return arr.filter(function (ele) {
+      return ele['bookId'] != value;
     });
-}
-
-  const handleNeg =(e)=>{
-    let newCart = cart;
-    for(var i = 0; i < newCart.length; i++)
-      {
-        console.log(e.target.value);
-
-        if(newCart[i]["bookId"] == e.target.value)
-        {
-          newCart[i]["copies"] = parseInt(newCart[i]["copies"])-1;
-          setCart([...newCart]);
-
-        }
-
-        if(newCart[i]["copies"]==0){
-          console.log("Length before: " + newCart.length);
-          newCart = arrayRemove(newCart,newCart[i]["bookId"]);
-          console.log("Length after: " + newCart.length);
-          setCart([...newCart]);
-        }
-      }
-      console.log(cart);
-
   }
 
-  const handleDel =(e)=>{
+  const handleNeg = (e) => {
     let newCart = cart;
-    for(var i = 0; i < newCart.length; i++)
-      {
-        console.log(e.target.value);
+    for (var i = 0; i < newCart.length; i++) {
+      console.log(e.target.value);
 
-        if(newCart[i]["bookId"] == e.target.value)
-        {
-          newCart = arrayRemove(newCart,newCart[i]["bookId"]);
-          setCart([...newCart]);
-
-        }
-
-
+      if (newCart[i]['bookId'] == e.target.value) {
+        newCart[i]['copies'] = parseInt(newCart[i]['copies']) - 1;
+        setCart([...newCart]);
       }
-      console.log(cart);
 
-  }
+      if (newCart[i]['copies'] == 0) {
+        console.log('Length before: ' + newCart.length);
+        newCart = arrayRemove(newCart, newCart[i]['bookId']);
+        console.log('Length after: ' + newCart.length);
+        setCart([...newCart]);
+      }
+    }
+    console.log(cart);
+  };
 
-  const handleSubmit =(e)=>{
-    if(cart.length !=0){
+  const handleDel = (e) => {
+    let newCart = cart;
+    for (var i = 0; i < newCart.length; i++) {
+      console.log(e.target.value);
+
+      if (newCart[i]['bookId'] == e.target.value) {
+        newCart = arrayRemove(newCart, newCart[i]['bookId']);
+        setCart([...newCart]);
+      }
+    }
+    console.log(cart);
+  };
+
+  const handleSubmit = (e) => {
+    if (cart.length != 0) {
       let bookCopies = [];
 
-
-      for(var i = 0; i < cart.length; i++)
-        {
-          bookCopies.push(
-            {
-              "book": {
-                  "bookId": cart[i]["bookId"]
-              },
-              "copies": cart[i]["copies"]
-          }
-          )
-        }
-      let message = {
-        "transactionDateTime": "2022-02-11T09:15:23",
-        "transactionType": "BORROW",
-        "loaner": {
-          "loanerId": id
-        },
-        "librarian": {
-          "librarianId": librarianId
-        },
-        "bookCopies": bookCopies
-
+      for (var i = 0; i < cart.length; i++) {
+        bookCopies.push({
+          book: {
+            bookId: cart[i]['bookId'],
+          },
+          copies: cart[i]['copies'],
+        });
       }
+      let message = {
+        transactionDateTime: '2022-02-11T09:15:23',
+        transactionType: 'BORROW',
+        loaner: {
+          loanerId: id,
+        },
+        librarian: {
+          librarianId: librarianId,
+        },
+        bookCopies: bookCopies,
+      };
       console.log(message);
 
       postCall('api/transactions?borrowDate=20220211&dueDate=20220411', message);
-      window.alert("Transaction complete");
+      window.alert('Transaction complete');
       setCart([]);
 
-        console.log(bookCopies);
+      console.log(bookCopies);
+    } else {
+      window.alert('No Submission Needed for Empty Cart');
     }
-    else{
-      window.alert("No Submission Needed for Empty Cart");
-    }
-
-  }
+  };
 
   return (
     <div className='row'>
@@ -188,12 +152,11 @@ const BorrowCartList = (props) => {
                     <th>Book ID</th>
                     <th>Book Title</th>
                     <th>To Cart</th>
-
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                  <th>Book ID</th>
+                    <th>Book ID</th>
                     <th>Book Title</th>
                     <th>Add to Cart</th>
                   </tr>
@@ -202,33 +165,24 @@ const BorrowCartList = (props) => {
                   {data.map((dataItem) => {
                     let { bookId, title, availableQuantity } = dataItem;
 
-
-
                     return (
                       <tr key={bookId}>
-                        <td>
-
-                            {bookId}
-
-                        </td>
+                        <td>{bookId}</td>
                         <td>{title}</td>
-                        <td><button onClick={(e) => handleAdd(e)} value={bookId + "@" + title + "@" + availableQuantity}  className="btn btn-secondary btn-sm">Add</button></td>
-
+                        <td>
+                          <button onClick={(e) => handleAdd(e)} value={bookId + '@' + title + '@' + availableQuantity} className='btn btn-secondary btn-sm'>
+                            Add
+                          </button>
+                        </td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
-
-
 
       <div className='col-lg-7'>
         <div className='card shadow mb-4'>
@@ -243,13 +197,12 @@ const BorrowCartList = (props) => {
                     <th></th>
                     <th></th>
                     <th></th>
-
                   </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                  <th>Book Title</th>
-                  <th></th>
+                    <th>Book Title</th>
+                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -259,31 +212,34 @@ const BorrowCartList = (props) => {
                   {cart.map((dataItem) => {
                     let { bookId, copies } = dataItem;
 
-
-
                     return (
-                      <tr key={dataItem["bookId"]}>
-                        <td>
-
-                            {dataItem["title"]}
-
-                        </td>
-                        <th><button onClick={(e) => handleNeg(e)} value={bookId} className="btn btn-secondary btn-sm">-</button></th>
+                      <tr key={dataItem['bookId']}>
+                        <td>{dataItem['title']}</td>
+                        <th>
+                          <button onClick={(e) => handleNeg(e)} value={bookId} className='btn btn-secondary btn-sm'>
+                            -
+                          </button>
+                        </th>
                         <td>{copies}</td>
-                        <th><button onClick={(e) => handlePos(e)} value={bookId} className="btn btn-secondary btn-sm">+</button></th>
-                        <td><button onClick={(e) => handleDel(e)} value={bookId} className="btn btn-alert btn-sm">Delete</button></td>
-
+                        <th>
+                          <button onClick={(e) => handlePos(e)} value={bookId} className='btn btn-secondary btn-sm'>
+                            +
+                          </button>
+                        </th>
+                        <td>
+                          <button onClick={(e) => handleDel(e)} value={bookId} className='btn btn-alert btn-sm'>
+                            Delete
+                          </button>
+                        </td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
-              <button onClick={(e) => handleSubmit(e)} className="btn btn-primary btn-lg">Submit</button>
+              <button onClick={(e) => handleSubmit(e)} className='btn btn-primary btn-lg'>
+                Submit
+              </button>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
