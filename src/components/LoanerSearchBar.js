@@ -57,7 +57,7 @@ function LoanerSearchBar(props) {
                 </div>
 
                 <div className='col-lg-2'>
-                  <button type='button' className='btn btn-primary' onClick={(e) => handleSearch(e)}>
+                  <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleSearch(e)}>
                     Search
                   </button>
                 </div>
