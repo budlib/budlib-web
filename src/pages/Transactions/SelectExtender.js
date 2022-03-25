@@ -9,7 +9,6 @@ import LoanerSearchBar from '../../components/LoanerSearchBar';
 
 const SelectExtender = () => {
   const [psearchBy, setSearchBy] = useState(['', '']);
-  const [psearchTerm, setSearchTerm] = useState('');
 
   return (
     <React.Fragment>
@@ -18,7 +17,7 @@ const SelectExtender = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Select Borrower to Extend For' />
+            <Header heading='Extend books - select loaner' />
             <div className='container-fluid'>
               <LoanerSearchBar func={setSearchBy} />
               <SelectExtenderList searchBy={psearchBy[0]} searchTerm={psearchBy[1]} />

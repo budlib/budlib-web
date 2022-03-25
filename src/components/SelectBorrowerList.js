@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const SelectBorrowerList = (props) => {
   const url = '/api/loaners';
   let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
-  console.log(thisurl);
 
   const { data } = useFetch(thisurl);
 
@@ -26,16 +25,6 @@ const SelectBorrowerList = (props) => {
                     <th>Select</th>
                   </tr>
                 </thead>
-                <tfoot>
-                  <tr>
-                    <th>Loaner ID</th>
-                    <th>School ID</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Total outstanding</th>
-                    <th>Select</th>
-                  </tr>
-                </tfoot>
                 <tbody>
                   {data.map((dataItem) => {
                     let { loanerId, schoolId, fullNameWithSalutation, isStudent, totalOutstanding } = dataItem;
@@ -65,8 +54,8 @@ const SelectBorrowerList = (props) => {
                         <td>{isStudent}</td>
                         <td>{totalOutstanding}</td>
                         <td>
-                          <Link to={`/transactions/borrow-books/${loanerId}`} className='btn btn-primary btn-sm'>
-                            Select
+                          <Link to={`/transactions/borrow-books/${loanerId}`} className='btn btn-sm btn-block btn-outline-primary'>
+                            <i className='fas fa-check'></i>
                           </Link>
                         </td>
                       </tr>

@@ -9,7 +9,6 @@ import LoanerSearchBar from '../../components/LoanerSearchBar';
 
 const SelectBorrower = () => {
   const [psearchBy, setSearchBy] = useState(['', '']);
-  const [psearchTerm, setSearchTerm] = useState('');
 
   return (
     <React.Fragment>
@@ -18,7 +17,7 @@ const SelectBorrower = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Select Borrower' />
+            <Header heading='Borrow books - select loaner' />
             <div className='container-fluid'>
               <LoanerSearchBar func={setSearchBy} />
               <SelectBorrowerList searchBy={psearchBy[0]} searchTerm={psearchBy[1]} />

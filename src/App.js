@@ -68,12 +68,12 @@ function App() {
         {/* routes for transactions */}
         <Route path='/transactions' element={<RequireAuth><SearchTransactions /></RequireAuth>} />
         <Route path='/transactions/:id/view' element={<ViewTransaction />} />
-        <Route path='/transactions/borrow-books/:id' element={<RequireAuth><BorrowCart /></RequireAuth>} />
-        <Route path='/transactions/return-books/:id' element={<RequireAuth><ReturnCart /></RequireAuth>} />
-        <Route path='/transactions/extend-books/:id' element={<RequireAuth><ExtendCart /></RequireAuth>} />
-        <Route path='/transactions/return-books' element={<RequireAuth><SelectReturner /></RequireAuth>} />
         <Route path='/transactions/borrow-books' element={<RequireAuth><SelectBorrower /></RequireAuth>} />
+        <Route path='/transactions/borrow-books/:id' element={<RequireAuth><BorrowCart /></RequireAuth>} />
+        <Route path='/transactions/return-books' element={<RequireAuth><SelectReturner /></RequireAuth>} />
+        <Route path='/transactions/return-books/:id' element={<RequireAuth><ReturnCart /></RequireAuth>} />
         <Route path='/transactions/extend-books' element={<RequireAuth><SelectExtender /></RequireAuth>} />
+        <Route path='/transactions/extend-books/:id' element={<RequireAuth><ExtendCart /></RequireAuth>} />
 
         {/* routes for dashboard */}
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />
