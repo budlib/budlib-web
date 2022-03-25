@@ -54,7 +54,7 @@ const SelectReturnerList = (props) => {
                         <td>{isStudent}</td>
                         <td>{totalOutstanding}</td>
                         <td>
-                          <Link to={`/transactions/borrow-books/${loanerId}`} className='btn btn-sm btn-block btn-outline-primary'>
+                          <Link to={`/transactions/return-books/${loanerId}`} className='btn btn-sm btn-block btn-outline-primary'>
                             <i className='fas fa-check'></i>
                           </Link>
                         </td>
