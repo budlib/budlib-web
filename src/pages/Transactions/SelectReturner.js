@@ -4,10 +4,10 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ScrollTop from '../../components/ScrollTop';
 import ModalLogout from '../../components/ModalLogout';
-import BookSearchBar from './../../components/BookSearchBar';
-import BorrowCartList from '../../components/BorrowCartList';
+import SelectReturnerList from '../../components/SelectReturnerList';
+import LoanerSearchBar from '../../components/LoanerSearchBar';
 
-const BorrowCart = () => {
+const SelectReturner = () => {
   const [psearchBy, setSearchBy] = useState(['', '']);
   const [psearchTerm, setSearchTerm] = useState('');
 
@@ -18,10 +18,10 @@ const BorrowCart = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Add Books to Borrow' />
+            <Header heading='Select Returner' />
             <div className='container-fluid'>
-              <BookSearchBar func={setSearchBy} />
-              <BorrowCartList searchBy={psearchBy[0]} searchTerm={psearchBy[1]} />
+              <LoanerSearchBar func={setSearchBy} />
+              <SelectReturnerList searchBy={psearchBy[0]} searchTerm={psearchBy[1]} />
             </div>
           </div>
 
@@ -35,4 +35,4 @@ const BorrowCart = () => {
   );
 };
 
-export default BorrowCart;
+export default SelectReturner;

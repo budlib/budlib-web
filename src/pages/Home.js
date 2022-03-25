@@ -28,9 +28,9 @@ const Home = () => {
                 Transact
               </h4>
               <div className='row pt-3'>
-                <MenuCard head='Borrow books' url='/loaners/borrow-books' src='/images/menu_borrow_books.svg' />
-                <MenuCard head='Return books' url='/loaners/return-books' src='/images/menu_return_books.svg' />
-                <MenuCard head='Extend books' url='/loaners/extend-books' src='/images/menu_provide_extension.svg' />
+                <MenuCard head='Borrow books' url='/transactions/borrow-books' src='/images/menu_borrow_books.svg' />
+                <MenuCard head='Return books' url='/transactions/return-books' src='/images/menu_return_books.svg' />
+                <MenuCard head='Extend books' url='/transactions/extend-books' src='/images/menu_provide_extension.svg' />
                 <MenuCard head='Past transactions' url='/transactions' src='/images/menu_past_transactions.svg' />
               </div>
 

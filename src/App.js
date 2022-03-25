@@ -13,12 +13,14 @@ import SearchBooks from './pages/Books/SearchBooks';
 import ViewBook from './pages/Books/ViewBook';
 import AddBook from './pages/Books/AddBook';
 import EditBook from './pages/Books/EditBook';
+import BookBatchUpload from './pages/Books/BookBatchUpload';
 
 // loaners
 import SearchLoaners from './pages/Loaners/SearchLoaners';
 import ViewLoaner from './pages/Loaners/ViewLoaner';
 import AddLoaner from './pages/Loaners/AddLoaner';
 import EditLoaner from './pages/Loaners/EditLoaner';
+import LoanerBatchUpload from './pages/Loaners/LoanerBatchUpload';
 
 // librarian
 import SearchLibrarians from './pages/Librarian/SearchLibrarians';
@@ -30,17 +32,12 @@ import ChangePasswordLibrarian from './pages/Librarian/ChangePasswordLibrarian';
 // transactions
 import SearchTransactions from './pages/Transactions/SearchTransactions';
 import ViewTransaction from './pages/Transactions/ViewTransaction';
-import BorrowCart from './pages/Loaners/BorrowCart';
-import ReturnCart from './pages/Loaners/ReturnCart';
-import ExtendCart from './pages/Loaners/ExtendCart';
-import SelectBorrower from './pages/Loaners/SelectBorrower';
-import SelectReturner from './pages/Loaners/SelectReturner';
-import SelectExtender from './pages/Loaners/SelectExtender';
-
-// batch processing
-import BookBatchUpload from './pages/Books/BookBatchUpload';
-import LoanerBatchUpload from './pages/Loaners/LoanerBatchUpload';
-
+import BorrowCart from './pages/Transactions/BorrowCart';
+import ReturnCart from './pages/Transactions/ReturnCart';
+import ExtendCart from './pages/Transactions/ExtendCart';
+import SelectBorrower from './pages/Transactions/SelectBorrower';
+import SelectReturner from './pages/Transactions/SelectReturner';
+import SelectExtender from './pages/Transactions/SelectExtender';
 
 function App() {
   return (
@@ -71,12 +68,12 @@ function App() {
         {/* routes for transactions */}
         <Route path='/transactions' element={<RequireAuth><SearchTransactions /></RequireAuth>} />
         <Route path='/transactions/:id/view' element={<ViewTransaction />} />
-        <Route path='/loaners/return-books/:id' element={<RequireAuth><ReturnCart /></RequireAuth>} />
-        <Route path='/loaners/return-books' element={<RequireAuth><SelectReturner /></RequireAuth>} />
-        <Route path='/loaners/borrow-books/:id' element={<RequireAuth><BorrowCart /></RequireAuth>} />
-        <Route path='/loaners/borrow-books' element={<RequireAuth><SelectBorrower /></RequireAuth>} />
-        <Route path='/loaners/extend-books/:id' element={<RequireAuth><ExtendCart /></RequireAuth>} />
-        <Route path='/loaners/extend-books' element={<RequireAuth><SelectExtender /></RequireAuth>} />
+        <Route path='/transactions/borrow-books/:id' element={<RequireAuth><BorrowCart /></RequireAuth>} />
+        <Route path='/transactions/return-books/:id' element={<RequireAuth><ReturnCart /></RequireAuth>} />
+        <Route path='/transactions/extend-books/:id' element={<RequireAuth><ExtendCart /></RequireAuth>} />
+        <Route path='/transactions/return-books' element={<RequireAuth><SelectReturner /></RequireAuth>} />
+        <Route path='/transactions/borrow-books' element={<RequireAuth><SelectBorrower /></RequireAuth>} />
+        <Route path='/transactions/extend-books' element={<RequireAuth><SelectExtender /></RequireAuth>} />
 
         {/* routes for dashboard */}
         <Route path='/dashboard' element={<RequireAuth><Dashboard /></RequireAuth>} />

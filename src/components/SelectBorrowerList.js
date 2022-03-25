@@ -50,7 +50,7 @@ const SelectBorrowerList = (props) => {
                       <tr key={loanerId}>
                         <td>
                           <Link
-                            to={`/loaners/${loanerId}/view`}
+                            to={`/transactions/${loanerId}/view`}
                             style={{
                               display: 'block',
                               width: '100%',
@@ -65,7 +65,7 @@ const SelectBorrowerList = (props) => {
                         <td>{isStudent}</td>
                         <td>{totalOutstanding}</td>
                         <td>
-                          <Link to={`/loaners/borrow-books/${loanerId}`} className='btn btn-primary btn-sm'>
+                          <Link to={`/transactions/borrow-books/${loanerId}`} className='btn btn-primary btn-sm'>
                             Select
                           </Link>
                         </td>

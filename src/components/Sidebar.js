@@ -21,21 +21,21 @@ const Sidebar = () => {
       <div className='sidebar-heading'>Transact</div>
 
       <li className='nav-item'>
-        <Link className='nav-link text-white' to='/loaners/borrow-books'>
+        <Link className='nav-link text-white' to='/transactions/borrow-books'>
           <i className='fas fa-fw fa-anchor'></i>
           <span>Borrow books</span>
         </Link>
       </li>
 
       <li className='nav-item'>
-        <Link className='nav-link text-white' to='/loaners/return-books'>
+        <Link className='nav-link text-white' to='/transactions/return-books'>
           <i className='fas fa-fw fa-award'></i>
           <span>Return books</span>
         </Link>
       </li>
 
       <li className='nav-item'>
-        <Link className='nav-link text-white' to='/loaners/extend-books'>
+        <Link className='nav-link text-white' to='/transactions/extend-books'>
           <i className='far fa-fw fa-calendar-check'></i>
           <span>Provide extension</span>
         </Link>
