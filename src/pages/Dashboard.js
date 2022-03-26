@@ -21,6 +21,10 @@ const Dashboard = () => {
   let ratioOutstanding = statsData['totalOutstandingCopies'] / statsData['totalCopies'];
   let percentageOutstanding = (ratioOutstanding * 100).toFixed(2);
 
+  if (statsData['totalCopies'] === 0) {
+    percentageOutstanding = 0.0;
+  }
+
   return (
     <React.Fragment>
       <div id='wrapper'>
