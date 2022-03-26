@@ -15,7 +15,9 @@ const BookBatchUpload = () => {
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
             <Header heading='Import books' />
-            <BookBatchLoad />
+            <div className='container-fluid'>
+              <BookBatchLoad />
+            </div>
           </div>
 
           <Footer />
