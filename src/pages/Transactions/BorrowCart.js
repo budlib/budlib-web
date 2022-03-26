@@ -149,6 +149,11 @@ const BorrowCart = () => {
   function handleSubmit(e) {
     e.preventDefault();
 
+    if (cartBookCopies.length === 0) {
+      window.alert('No books in cart to borrow');
+      return;
+    }
+
     let sendBorrowDate = borrowDate.replaceAll('-', '');
     let sendDueDate = dueDate.replaceAll('-', '');
 
