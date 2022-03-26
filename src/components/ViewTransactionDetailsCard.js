@@ -81,7 +81,7 @@ const ViewTransactionDetailsCard = ({ data }) => {
                   <td>{loaner == null ? '<removed>' : loaner['email'] == null ? '-' : loaner['email']}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Borrowed books</th>
+                  <th style={{ width: '30%' }}>Transacted books</th>
                   <td>
                     <div className='table-responsive'>
                       <table className='table table-borderless'>
