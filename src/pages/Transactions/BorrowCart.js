@@ -332,49 +332,53 @@ const BorrowCart = () => {
 
                   <div className='card shadow mb-4'>
                     <div className='card-body'>
-                      <div className='table-responsive'>
-                        <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
-                          <thead className='table-secondary text-dark'>
-                            <tr className='o-hidden'>
-                              <th style={{ width: '70%' }}>Title</th>
-                              <th>Qty</th>
-                              <th>Add</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {data.map((dataItem) => {
-                              let { bookId, title, availableQuantity } = dataItem;
+                      {data.length === 0 ? (
+                        <div className='text-secondary pt-2 text-centerr'>No books found</div>
+                      ) : (
+                        <div className='table-responsive'>
+                          <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
+                            <thead className='table-secondary text-dark'>
+                              <tr className='o-hidden'>
+                                <th style={{ width: '70%' }}>Title</th>
+                                <th>Qty</th>
+                                <th>Add</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {data?.map((dataItem) => {
+                                let { bookId, title, availableQuantity } = dataItem;
 
-                              return (
-                                <tr key={bookId}>
-                                  <td
-                                    style={{
-                                      textOverflow: 'ellipsis',
-                                      overflow: 'hidden',
-                                      whiteSpace: 'nowrap',
-                                      WebkitLineClamp: '1',
-                                      lineClamp: '1',
-                                    }}
-                                  >
-                                    {title}
-                                  </td>
-                                  <td id={`${bookId}_avaQty`}>{availableQuantity}</td>
-                                  <td style={{ textAlign: 'center' }}>
-                                    <button
-                                      className='btn btn-sm btn-circle btn-outline-primary'
-                                      style={{ fontSize: '1.4em' }}
-                                      value={bookId + '@@' + title + '@@' + availableQuantity}
-                                      onClick={(e) => handleAddition(e)}
+                                return (
+                                  <tr key={bookId}>
+                                    <td
+                                      style={{
+                                        textOverflow: 'ellipsis',
+                                        overflow: 'hidden',
+                                        whiteSpace: 'nowrap',
+                                        WebkitLineClamp: '1',
+                                        lineClamp: '1',
+                                      }}
                                     >
-                                      &#43;
-                                    </button>
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      </div>
+                                      {title}
+                                    </td>
+                                    <td id={`${bookId}_avaQty`}>{availableQuantity}</td>
+                                    <td style={{ textAlign: 'center' }}>
+                                      <button
+                                        className='btn btn-sm btn-circle btn-outline-primary'
+                                        style={{ fontSize: '1.4em' }}
+                                        value={bookId + '@@' + title + '@@' + availableQuantity}
+                                        onClick={(e) => handleAddition(e)}
+                                      >
+                                        &#43;
+                                      </button>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

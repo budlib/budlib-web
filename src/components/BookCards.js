@@ -9,11 +9,21 @@ function BookCards(props) {
   const { data } = useFetch(thisurl);
 
   return (
-    <div className='row pt-3'>
-      {data.map((dataItem) => {
-        return <BookCard key={dataItem['bookId']} {...dataItem} />;
-      })}
-    </div>
+    <React.Fragment>
+      {data.length === 0 ? (
+        <div className='card shadow mt-4'>
+          <div className='card-body'>
+            <div className='text-secondary pt-2 text-centerr'>No books found</div>
+          </div>
+        </div>
+      ) : (
+        <div className='row pt-3'>
+          {data?.map((dataItem) => {
+            return <BookCard key={dataItem['bookId']} {...dataItem} />;
+          })}
+        </div>
+      )}
+    </React.Fragment>
   );
 }
 
