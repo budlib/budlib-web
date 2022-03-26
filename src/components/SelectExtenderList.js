@@ -53,8 +53,8 @@ const SelectExtenderList = (props) => {
                         <td>{fullNameWithSalutation}</td>
                         <td>{isStudent}</td>
                         <td>{totalOutstanding}</td>
-                        <td>
-                          <Link to={`/transactions/extend-books/${loanerId}`} className='btn btn-sm btn-block btn-outline-primary'>
+                        <td style={{ textAlign: 'center' }}>
+                          <Link to={`/transactions/extend-books/${loanerId}`} className='btn btn-sm btn-block btn-circle btn-outline-primary'>
                             <i className='fas fa-check'></i>
                           </Link>
                         </td>
