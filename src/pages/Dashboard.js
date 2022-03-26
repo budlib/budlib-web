@@ -19,7 +19,7 @@ const Dashboard = () => {
   const { data: upcomingdueData } = useFetch(upcomingdueUrl);
 
   let ratioOutstanding = statsData['totalOutstandingCopies'] / statsData['totalCopies'];
-  let percentageOutstanding = ratioOutstanding.toFixed(2) * 100;
+  let percentageOutstanding = (ratioOutstanding * 100).toFixed(2);
 
   return (
     <React.Fragment>
