@@ -17,7 +17,7 @@ const SelectExtender = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Extend books - select loaner' />
+            <Header heading='Provide extension - select loaner' />
             <div className='container-fluid'>
               <LoanerSearchBar func={setSearchBy} />
               <SelectExtenderList searchBy={psearchBy[0]} searchTerm={psearchBy[1]} />
