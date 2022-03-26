@@ -41,10 +41,10 @@ const BorrowCart = () => {
   const { data: loanerData } = useFetch(loanerDetailUrl);
 
   let bookUrl = '/api/books';
-  // let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
-  const { data } = useFetch(bookUrl);
-
   const [psearchBy, setSearchBy] = useState(['', '']);
+
+  let thisUrl = bookUrl + '?searchBy=' + psearchBy[0] + '&searchTerm=' + psearchBy[1];
+  const { data } = useFetch(thisUrl);
 
   const [borrowDate, setBorrowDate] = useState(todayDate());
   const [dueDate, setDueDate] = useState(defaultDueDate());
