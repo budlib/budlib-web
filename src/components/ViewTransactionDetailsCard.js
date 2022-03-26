@@ -62,7 +62,7 @@ const ViewTransactionDetailsCard = ({ data }) => {
                 </tr>
                 <tr>
                   <th style={{ width: '30%' }}>Loaner type</th>
-                  <td>{loaner == null ? '<removed>' : loaner['isStudent'] == true ? 'Student' : 'Faculty'}</td>
+                  <td>{loaner == null ? '<removed>' : loaner['isStudent'] === true ? 'Student' : 'Faculty'}</td>
                 </tr>
                 <tr>
                   <th style={{ width: '30%' }}>Loaner ID</th>

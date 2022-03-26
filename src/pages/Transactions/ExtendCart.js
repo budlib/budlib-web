@@ -93,7 +93,7 @@ const ExtendCart = () => {
           }
         }
 
-        if (flag == false) {
+        if (flag === false) {
           // adding extra properties loanId and dueDate for processing
           newCart.push({
             book: {
@@ -218,7 +218,7 @@ const ExtendCart = () => {
                         <div className='border rounded p-2 mb-4'>
                           <div className='row form-group'>
                             <div className='col-sm-12'>
-                              {cartBookCopies.length == 0 ? (
+                              {cartBookCopies.length === 0 ? (
                                 <div className='text-secondary pt-2 text-center'>Empty cart</div>
                               ) : (
                                 <div className='table-responsive'>

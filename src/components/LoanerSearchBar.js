@@ -14,7 +14,7 @@ function LoanerSearchBar(props) {
   };
 
   const handleSearch = (e) => {
-    if (filterOption != '') {
+    if (filterOption !== '') {
       props.func([filterOption, filterText]);
     } else {
       window.alert('Searching requires a filter');
