@@ -118,7 +118,7 @@ const BookBatchLoad = () => {
                                   let headers = e.target.value.split('@@');
                                   let tempMap = headerMap;
 
-                                  if (headers[1] != 'na') {
+                                  if (headers[1] !== 'na') {
                                     tempMap[headers[0]] = headers[1];
                                   } else {
                                     if (tempMap.hasOwnProperty(headers[0])) {

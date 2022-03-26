@@ -15,7 +15,9 @@ const LoanerBatchUpload = () => {
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
             <Header heading='Import loaners' />
-            <LoanerBatchLoad />
+            <div className='container-fluid'>
+              <LoanerBatchLoad />
+            </div>
           </div>
 
           <Footer />
