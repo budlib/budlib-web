@@ -34,12 +34,12 @@ function BookSearchBar(props) {
               </div>
               <select className='form-control form-select' id='selectFilter' onChange={(e) => handleFilter(e)} value={filterOption}>
                 <option value=''>No Filter</option>
+                <option value='librarysection'>Library Section</option>
                 <option value='title'>Title</option>
                 <option value='author'>Author</option>
                 <option value='publisher'>Publisher</option>
                 <option value='isbn'>ISBN</option>
                 <option value='tags'>Tags</option>
-                <option value='librarysection'>Library Section</option>
                 <option value='language'>Language</option>
               </select>
             </div>

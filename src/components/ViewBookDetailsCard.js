@@ -37,8 +37,8 @@ const ViewBookDetailsCard = ({ data }) => {
                       <td>{data['availableQuantity']}</td>
                     </tr>
                     <tr>
-                      <th style={{ width: '60%' }}>Language</th>
-                      <td>{data['language'] || '-'}</td>
+                      <th style={{ width: '60%' }}>Library Section</th>
+                      <td>{data['librarySection'] || '-'}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -80,8 +80,8 @@ const ViewBookDetailsCard = ({ data }) => {
                   <td>{data['year'] || '-'}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Library Section</th>
-                  <td>{data['librarySection'] || '-'}</td>
+                  <th style={{ width: '30%' }}>Language</th>
+                  <td>{data['language'] || '-'}</td>
                 </tr>
                 <tr>
                   <th style={{ width: '30%' }}>Tags</th>

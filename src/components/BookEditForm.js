@@ -216,17 +216,20 @@ const BookEditForm = () => {
                 <div className='form-row'>
                   <div className='form-group col-md-4'>
                     <label htmlFor='formSection'>Section in library</label>
-                    <input
-                      type='text'
+                    <select
                       id='formSection'
-                      maxLength='250'
                       className='form-control'
                       placeholder='Section AB12'
                       value={details['librarySection']}
                       onChange={(e) => {
                         setDetails({ ...details, librarySection: e.target.value });
                       }}
-                    />
+                    >
+                      <option value='PARENT_LIBRARY'>PARENT_LIBRARY</option>
+                      <option value='FACULTY_LIBRARY'>FACULTY_LIBRARY</option>
+                      <option value='CLASS_SETS'>CLASS_SETS</option>
+                      <option value='CHILDREN_LIBRARY'>CHILDREN_LIBRARY</option>
+                    </select>
                   </div>
                   <div className='form-group col-md-8'>
                     <label htmlFor='formImageLink'>Image link</label>
