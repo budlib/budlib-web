@@ -6,7 +6,7 @@ A web based front end for the [budlib-api](https://github.com/budlib/budlib-api)
 
 - Node version 16.13.1 or above
 
-## How to run
+## How to run on web browser
 
 1. Clone the repository on your machine
 
@@ -19,16 +19,27 @@ A web based front end for the [budlib-api](https://github.com/budlib/budlib-api)
    $ npm start
    ```
 
-## Compiling Electron App
-1. Create a build of the web application first
+## How to run on Electron app
+
+1. Clone the repository on your machine
+
+2. Make sure that [BudLib API](https://github.com/budlib/budlib-api) is running and is accessible
+
+3. Create the build of the web application
+
    ```bash
    $ npm run build
    ```
-2. run package script as listed in package.json. For example if we were to compile a windows application:
+
+4. Run the run electron packaging script depending on your OS
+
    ```bash
-   $ npm run package-win
+   $ npm run package-mac         # for macOS
+   $ npm run package-win         # for Windows
+   $ npm run package-linux       # for Linux
    ```
 
+5. The above command will create a `release-builds` directory, with the build of the web application. For example, when using Windows, you will electron executable file under `release-builds/budlib-win32-ia32/budlib.exe`.
 
 ## Contributors
 
