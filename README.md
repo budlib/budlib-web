@@ -45,3 +45,9 @@ A web based front end for the [budlib-api](https://github.com/budlib/budlib-api)
 
 - [Bhavyai Gupta](https://github.com/zbhavyai)
 - [Michael Man Yin Lee](https://github.com/mikeePy)
+
+## Attribution
+
+- [Bootstrap theme](https://startbootstrap.com/theme/sb-admin-2) by Start BootStrap
+- [Icons and logo](https://www.flaticon.com/free-icons/book) from Smashicons
+- [Dashboard images](https://iconscout.com/illustration-pack/indian-doodle) from Iconscout
