@@ -39,7 +39,7 @@ A web based front end for the [budlib-api](https://github.com/budlib/budlib-api)
    $ npm run package-linux       # for Linux
    ```
 
-5. The above command will create a `release-builds` directory, with the build of the web application. For example, when using Windows, you will electron executable file under `release-builds/budlib-win32-ia32/budlib.exe`.
+5. The above command will create a `release-builds` directory, with the build of the web application. For example, when using Windows, you will find electron executable file under `release-builds/budlib-win32-ia32/budlib.exe`.
 
 ## Contributors
 
