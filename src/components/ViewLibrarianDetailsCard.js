@@ -25,7 +25,7 @@ const ViewLibrarianDetailsCard = ({ data }) => {
               </tr>
               <tr>
                 <th style={{ width: '30%' }}>Email</th>
-                <td>{data['email'] || 'not given'}</td>
+                <td>{data['email'] || '-'}</td>
               </tr>
               <tr>
                 <th style={{ width: '30%' }}>First Name</th>
@@ -33,11 +33,11 @@ const ViewLibrarianDetailsCard = ({ data }) => {
               </tr>
               <tr>
                 <th style={{ width: '30%' }}>Middle Name</th>
-                <td>{data['middleName'] || 'not given'}</td>
+                <td>{data['middleName'] || '-'}</td>
               </tr>
               <tr>
                 <th style={{ width: '30%' }}>Last Name</th>
-                <td>{data['lastName'] || 'not given'}</td>
+                <td>{data['lastName'] || '-'}</td>
               </tr>
             </tbody>
           </table>
