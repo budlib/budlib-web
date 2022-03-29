@@ -50,21 +50,29 @@ const ViewBook = () => {
               <div className='row'>
                 <ViewBookDetailsCard data={bookData} />
 
-                <div className='col-sm-4 px-4 p-2'>
-                  <div className='btn-group btn-block'>
-                    <button type='button' className='btn btn-secondary' onClick={handleEdit}>
-                      Edit details
-                    </button>
-                    <button type='button' className='btn btn-danger' onClick={handleDelete}>
-                      Delete Book
-                    </button>
+                {window.localStorage.getItem('role') === 'ADMIN' ? (
+                  <div className='col-sm-4 px-4 p-2'>
+                    <div className='btn-group btn-block'>
+                      <button type='button' className='btn btn-secondary' onClick={handleEdit}>
+                        Edit details
+                      </button>
+                      <button type='button' className='btn btn-danger' onClick={handleDelete}>
+                        Delete Book
+                      </button>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  ''
+                )}
               </div>
 
-              <div className='row'>
-                <ViewBookLoansCard data={bookLoanData} />
-              </div>
+              {window.localStorage.getItem('role') === 'ADMIN' ? (
+                <div className='row'>
+                  <ViewBookLoansCard data={bookLoanData} />
+                </div>
+              ) : (
+                ''
+              )}
             </div>
           </div>
 

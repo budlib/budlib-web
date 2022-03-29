@@ -50,7 +50,7 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
             </p>
 
             <p
-              className='card-text o-hidden'
+              className='card-text o-hidden pt-1'
               style={{
                 fontSize: '13px',
                 color: '#000000',
@@ -75,10 +75,10 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
               WebkitBoxOrient: 'vertical',
             }}
           >
-            {tags.map((tag) => {
+            {tags?.map((tag) => {
               return (
                 <React.Fragment>
-                  <span key={`${bookId} ${tag['id']}`} className='badge bg-primary mx-1 text-white'>
+                  <span key={`${bookId}_${tag['tagId']}`} className='badge bg-primary mx-1 text-white'>
                     {tag['tagName']}
                   </span>
                 </React.Fragment>

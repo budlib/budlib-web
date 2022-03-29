@@ -262,10 +262,8 @@ const BookEditForm = () => {
               </div>
 
               <div className='col-md-4 px-5 pb-4 o-hidden'>
-                <div className='card' style={{ height: '300px', width: '230px' }}>
-                  <div className='card-body p-0'>
-                    <img id='formThumbnail' className='card-img-top' alt='' src={details['imageLink']} style={{ height: '100%', objectFit: 'scale-down' }} />
-                  </div>
+                <div className='o-hidden' style={{ height: '300px', width: '230px' }}>
+                  <img id='formThumbnail' className='card-img-top img-thumbnail' alt='' src={details['imageLink']} style={{ height: '100%', objectFit: 'scale-down' }} />
                 </div>
               </div>
             </div>
