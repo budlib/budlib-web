@@ -168,7 +168,7 @@ const Dashboard = () => {
                         {overdueData.length === 0 ? (
                           'No overdue loans'
                         ) : (
-                          <table className='table table-bordered table-hover' id='dataTable' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
+                          <table className='table table-bordered table-hover' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
                             <thead className='table-secondary text-dark'>
                               <tr>
                                 <th style={{ width: '25%' }}>Loaner</th>
@@ -238,7 +238,7 @@ const Dashboard = () => {
                         {upcomingdueData.length === 0 ? (
                           'No upcoming due date until next week'
                         ) : (
-                          <table className='table table-bordered table-hover' id='dataTable' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
+                          <table className='table table-bordered table-hover' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
                             <thead className='table-secondary text-dark'>
                               <tr>
                                 <th style={{ width: '25%' }}>Loaner</th>
