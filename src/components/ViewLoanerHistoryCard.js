@@ -31,7 +31,7 @@ const ViewLoanerHistoryCard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.map((dataItem) => {
+                    {data?.map((dataItem) => {
                       const { transactionId, transactionDateTime, transactionType } = dataItem;
 
                       const trnDateTime = new Date(transactionDateTime);

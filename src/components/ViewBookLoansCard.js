@@ -25,7 +25,7 @@ const ViewBookLoansCard = ({ data }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.map((dataItem) => {
+                    {data?.map((dataItem) => {
                       return (
                         <React.Fragment key={dataItem['loanId']}>
                           <tr>

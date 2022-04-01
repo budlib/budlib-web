@@ -178,7 +178,7 @@ const Dashboard = () => {
                               </tr>
                             </thead>
                             <tbody>
-                              {overdueData.map((overDueItem) => {
+                              {overdueData?.map((overDueItem) => {
                                 const { loanId, loaner, book, copies, dueDate } = overDueItem;
 
                                 return (
@@ -248,7 +248,7 @@ const Dashboard = () => {
                               </tr>
                             </thead>
                             <tbody>
-                              {upcomingdueData.map((upcomingDueItem) => {
+                              {upcomingdueData?.map((upcomingDueItem) => {
                                 const { loanId, loaner, book, copies, dueDate } = upcomingDueItem;
 
                                 return (

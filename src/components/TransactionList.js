@@ -35,7 +35,7 @@ const TransactionList = () => {
                     </tr>
                   </tfoot>
                   <tbody>
-                    {data.map((dataItem) => {
+                    {data?.map((dataItem) => {
                       const { transactionId, transactionDateTime, transactionType, loaner } = dataItem;
 
                       const trnDateTime = new Date(transactionDateTime);

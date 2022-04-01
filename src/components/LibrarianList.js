@@ -25,7 +25,7 @@ const LibrarianList = (props) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.map((dataItem) => {
+                    {data?.map((dataItem) => {
                       let { librarianId, userName, email, role } = dataItem;
 
                       if (librarianId.toString() !== window.localStorage.getItem('id')) {

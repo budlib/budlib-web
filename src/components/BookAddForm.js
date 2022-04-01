@@ -118,7 +118,7 @@ const BookAddForm = () => {
     let tempTagArray = tagString.split(',');
     let finalTagArray = [];
 
-    tempTagArray.map((eachTag) => {
+    tempTagArray?.map((eachTag) => {
       let eachTagTrim = eachTag.trim();
       eachTagTrim !== '' ? finalTagArray.push({ tagName: eachTagTrim }) : console.log('Skipping empty tag');
     });
