@@ -317,7 +317,6 @@ const BookAddForm = () => {
                     <select
                       id='formSection'
                       className='form-control'
-                      placeholder='Section AB12'
                       defaultValue='CHILDREN_LIBRARY'
                       onChange={(e) => {
                         setDetails({ ...details, librarySection: e.target.value });
