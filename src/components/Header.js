@@ -5,6 +5,7 @@ import profilePic from '../assets/img/undraw_profile_3.svg';
 const Header = (props) => {
   let loggedName = window.localStorage.getItem('username');
   let loggedId = window.localStorage.getItem('id');
+  let loggedRole = window.localStorage.getItem('role');
 
   function handleToggle() {
     document.body.classList.toggle('sidebar-toggled');
@@ -40,11 +41,17 @@ const Header = (props) => {
           </a>
 
           <div className='dropdown-menu dropdown-menu-right shadow animated--grow-in' aria-labelledby='userDropdown'>
-            <Link className='dropdown-item' to={`/dashboard/librarian/${loggedId}/view`}>
-              <i className='fas fa-user fa-sm fa-fw mr-2 text-gray-400'></i>
-              Profile
-            </Link>
-            <div className='dropdown-divider'></div>
+            {loggedRole === 'ADMIN' ? (
+              <React.Fragment>
+                <Link className='dropdown-item' to={`/dashboard/librarian/${loggedId}/view`}>
+                  <i className='fas fa-user fa-sm fa-fw mr-2 text-gray-400'></i>
+                  Profile
+                </Link>
+                <div className='dropdown-divider'></div>
+              </React.Fragment>
+            ) : (
+              <></>
+            )}
             <button className='dropdown-item' data-toggle='modal' data-target='#logoutModal'>
               <i className='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>
               Logout
