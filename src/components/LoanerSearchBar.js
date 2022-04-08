@@ -21,6 +21,11 @@ function LoanerSearchBar(props) {
     }
   };
 
+  const handleClear = (e) => {
+    props.func([filterOption, ""]);
+    setfilterText("");
+  };
+
   return (
     <div className='row'>
       <div className='col-lg-10'>
@@ -56,6 +61,9 @@ function LoanerSearchBar(props) {
               <div className='col-lg-2'>
                 <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleSearch(e)}>
                   Search
+                </button>
+                <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleClear(e)}>
+                  Clear
                 </button>
               </div>
             </div>
