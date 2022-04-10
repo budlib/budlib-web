@@ -7,6 +7,8 @@ const LibrarianEditForm = () => {
   const { id } = useParams();
   let navigate = useNavigate();
 
+  let loggedId = window.localStorage.getItem('id');
+
   let librarianDetailUrl = `/api/librarian/${id}`;
   const { loading: loadStatus, data: existingDetails } = useFetch(librarianDetailUrl);
 
@@ -39,6 +41,11 @@ const LibrarianEditForm = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
+        if (id === loggedId) {
+          window.localStorage.setItem('role', details['role']);
+          window.localStorage.setItem('username', details['userName']);
+        }
+
         let path = `/dashboard/librarian/${id}/view`;
         navigate(path);
       }
