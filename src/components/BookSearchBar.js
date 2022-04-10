@@ -14,7 +14,7 @@ function BookSearchBar(props) {
   };
 
   const handleSearch = (e) => {
-    if (filterOption != '') {
+    if (filterOption !== '') {
       props.func([filterOption, filterText]);
     } else {
       window.alert('Searching requires a filter');
@@ -22,20 +22,17 @@ function BookSearchBar(props) {
   };
 
   const handleClear = (e) => {
-    props.func([filterOption, ""]);
-    setfilterText("");
+    props.func([filterOption, '']);
+    setfilterText('');
   };
 
   return (
-    // filterOption,
-    // filterText,
-    // (
     <div className='row'>
       <div className='col-lg-12'>
         <div className='card shadow'>
           <div className='card-body'>
             <div className='row'>
-              <div className='col-lg-4'>
+              <div className='col-lg-3'>
                 <div className='input-group mb-3'>
                   <div className='input-group-prepend'>
                     <span className='input-group-text' htmlFor='inputGroupSelect01'>
@@ -64,20 +61,29 @@ function BookSearchBar(props) {
                 </div>
               </div>
 
-              <div className='col-lg-2'>
-                <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleSearch(e)}>
-                  Search
-                </button>
-                <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleClear(e)}>
-                  Clear
-                </button>
+              <div className='col-lg-3'>
+                <div className='row'>
+                  <div className='col-lg-6'>
+                    <div className='mb-3'>
+                      <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleSearch(e)}>
+                        Search
+                      </button>
+                    </div>
+                  </div>
+                  <div className='col-lg-6'>
+                    <div className='mb-3'>
+                      <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleClear(e)}>
+                        Clear
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    // )
   );
 }
 export default BookSearchBar;
