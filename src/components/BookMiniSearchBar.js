@@ -21,6 +21,12 @@ function BookSearchBar(props) {
     }
   };
 
+  const triggerSearchOnEnter = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className='card shadow mb-4'>
       <div className='card-body'>
@@ -58,7 +64,15 @@ function BookSearchBar(props) {
               <div className='input-group-prepend'>
                 <span className='input-group-text'>Search term</span>
               </div>
-              <input type='text' id='inputFilter' onChange={(e) => handleFilterText(e)} value={filterText} className='form-control' placeholder='Your search term goes here' />
+              <input
+                type='text'
+                id='inputFilter'
+                onChange={(e) => handleFilterText(e)}
+                value={filterText}
+                className='form-control'
+                placeholder='Your search term goes here'
+                onKeyDown={(e) => triggerSearchOnEnter(e)}
+              />
             </div>
           </div>
         </div>
