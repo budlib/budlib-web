@@ -7,7 +7,7 @@ export async function postCall(endpoint, payload) {
     'Content-Type': 'application/json',
   };
 
-  if (localStorage.getItem('Authenticated') === '1') {
+  if (endpoint !== '/api/auth' && localStorage.getItem('Authenticated') === '1') {
     requestHeader['Authorization'] = `Bearer ${window.localStorage.getItem('token')}`;
   }
 

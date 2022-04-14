@@ -23,6 +23,7 @@ const Login = () => {
         window.localStorage.setItem('username', result['data']['username']);
         window.localStorage.setItem('role', result['data']['role']);
         window.localStorage.setItem('token', result['data']['token']);
+        window.localStorage.setItem('expiry', result['data']['expiry']);
 
         login().then(() => {
           navigate('/');

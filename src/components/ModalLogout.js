@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../helpers/useAuth';
 
@@ -6,16 +6,29 @@ const ModalLogout = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
+  let loggedExpiry = window.localStorage.getItem('expiry');
+
   const handleLogout = () => {
     window.localStorage.removeItem('id');
     window.localStorage.removeItem('username');
     window.localStorage.removeItem('role');
     window.localStorage.removeItem('token');
+    window.localStorage.removeItem('expiry');
 
     logout().then(() => {
       navigate('/');
     });
   };
+
+  useEffect(() => {
+    let tokenExpiry = new Date(loggedExpiry);
+    let now = new Date();
+
+    if (now > tokenExpiry) {
+      window.alert('Your session has expired. Please login again.');
+      handleLogout();
+    }
+  }, []);
 
   return (
     <div className='modal fade' id='logoutModal' tabIndex='-1' role='dialog' aria-labelledby='modalLabel' aria-hidden='true'>
