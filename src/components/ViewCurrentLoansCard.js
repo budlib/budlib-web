@@ -17,11 +17,11 @@ const ViewCurrentLoansCard = ({ data }) => {
                 <table className='table table-bordered table-hover'>
                   <thead className='table-secondary text-dark'>
                     <tr>
-                      <th>Book ISBN</th>
-                      <th>Book title</th>
-                      <th>Copies</th>
-                      <th>Borrow date</th>
-                      <th>Due date</th>
+                      <th style={{ width: '15%' }}>Book ISBN</th>
+                      <th style={{ width: '40%' }}>Book title</th>
+                      <th style={{ width: '10%' }}>Copies</th>
+                      <th style={{ width: '18%' }}>Borrow date</th>
+                      <th style={{ width: '17%' }}>Due date</th>
                     </tr>
                   </thead>
                   <tbody>
