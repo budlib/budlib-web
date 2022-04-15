@@ -111,6 +111,18 @@ const ExtendCart = () => {
     }
   }
 
+  function handleRemove(e) {
+    let newCart = cartBookCopies;
+
+    for (let i = 0; i < newCart.length; i++) {
+      if (newCart[i]['loanId'] === parseInt(e.target.value)) {
+        newCart.splice(i, 1);
+
+        setCartBookCopies([...newCart]);
+      }
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -120,7 +132,7 @@ const ExtendCart = () => {
     }
 
     // now delete extra properties used for display
-    let newCart = cartBookCopies;
+    let newCart = JSON.parse(JSON.stringify(cartBookCopies));
     for (let i = 0; i < newCart.length; i++) {
       delete newCart[i]['loanId'];
       delete newCart[i]['dueDate'];
@@ -239,7 +251,16 @@ const ExtendCart = () => {
                                             <td className='pt-3' style={{ width: '60%' }}>
                                               {book['title']}
                                             </td>
-                                            <td className='pt-3'>{copies}</td>
+                                            <td className='pt-3'>
+                                              <div className='btn-group btn-group-sm' role='group'>
+                                                <span className='btn disabled text-dark border-top border-bottom border-left' style={{ boxSizing: 'content-box', minWidth: '1.5em' }}>
+                                                  {copies}
+                                                </span>
+                                                <button type='button' className='btn btn-secondary btn-circle' style={{ fontSize: '1.3em' }} value={loanId} onClick={(e) => handleRemove(e)}>
+                                                  &#x292B;
+                                                </button>
+                                              </div>
+                                            </td>
                                             <td className='pt-3'>{displayDate(dueDate)}</td>
                                           </tr>
                                         );
