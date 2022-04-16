@@ -42,7 +42,7 @@ const SelectBorrowerList = (props) => {
                         <tr key={loanerId}>
                           <td>
                             <Link
-                              to={`/transactions/${loanerId}/view`}
+                              to={`/loaners/${loanerId}/view`}
                               style={{
                                 display: 'block',
                                 width: '100%',
