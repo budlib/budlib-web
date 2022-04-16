@@ -11,27 +11,23 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
+    autoHideMenuBar: true,
+    icon: path.join(__dirname, '/public/favicon.ico'),
   });
 
   // and load the index.html of the app.
-  win.loadFile("build/index.html");
-  win.loadURL(
-    isDev
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../build/index.html')}`
+  win.loadFile('build/index.html');
+  win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
 
-  );
-  // Open the DevTools.
+  // Open the DevTools
   if (isDev) {
     win.webContents.openDevTools({ mode: 'detach' });
   }
 
   win.webContents.on('new-window', (event, url) => {
-    event.preventDefault()
-    win.loadURL(url)
-  })
-
-
+    event.preventDefault();
+    win.loadURL(url);
+  });
 }
 
 // This method will be called when Electron has finished
