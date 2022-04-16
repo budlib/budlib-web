@@ -34,12 +34,12 @@ A web based front end for the [budlib-api](https://github.com/budlib/budlib-api)
 4. Run the run electron packaging script depending on your OS
 
    ```bash
-   $ npm run package-mac         # for macOS
    $ npm run package-win         # for Windows
    $ npm run package-linux       # for Linux
+   $ npm run package-mac         # for macOS
    ```
 
-5. The above command will create a `release-builds` directory, with the build of the web application. For example, when using Windows, you will find electron executable file under `release-builds/budlib-win32-ia32/budlib.exe`.
+5. The above command will create a `electron-build` directory, containing the electron build of the web application. For example, when using Windows, you will find electron executable file created as `electron-build/budlib-win32-x64/budlib.exe`.
 
 ## Contributors
 
