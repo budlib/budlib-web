@@ -24,20 +24,8 @@ const LoanAddForm = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
-        setDetails({
-          schoolId: '',
-          email: '',
-          salutation: '',
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          motherName: '',
-          fatherName: '',
-          isStudent: true,
-        });
+        window.location.reload();
       }
-
-      window.location.reload();
     });
   }
 

@@ -134,30 +134,7 @@ const BookAddForm = () => {
       window.alert(result['data']['message']);
 
       if (result['status'] === 200) {
-        setDetails({
-          title: '',
-          subtitle: '',
-          authors: '',
-          publisher: '',
-          edition: '',
-          year: '',
-          language: '',
-          isbn_10: '',
-          isbn_13: '',
-          librarySection: '',
-          totalQuantity: '',
-          availableQuantity: '',
-          notes: '',
-          tags: [],
-          imageLink: defaultImg,
-          priceRetail: '',
-          priceLibrary: '',
-        });
-
-        document.getElementById('isbnMessage').innerHTML = '';
-        document.getElementById('isbnMessage').className = 'px-4';
-        document.getElementById('formIsbn').value = '';
-        setTagString('');
+        window.location.reload();
       }
     });
   }
