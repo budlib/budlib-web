@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import ScrollTop from '../components/ScrollTop';
 import ModalLogout from '../components/ModalLogout';
-import BatchImport from '../components/BatchExport';
+import BatchExport from '../components/BatchExport';
 
 const Dashboard = () => {
   const statsUrl = '/api/dashboard/stats';
@@ -119,7 +119,7 @@ const Dashboard = () => {
               <div className='row pt-4'>
                 <div className='col-lg-6 mb-4'>
                   <div className='row'>
-                    <BatchImport />
+                    <BatchExport />
                   </div>
                 </div>
                 <div className='col-lg-6 mb-4'>
