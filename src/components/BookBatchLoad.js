@@ -111,7 +111,7 @@ const BookBatchLoad = () => {
             >
               this link.
             </button>
-            The mandatory fields are <b>title</b>, <b>isbn_10</b>, <b>isbn_13</b>, <b>library_section</b>, <b>totalQuantity</b>, and <b>availableQuantity</b>.
+            The mandatory fields are <b>title</b>, <b>isbn_10</b> or <b>isbn_13</b>, <b>library_section</b>, <b>totalQuantity</b>, and <b>availableQuantity</b>.
           </div>
         </div>
       </div>

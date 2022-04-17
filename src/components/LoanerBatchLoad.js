@@ -111,7 +111,7 @@ const LoanerBatchLoad = () => {
             >
               this link.
             </button>
-            The mandatory fields are <b>isStudent</b> and <b>first_name</b>.
+            The mandatory fields are <b>isStudent</b> and <b>firstName</b>.
           </div>
         </div>
       </div>
