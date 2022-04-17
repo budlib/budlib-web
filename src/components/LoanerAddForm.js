@@ -36,6 +36,8 @@ const LoanAddForm = () => {
           isStudent: true,
         });
       }
+
+      window.location.reload();
     });
   }
 
@@ -61,7 +63,7 @@ const LoanAddForm = () => {
                   document.getElementById('formMotherName').parentElement.parentElement.classList.toggle('bg-hide');
 
                   let idLabel = document.getElementById('formSchoolId').parentElement.previousElementSibling;
-                  e.target.value === 'Student' ? (idLabel.innerHTML = 'School ID') : (idLabel.innerHTML = 'Employee ID');
+                  e.target.value === 'Student' ? (idLabel.textContent = 'School ID') : (idLabel.textContent = 'Employee ID');
                 }}
               >
                 <option value='Student'>Student</option>
