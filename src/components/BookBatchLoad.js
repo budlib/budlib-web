@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as xlsx from 'xlsx';
 import { postCall } from '../helpers/postCall';
+import { downloadCall } from '../helpers/downloadCall';
 
 const BookBatchLoad = () => {
   // const [file, setFile] = useState();
@@ -69,9 +70,13 @@ const BookBatchLoad = () => {
     });
   };
 
+  const importBookSample = () => {
+    downloadCall('/api/dashboard/batch/samplebooks', 'sample_books_import.csv');
+  };
+
   return (
     <React.Fragment>
-      <div className='card shadow mb-4 text-dark p-3' style={{ maxWidth: '60rem' }}>
+      <div className='card shadow mb-4 text-dark p-2' style={{ maxWidth: '60rem' }}>
         <div className='card-body'>
           <form id='bookImport'>
             <div className='form-group row'>
@@ -87,6 +92,27 @@ const BookBatchLoad = () => {
               </div>
             </div>
           </form>
+          <div>
+            <strong>Note</strong>: The recommended file format during import is CSV. Please make sure that the file is in the correct format. A sample file can be downloaded from{' '}
+            <button
+              onClick={() => {
+                importBookSample();
+                return false;
+              }}
+              style={{
+                background: 'none!important',
+                backgroundColor: '#fff',
+                border: 'none',
+                padding: '0!important',
+                color: '#069',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+              }}
+            >
+              this link.
+            </button>
+            The mandatory fields are <b>title</b>, <b>isbn_10</b>, <b>isbn_13</b>, <b>library_section</b>, <b>totalQuantity</b>, and <b>availableQuantity</b>.
+          </div>
         </div>
       </div>
       <div className='card shadow' style={{ maxWidth: '60rem' }}>
@@ -142,6 +168,7 @@ const BookBatchLoad = () => {
                                 <option value={dataItem + '@@' + 'librarySection'}>librarySection</option>
                                 <option value={dataItem + '@@' + 'totalQuantity'}>totalQuantity</option>
                                 <option value={dataItem + '@@' + 'availableQuantity'}>availableQuantity</option>
+                                <option value={dataItem + '@@' + 'imageLink'}>imageLink</option>
                                 <option value={dataItem + '@@' + 'notes'}>notes</option>
                                 <option value={dataItem + '@@' + 'priceRetail'}>priceRetail</option>
                                 <option value={dataItem + '@@' + 'priceLibrary'}>priceLibrary</option>

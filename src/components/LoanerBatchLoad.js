@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as xlsx from 'xlsx';
 import { postCall } from '../helpers/postCall';
+import { downloadCall } from '../helpers/downloadCall';
 
 const LoanerBatchLoad = () => {
   // const [file, setFile] = useState();
@@ -69,11 +70,15 @@ const LoanerBatchLoad = () => {
     });
   };
 
+  const importLoanerSample = () => {
+    downloadCall('/api/dashboard/batch/sampleloaners', 'sample_loaners_import.csv');
+  };
+
   return (
     <React.Fragment>
       <div className='card shadow mb-4 text-dark p-3' style={{ maxWidth: '60rem' }}>
         <div className='card-body'>
-          <form id='bookImport'>
+          <form id='loanerImport'>
             <div className='form-group row'>
               <div className='form-group col-lg-12'>
                 <input
@@ -87,6 +92,27 @@ const LoanerBatchLoad = () => {
               </div>
             </div>
           </form>
+          <div>
+            <strong>Note</strong>: The recommended file format during import is CSV. Please make sure that the file is in the correct format. A sample file can be downloaded from{' '}
+            <button
+              onClick={() => {
+                importLoanerSample();
+                return false;
+              }}
+              style={{
+                background: 'none!important',
+                backgroundColor: '#fff',
+                border: 'none',
+                padding: '0!important',
+                color: '#069',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+              }}
+            >
+              this link.
+            </button>
+            The mandatory fields are <b>isStudent</b> and <b>first_name</b>.
+          </div>
         </div>
       </div>
 
