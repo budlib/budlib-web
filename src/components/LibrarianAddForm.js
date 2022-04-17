@@ -26,8 +26,6 @@ const LibrarianAddForm = () => {
       return;
     }
 
-    console.log(details);
-
     postCall('/api/librarian', details).then((result) => {
       window.alert(result['data']['message']);
 
