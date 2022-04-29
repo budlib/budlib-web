@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Sidebar from '../../components/Sidebar';
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import ScrollTop from '../../components/ScrollTop';
-import ModalLogout from '../../components/ModalLogout';
-import SelectBorrowerList from '../../components/SelectBorrowerList';
+import Header from '../../components/Header';
 import LoanerSearchBar from '../../components/LoanerSearchBar';
+import ModalLogout from '../../components/ModalLogout';
+import ScrollTop from '../../components/ScrollTop';
+import SelectBorrowerList from '../../components/SelectBorrowerList';
+import Sidebar from '../../components/Sidebar';
 
 const SelectBorrower = () => {
   const [psearchBy, setSearchBy] = useState(['', '']);

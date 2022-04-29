@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import hosting from './baseUrlAPI';
 
 export const useFetch = (endpoint) => {

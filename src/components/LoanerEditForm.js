@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useFetch } from '../helpers/useFetch';
 import { putCall } from '../helpers/putCall';
+import { useFetch } from '../helpers/useFetch';
 
 const LoanEditForm = () => {
   const { id } = useParams();

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useFetch } from '../helpers/useFetch';
 import { Link } from 'react-router-dom';
+import { useFetch } from '../helpers/useFetch';
 
 const SelectExtenderList = (props) => {
   const url = '/api/loaners';

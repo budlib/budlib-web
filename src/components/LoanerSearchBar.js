@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function LoanerSearchBar(props) {
   const [filterOption, setfilterOption] = useState('');

@@ -1,9 +1,9 @@
 import React from 'react';
-import Sidebar from '../../components/Sidebar';
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import ScrollTop from '../../components/ScrollTop';
+import Header from '../../components/Header';
 import ModalLogout from '../../components/ModalLogout';
+import ScrollTop from '../../components/ScrollTop';
+import Sidebar from '../../components/Sidebar';
 import TransactionList from '../../components/TransactionList';
 
 const SearchTransactions = () => {

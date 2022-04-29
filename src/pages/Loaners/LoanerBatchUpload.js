@@ -1,10 +1,10 @@
 import React from 'react';
-import Sidebar from '../../components/Sidebar';
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import ScrollTop from '../../components/ScrollTop';
-import ModalLogout from '../../components/ModalLogout';
+import Header from '../../components/Header';
 import LoanerBatchLoad from '../../components/LoanerBatchLoad';
+import ModalLogout from '../../components/ModalLogout';
+import ScrollTop from '../../components/ScrollTop';
+import Sidebar from '../../components/Sidebar';
 
 const LoanerBatchUpload = () => {
   return (
