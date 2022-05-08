@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className='sticky-footer bg-secondary'>
       <div className='container my-auto'>
         <div className='copyright text-center my-auto text-white'>
-          <span>Calgary Waldorf School Library</span>
+          <span>BudLib OpenSource Library System</span>
         </div>
       </div>
     </footer>
