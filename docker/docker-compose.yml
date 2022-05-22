@@ -1,0 +1,24 @@
+services:
+  budlib-api:
+    image: zbhavyai/budlib-api:1.0.0
+    ports:
+      - 8080:8080
+    depends_on:
+      - budlib-mysql
+
+  budlib-mysql:
+    image: zbhavyai/budlib-mysql:1.0.0
+    volumes:
+      - budlib-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+  budlib-web:
+    image: zbhavyai/budlib-web:1.0.0
+    ports:
+      - 80:80
+    depends_on:
+      - budlib-api
+
+volumes:
+  budlib-mysql-data:
