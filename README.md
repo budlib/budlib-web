@@ -2,49 +2,57 @@
 
 A web based front end for the [budlib-api](https://github.com/budlib/budlib-api)
 
-## Dependencies
+## How to deploy
 
-- Node version 16.13.1 or above
+Check the [wiki](https://github.com/budlib/budlib-web/wiki) for deployment instructions.
 
-## How to run on web browser
+## How to build and run
 
-1. Clone the repository on your machine
+1. The following are required to build and run this project:
 
-2. Make sure that [BudLib API](https://github.com/budlib/budlib-api) is running and is accessible
+   - Node version 16.13.1 or above
+   - [BudLib API](https://github.com/budlib/budlib-api) is running and is accessible
 
-3. Running the below command from the repository's root directory will get the react server running. You can launch your browser and visit the default URL `http://localhost:3000`
+2. Clone the repository on your machine, or download the zip file
+
+   ```bash
+   $ git clone git@github.com:budlib/budlib-web.git
+   ```
+
+3. Install the dependencies
 
    ```bash
    $ npm install
+   ```
+
+4. To run the development build using the below command. You can launch your browser and visit the default URL `http://localhost:3000`
+
+   ```
    $ npm start
    ```
 
-## How to run on Electron app
+5. To run the production build in an **Electron app**
 
-1. Clone the repository on your machine
+   1. Create the production build
 
-2. Make sure that [BudLib API](https://github.com/budlib/budlib-api) is running and is accessible
+      ```bash
+      $ npm run build
+      ```
 
-3. Create the build of the web application
+   2. Run the run electron packaging script depending on your OS
 
-   ```bash
-   $ npm run build
-   ```
+      ```bash
+      $ npm run package-win         # for Windows
+      $ npm run package-linux       # for Linux
+      $ npm run package-mac         # for macOS
+      ```
 
-4. Run the run electron packaging script depending on your OS
-
-   ```bash
-   $ npm run package-win         # for Windows
-   $ npm run package-linux       # for Linux
-   $ npm run package-mac         # for macOS
-   ```
-
-5. The above command will create a `electron-build` directory, containing the electron build of the web application. For example, when using Windows, you will find electron executable file created as `electron-build/budlib-win32-x64/budlib.exe`.
+   3. The above command will create a `electron-build` directory, containing the electron build of the web application. For example, when using Windows, you will find electron executable file created as `electron-build/budlib-win32-x64/budlib.exe`.
 
 ## Contributors
 
 - [Bhavyai Gupta](https://github.com/zbhavyai)
-- [Mike Lee](https://github.com/mikeePy)
+- [Michael Man Yin Lee](https://github.com/mikeePy)
 
 ## Attribution
 
