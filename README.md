@@ -49,10 +49,12 @@ Check the [wiki](https://github.com/budlib/budlib-web/wiki) for deployment instr
 
    3. The above command will create a `electron-build` directory, containing the electron build of the web application. For example, when using Windows, you will find electron executable file created as `electron-build/budlib-win32-x64/budlib.exe`.
 
+**Note**: The initial credentials to use the application are `admin@localhost` and `easypassword`
+
 ## Contributors
 
 - [Bhavyai Gupta](https://github.com/zbhavyai)
-- [Michael Man Yin Lee](https://github.com/mikeePy)
+- [Mike Lee](https://github.com/mikeePy)
 
 ## Attribution
 
