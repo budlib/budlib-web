@@ -1,0 +1,20 @@
+# Note: run from project root
+#
+# Make sure budlib-mysql and budlib-api containers are running
+#
+# Build
+#   $ docker build -f docker/Dockerfile.web -t budlib-web:1.0.0 .
+#
+# Run
+#   $ docker run -d -it -p 80:80 --network budnetwork --name budlib-web budlib-web:1.0.0
+
+FROM node:18
+LABEL description="Web interface for BudLib API"
+WORKDIR /usr/budlib-web
+ADD package*.json /usr/budlib-web/
+RUN npm install
+ADD . /usr/budlib-web/
+RUN npm run build
+RUN npm install -g serve
+EXPOSE 3000
+CMD serve -s build -l 80
