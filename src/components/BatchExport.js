@@ -1,7 +1,7 @@
 import React from 'react';
 import { downloadCall } from '../helpers/downloadCall';
 
-const BatchImport = () => {
+const BatchExport = () => {
   const exportBooks = () => {
     downloadCall('/api/dashboard/batch/export/books', 'budlib_books_export.csv');
   };
@@ -52,4 +52,4 @@ const BatchImport = () => {
   );
 };
 
-export default BatchImport;
+export default BatchExport;
