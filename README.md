@@ -44,7 +44,7 @@ A web based front end for the [budlib-api](https://github.com/budlib/budlib-api)
 ## Contributors
 
 - [Bhavyai Gupta](https://github.com/zbhavyai)
-- [Michael Man Yin Lee](https://github.com/mikeePy)
+- [Mike Lee](https://github.com/mikeePy)
 
 ## Attribution
 
