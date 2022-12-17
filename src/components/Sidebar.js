@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = () => {
+  const { t } = useTranslation('common');
   const loggedRole = window.localStorage.getItem('role');
 
   function handleToggle() {
@@ -15,45 +17,45 @@ const Sidebar = () => {
         <div className='sidebar-brand-icon rotate-n-15'>
           <i className='fas fa-book-open'></i>
         </div>
-        <div className='sidebar-brand-text mx-3'>BudLib</div>
+        <div className='sidebar-brand-text mx-3'>{t('appName')}</div>
       </Link>
 
       <hr className='sidebar-divider' />
       {loggedRole === 'ADMIN' ? (
         <React.Fragment>
-          <div className='sidebar-heading'>Transact</div>
+          <div className='sidebar-heading'>{t('transact')}</div>
 
           <li className='nav-item'>
             <Link className='nav-link text-white' to='/transactions/borrow-books'>
               <i className='fas fa-fw fa-anchor'></i>
-              <span>Borrow books</span>
+              <span>{t('borrowBooks')}</span>
             </Link>
           </li>
 
           <li className='nav-item'>
             <Link className='nav-link text-white' to='/transactions/return-books'>
               <i className='fas fa-fw fa-award'></i>
-              <span>Return books</span>
+              <span>{t('returnBooks')}</span>
             </Link>
           </li>
 
           <li className='nav-item'>
             <Link className='nav-link text-white' to='/transactions/extend-books'>
               <i className='far fa-fw fa-calendar-check'></i>
-              <span>Provide extension</span>
+              <span>{t('extendBooks')}</span>
             </Link>
           </li>
 
           <li className='nav-item'>
             <Link className='nav-link text-white' to='/transactions'>
               <i className='fas fa-fw fa-chart-area'></i>
-              <span>Past transactions</span>
+              <span>{t('pastTransactions')}</span>
             </Link>
           </li>
 
           <hr className='sidebar-divider' />
 
-          <div className='sidebar-heading'>Database</div>
+          <div className='sidebar-heading'>{t('database')}</div>
         </React.Fragment>
       ) : (
         ''
@@ -61,17 +63,17 @@ const Sidebar = () => {
       <li className='nav-item'>
         <a className='nav-link collapsed text-white' href='#' data-toggle='collapse' data-target='#collapseBooks' aria-expanded='true' aria-controls='collapseBooks'>
           <i className='fas fa-fw fa-book'></i>
-          <span>Books</span>
+          <span>{t('books')}</span>
         </a>
         <div id='collapseBooks' className='collapse' aria-labelledby='headingTwo' data-parent='#accordionSidebar'>
           <div className='bg-white py-2 collapse-inner rounded'>
             <Link className='collapse-item' to='/books/search'>
-              Search books
+            {t('searchBooks')}
             </Link>
             {loggedRole === 'ADMIN' ? (
               <React.Fragment>
                 <Link className='collapse-item' to='/books/add-book'>
-                  Add a book
+                {t('addBook')}
                 </Link>
               </React.Fragment>
             ) : (
@@ -86,15 +88,15 @@ const Sidebar = () => {
           <li className='nav-item'>
             <a className='nav-link collapsed text-white' href='#' data-toggle='collapse' data-target='#collapseLoaners' aria-expanded='true' aria-controls='collapseLoaners'>
               <i className='fas fa-fw fa-user'></i>
-              <span>Loaners</span>
+              <span>{t('loaners')}</span>
             </a>
             <div id='collapseLoaners' className='collapse' aria-labelledby='headingUtilities' data-parent='#accordionSidebar'>
               <div className='bg-white py-2 collapse-inner rounded'>
                 <Link className='collapse-item' to='/loaners/search'>
-                  Search loaners
+                {t('searchLoaners')}
                 </Link>
                 <Link className='collapse-item' to='/loaners/add-loaner'>
-                  Add a loaner
+                {t('addLoaner')}
                 </Link>
               </div>
             </div>
@@ -102,12 +104,12 @@ const Sidebar = () => {
 
           <hr className='sidebar-divider' />
 
-          <div className='sidebar-heading'>Admin</div>
+          <div className='sidebar-heading'>{t('admin')}</div>
 
           <li className='nav-item'>
             <Link className='nav-link text-white' to='/dashboard'>
               <i className='fas fa-fw fa-tachometer-alt'></i>
-              <span>Dashboard</span>
+              <span>{t('dashboard')}</span>
             </Link>
           </li>
 

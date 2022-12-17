@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useTransition } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postCall } from '../helpers/postCall';
 import { useAuth } from '../helpers/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
+  const { t } = useTranslation("login");
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -53,7 +55,7 @@ const Login = () => {
                   <div className='col-lg-6'>
                     <div className='p-5'>
                       <div className='text-center pb-5'>
-                        <h1 className='h4 text-gray-900 mb-4'>Login to BudLib</h1>
+                        <h1 className='h4 text-gray-900 mb-4'>{t('header')}</h1>
                       </div>
                       <form id='loginForm' className='user' onSubmit={handleLogin}>
                         <div className='form-group'>
@@ -65,7 +67,7 @@ const Login = () => {
                             maxLength='100'
                             value={message['email']}
                             required
-                            placeholder='Enter Email Address...'
+                            placeholder={t('emailPlaceholder')}
                             onChange={(e) => {
                               setMessage({ ...message, email: e.target.value });
                             }}
@@ -79,14 +81,14 @@ const Login = () => {
                             className='form-control form-control-user'
                             value={message['password']}
                             required
-                            placeholder='Password'
+                            placeholder={t('passwordPlaceholder')}
                             onChange={(e) => {
                               setMessage({ ...message, password: e.target.value });
                             }}
                           />
                         </div>
                         <button type='submit' className='btn btn-primary btn-user btn-block'>
-                          Login
+                          {t('loginButton')}
                         </button>
                       </form>
 

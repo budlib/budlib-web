@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../helpers/useAuth';
+import { useTranslation } from 'react-i18next';
 
 const ModalLogout = () => {
+  const { t } = useTranslation('common');
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const ModalLogout = () => {
     let now = new Date();
 
     if (now > tokenExpiry) {
-      window.alert('Your session has expired. Please login again.');
+      window.alert(t('expiredSession'));
       handleLogout();
     }
   }, []);
@@ -36,19 +38,19 @@ const ModalLogout = () => {
         <div className='modal-content'>
           <div className='modal-header'>
             <h5 className='modal-title' id='modalLabel'>
-              Alert
+              {t('alert')}
             </h5>
             <button className='close' type='button' data-dismiss='modal' aria-label='Close'>
               <span aria-hidden='true'>&#x00d7;</span>
             </button>
           </div>
-          <div className='modal-body'>Are you sure you want to logout?</div>
+          <div className='modal-body'>{t('confirmLogout')}</div>
           <div className='modal-footer'>
             <button className='btn btn-secondary' type='button' data-dismiss='modal'>
-              Cancel
+              {t('Cancel')}
             </button>
             <button className='btn btn-primary' data-dismiss='modal' onClick={handleLogout}>
-              Logout
+              {t('Logout')}
             </button>
           </div>
         </div>
