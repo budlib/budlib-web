@@ -8,7 +8,7 @@ import Sidebar from '../components/Sidebar';
 import { useTranslation } from 'react-i18next';
 
 const Home = () => {
-  const { t } = useTranslation('common'); 
+  const { t } = useTranslation();
   const loggedRole = window.localStorage.getItem('role');
 
   return (

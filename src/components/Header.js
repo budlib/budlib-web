@@ -4,7 +4,7 @@ import profilePic from '../assets/img/undraw_profile_3.svg';
 import { useTranslation } from 'react-i18next';
 
 const Header = (props) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
   let loggedName = window.localStorage.getItem('username');
   let loggedId = window.localStorage.getItem('id');
   let loggedRole = window.localStorage.getItem('role');

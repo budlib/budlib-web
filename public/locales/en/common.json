@@ -3,6 +3,7 @@
     "profile": "Profile",
     "logout": "Logout",
     "cancel": "Cancel",
+    "clear": "Clear",
     "admin": "Admin",
     "books": "Books",
     "loaners": "Loaners",
@@ -22,5 +23,10 @@
     "librarianManagement": "Librarian management",
     "expiredSession": "Your session has expired. Please login again.",
     "alert": "Alert",
-    "confirmLogout": "Are you sure you want to logout?"
+    "confirmLogout": "Are you sure you want to logout?",
+    "footer": "BudLib OpenSource Library System",
+    "PARENT_LIBRARY": "Parent Library",
+    "FACULTY_LIBRARY": "Faculty Library",
+    "CLASS_SETS": "Class Sets",
+    "CHILDREN_LIBRARY": "Children Library"
 }

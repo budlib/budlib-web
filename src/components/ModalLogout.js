@@ -4,7 +4,7 @@ import { useAuth } from '../helpers/useAuth';
 import { useTranslation } from 'react-i18next';
 
 const ModalLogout = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
   const { logout } = useAuth();
   const navigate = useNavigate();
 

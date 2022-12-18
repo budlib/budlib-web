@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const Sidebar = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
   const loggedRole = window.localStorage.getItem('role');
 
   function handleToggle() {
