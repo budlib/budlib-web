@@ -1,0 +1,33 @@
+{
+    "deleteResp": {
+        "200": "Book deleted successfully",
+        "400": "{{errorMessage}}",
+        "unspecific": "Something went wrong."
+    },
+    "edit": "Edit details",
+    "delete": "Delete Book",
+    "bookId": "Book ID",
+    "isbn10": "ISBN-10",
+    "isbn13": "ISBN-13",
+    "totalQuantity": "Total quantity",
+    "availableQuantity": "Available quantity",
+    "librarySection": "Library Section",
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "authors": "Author(s)",
+    "publisher": "Publisher",
+    "edition": "Edition",
+    "year": "Year",
+    "language": "Language",
+    "tags": "Tags",
+    "retailPrice": "Retail price",
+    "libraryPrice": "Library price",
+    "additionalNotes": "Additional notes",
+    "currentLoans": "Current loans",
+    "noLoans": "No outstanding loans found",
+    "loanerId": "Loaner ID",
+    "fullName": "Full name",
+    "copies": "Copies",
+    "borrowDate": "Borrow date",
+    "dueDate": "Due date"
+}

@@ -15,7 +15,8 @@ i18n
         ns: [
             'login',
             'common',
-            'search-books'
+            'search-books',
+            'view-book'
         ],
         interpolation: {
             // Escaping is handled by React:
