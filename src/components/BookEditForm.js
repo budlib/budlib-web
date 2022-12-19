@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { putCall } from '../helpers/putCall';
 import { useFetch } from '../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const BookEditForm = () => {
+  const { t } = useTranslation('input-book');
   const { id } = useParams();
   let navigate = useNavigate();
 
@@ -85,9 +87,13 @@ const BookEditForm = () => {
     // }
 
     putCall(bookDetailUrl, sendDetails).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`updateResp.${status}`, 'updateResp.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         let path = `/books/${id}/view`;
         navigate(path);
       }
@@ -103,7 +109,7 @@ const BookEditForm = () => {
               <div className='col-md-8'>
                 <div className='form-row'>
                   <div className='form-group col-md-6'>
-                    <label htmlFor='formIsbn10'>ISBN-10</label>
+                    <label htmlFor='formIsbn10'>{t('isbn10')}</label>
                     <input
                       type='text'
                       id='formIsbn10'
@@ -118,7 +124,7 @@ const BookEditForm = () => {
                     />
                   </div>
                   <div className='form-group col-md-6'>
-                    <label htmlFor='formIsbn13'>ISBN-13</label>
+                    <label htmlFor='formIsbn13'>{t('isbn13')}</label>
                     <input
                       type='text'
                       id='formIsbn13'
@@ -136,7 +142,7 @@ const BookEditForm = () => {
 
                 <div className='form-row'>
                   <div className='form-group col-md-6'>
-                    <label htmlFor='formTotalQty'>Total copies</label>
+                    <label htmlFor='formTotalQty'>{t('totalCopies')}</label>
                     <input
                       type='number'
                       id='formTotalQty'
@@ -152,7 +158,7 @@ const BookEditForm = () => {
                     />
                   </div>
                   <div className='form-group col-md-6'>
-                    <label htmlFor='formAvailableQty'>Available copies</label>
+                    <label htmlFor='formAvailableQty'>{t('availableCopies')}</label>
                     <input
                       type='number'
                       id='formAvailableQty'
@@ -171,16 +177,16 @@ const BookEditForm = () => {
 
                 <div className='form-row'>
                   <div className='form-group col-md-6'>
-                    <label htmlFor='formRetailPrice'>Retail price</label>
+                    <label htmlFor='formRetailPrice'>{t('retailPrice')}</label>
                     <div className='input-group'>
                       <div className='input-group-prepend'>
-                        <span className='input-group-text'>$</span>
+                        <span className='input-group-text'>{t('currencySymbol')}</span>
                       </div>
                       <input
                         type='number'
                         id='formRetailPrice'
                         className='form-control'
-                        placeholder='10.99'
+                        placeholder={t('retailPlaceholder')}
                         min='0'
                         maxLength='250'
                         step='0.01'
@@ -192,16 +198,16 @@ const BookEditForm = () => {
                     </div>
                   </div>
                   <div className='form-group col-md-6'>
-                    <label htmlFor='formLibraryPrice'>Library Price</label>
+                    <label htmlFor='formLibraryPrice'>{t('libraryPrice')}</label>
                     <div className='input-group'>
                       <div className='input-group-prepend'>
-                        <span className='input-group-text'>$</span>
+                        <span className='input-group-text'>{t('currencySymbol')}</span>
                       </div>
                       <input
                         type='number'
                         id='formLibraryPrice'
                         className='form-control'
-                        placeholder='6.99'
+                        placeholder={t('retailPlaceholder')}
                         min='0'
                         maxLength='250'
                         step='0.01'
@@ -215,24 +221,24 @@ const BookEditForm = () => {
                 </div>
                 <div className='form-row'>
                   <div className='form-group col-md-4'>
-                    <label htmlFor='formSection'>Section in library</label>
+                    <label htmlFor='formSection'>{t('section')}</label>
                     <select
                       id='formSection'
                       className='form-control'
-                      placeholder='Section AB12'
+                      placeholder={t('CHILDREN_LIBRARY')}
                       value={details['librarySection']}
                       onChange={(e) => {
                         setDetails({ ...details, librarySection: e.target.value });
                       }}
                     >
-                      <option value='PARENT_LIBRARY'>PARENT_LIBRARY</option>
-                      <option value='FACULTY_LIBRARY'>FACULTY_LIBRARY</option>
-                      <option value='CLASS_SETS'>CLASS_SETS</option>
-                      <option value='CHILDREN_LIBRARY'>CHILDREN_LIBRARY</option>
+                      <option value='PARENT_LIBRARY'>{t('PARENT_LIBRARY')}</option>
+                      <option value='FACULTY_LIBRARY'>{t('FACULTY_LIBRARY')}</option>
+                      <option value='CLASS_SETS'>{t('CLASS_SETS')}</option>
+                      <option value='CHILDREN_LIBRARY'>{t('CHILDREN_LIBRARY')}</option>
                     </select>
                   </div>
                   <div className='form-group col-md-8'>
-                    <label htmlFor='formImageLink'>Image link</label>
+                    <label htmlFor='formImageLink'>{t('image')}</label>
 
                     <div className='input-group'>
                       <input
@@ -270,12 +276,12 @@ const BookEditForm = () => {
 
             <div className='form-row'>
               <div className='form-group col-md-5'>
-                <label htmlFor='formTitle'>Title</label>
+                <label htmlFor='formTitle'>{t('title')}</label>
                 <input
                   type='text'
                   id='formTitle'
                   className='form-control'
-                  placeholder="The Parent's Book about Bullying"
+                  placeholder={t('titlePlaceholder')}
                   maxLength='250'
                   value={details['title']}
                   onChange={(e) => {
@@ -284,12 +290,12 @@ const BookEditForm = () => {
                 />
               </div>
               <div className='form-group col-md-7'>
-                <label htmlFor='formSubtitle'>Subtitle</label>
+                <label htmlFor='formSubtitle'>{t('subtitle')}</label>
                 <input
                   type='text'
                   id='formSubtitle'
                   className='form-control'
-                  placeholder="Changing the Course of Your Child's Life"
+                  placeholder={t('subtitlePlaceholder')}
                   maxLength='250'
                   value={details['subtitle']}
                   onChange={(e) => {
@@ -301,12 +307,12 @@ const BookEditForm = () => {
 
             <div className='form-row'>
               <div className='form-group col-md-8'>
-                <label htmlFor='formAuthor'>Author(s)</label>
+                <label htmlFor='formAuthor'>{t('authors')}</label>
                 <input
                   type='text'
                   id='formAuthor'
                   className='form-control'
-                  placeholder='William Voors'
+                  placeholder={t('authorsPlaceholder')}
                   maxLength='250'
                   value={details['authors']}
                   onChange={(e) => {
@@ -315,12 +321,12 @@ const BookEditForm = () => {
                 />
               </div>
               <div className='form-group col-md-4'>
-                <label htmlFor='formLanguage'>Language</label>
+                <label htmlFor='formLanguage'>{t('language')}</label>
                 <input
                   type='text'
                   id='formLanguage'
                   className='form-control'
-                  placeholder='English'
+                  placeholder={t('languagePlaceholder')}
                   maxLength='250'
                   value={details['language']}
                   onChange={(e) => {
@@ -332,12 +338,12 @@ const BookEditForm = () => {
 
             <div className='form-row'>
               <div className='form-group col-md-6'>
-                <label htmlFor='formPublisher'>Publisher</label>
+                <label htmlFor='formPublisher'>{t('publisher')}</label>
                 <input
                   type='text'
                   id='formPublisher'
                   className='form-control'
-                  placeholder='Hazelden Publishing'
+                  placeholder={t('publisherPlaceholder')}
                   maxLength='250'
                   value={details['publisher']}
                   onChange={(e) => {
@@ -346,12 +352,12 @@ const BookEditForm = () => {
                 />
               </div>
               <div className='form-group col-md-3'>
-                <label htmlFor='formYear'>Year of publication</label>
+                <label htmlFor='formYear'>{t('year')}</label>
                 <input
                   type='text'
                   id='formYear'
                   className='form-control'
-                  placeholder='2000'
+                  placeholder={t('yearPlaceholder')}
                   maxLength='250'
                   value={details['year']}
                   onChange={(e) => {
@@ -360,12 +366,12 @@ const BookEditForm = () => {
                 />
               </div>
               <div className='form-group col-md-3'>
-                <label htmlFor='formEdition'>Edition</label>
+                <label htmlFor='formEdition'>{t('edition')}</label>
                 <input
                   type='text'
                   id='formEdition'
                   className='form-control'
-                  placeholder='1'
+                  placeholder={t('editionPlaceholder')}
                   maxLength='250'
                   value={details['edition']}
                   onChange={(e) => {
@@ -377,12 +383,12 @@ const BookEditForm = () => {
 
             <div className='form-row'>
               <div className='form-group col-md-12'>
-                <label htmlFor='formTags'>Tags (comma separated)</label>
+                <label htmlFor='formTags'>{t('tags')}</label>
                 <input
                   type='text'
                   id='formTags'
                   className='form-control'
-                  placeholder='family, relationships'
+                  placeholder={t('tagsPlaceholder')}
                   maxLength='250'
                   value={tagString}
                   onChange={(e) => {
@@ -395,13 +401,13 @@ const BookEditForm = () => {
 
             <div className='form-row'>
               <div className='form-group col-md-6'>
-                <label htmlFor='formNotes'>Additional notes</label>
+                <label htmlFor='formNotes'>{t('notes')}</label>
                 <textarea
                   type='textarea'
                   id='formNotes'
                   className='form-control'
                   rows='5'
-                  placeholder='Additional information'
+                  placeholder={t('notesPlaceholder')}
                   maxLength='250'
                   value={details['notes']}
                   onChange={(e) => {
@@ -412,7 +418,7 @@ const BookEditForm = () => {
             </div>
 
             <button type='submit' className='btn btn-primary my-2'>
-              Update
+            {t('update')}
             </button>
             <button
               type='button'
@@ -422,7 +428,7 @@ const BookEditForm = () => {
                 navigate(path);
               }}
             >
-              Cancel
+              {t('cancel')}
             </button>
           </form>
         </div>

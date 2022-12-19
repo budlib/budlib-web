@@ -8,7 +8,7 @@ import Sidebar from '../../components/Sidebar';
 import { useTranslation } from 'react-i18next';
 
 function AddBook() {
-  const { t } = useTranslation('add-book');
+  const { t } = useTranslation('input-book');
 
   return (
     <React.Fragment>

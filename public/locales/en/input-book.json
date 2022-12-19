@@ -2,8 +2,13 @@
     "enterIsbn": "Enter ISBN before searching!",
     "detailsNotFound": "Details not found! Please fill manually.",
     "detailsPopulated": "Details populated! You may edit them accordingly.",
-    "postResp": {
+    "createResp": {
         "200": "Book added successfully",
+        "400": "{{errorMessage}}",
+        "unspecific": "Something went wrong"
+    },
+    "updateResp": {
+        "200": "Book updated successfully",
         "400": "{{errorMessage}}",
         "unspecific": "Something went wrong"
     },
@@ -37,5 +42,7 @@
     "tagsPlaceholder": "family, relationships",
     "notes": "Additional notes",
     "notesPlaceholder": "Additional information",
-    "add": "Add book"
+    "add": "Add book",
+    "editBook": "Edit book",
+    "update": "Update"
 }

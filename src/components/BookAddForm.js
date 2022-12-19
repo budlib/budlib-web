@@ -15,7 +15,7 @@ function get_book_details(isbn_number) {
 }
 
 const BookAddForm = () => {
-  const { t } = useTranslation('add-book');
+  const { t } = useTranslation('input-book');
 
   let navigate = useNavigate();
   let defaultImg = `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
@@ -136,7 +136,7 @@ const BookAddForm = () => {
     postCall('/api/books', sendDetails).then((result) => {
       const status = result['status'];
       window.alert(t(
-        [`postResp.${status}`, 'postResp.unspecific'],
+        [`createResp.${status}`, 'createResp.unspecific'],
         {errorMessage: result['data']['message']}
       ));
 
