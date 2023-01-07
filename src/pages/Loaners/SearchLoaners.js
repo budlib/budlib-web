@@ -6,8 +6,10 @@ import LoanerSearchBar from '../../components/LoanerSearchBar';
 import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 const SearchLoaners = () => {
+  const { t } = useTranslation('loaners');
   const [psearchBy, setSearchBy] = useState(['', '']);
 
   return (
@@ -17,7 +19,7 @@ const SearchLoaners = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Search loaners' />
+            <Header heading={t('searchLoaners')} />
             <div className='container-fluid'>
               <LoanerSearchBar func={setSearchBy} />
               <LoanerList searchBy={psearchBy[0]} searchTerm={psearchBy[1]} />

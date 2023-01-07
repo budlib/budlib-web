@@ -10,8 +10,10 @@ import ViewLoanerDetailsCard from '../../components/ViewLoanerDetailsCard';
 import ViewLoanerHistoryCard from '../../components/ViewLoanerHistoryCard';
 import { deleteCall } from '../../helpers/deleteCall';
 import { useFetch } from '../../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const ViewLoaner = () => {
+  const { t } = useTranslation('loaners');
   const { id } = useParams();
 
   let loanerDetailUrl = `/api/loaners/${id}`;
@@ -24,9 +26,13 @@ const ViewLoaner = () => {
 
   function handleDelete(e) {
     deleteCall(loanerDetailUrl).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`deleteResp.${status}`, 'deleteResp.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         let path = `/loaners/search`;
         navigate(path);
       }
@@ -54,10 +60,10 @@ const ViewLoaner = () => {
                 <div className='col-sm-4 px-4 p-2'>
                   <div className='btn-group btn-block'>
                     <button type='button' className='btn btn-secondary' onClick={handleEdit}>
-                      Edit details
+                      {t('editDetails')}
                     </button>
                     <button type='button' className='btn btn-danger' onClick={handleDelete}>
-                      Delete loaner
+                      {t('deleteLoaner')}
                     </button>
                   </div>
                 </div>

@@ -1,11 +1,14 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ViewCurrentLoansCard = ({ data }) => {
+  const { t } = useTranslation('loaners');
+
   return (
     <div className='col-lg-8'>
       <div className='card shadow mb-4'>
         <a href='#loansCard' className='d-block card-header py-3' data-toggle='collapse' role='button' aria-expanded='true' aria-controls='loansCard'>
-          <h6 className='m-0 font-weight-bold text-primary'>Loans</h6>
+          <h6 className='m-0 font-weight-bold text-primary'>{t('loans')}</h6>
         </a>
 
         <div className='collapse show' id='loansCard'>
@@ -17,11 +20,11 @@ const ViewCurrentLoansCard = ({ data }) => {
                 <table className='table table-bordered table-hover'>
                   <thead className='table-secondary text-dark'>
                     <tr>
-                      <th style={{ width: '15%' }}>Book ISBN</th>
-                      <th style={{ width: '40%' }}>Book title</th>
-                      <th style={{ width: '10%' }}>Copies</th>
-                      <th style={{ width: '18%' }}>Borrow date</th>
-                      <th style={{ width: '17%' }}>Due date</th>
+                      <th style={{ width: '15%' }}>{t('bookIsbn')}</th>
+                      <th style={{ width: '40%' }}>{t('bookTitle')}</th>
+                      <th style={{ width: '10%' }}>{t('copies')}</th>
+                      <th style={{ width: '18%' }}>{t('borrowDate')}</th>
+                      <th style={{ width: '17%' }}>{t('dueDate')}</th>
                     </tr>
                   </thead>
                   <tbody>

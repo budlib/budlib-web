@@ -28,5 +28,8 @@
     "PARENT_LIBRARY": "Parent Library",
     "FACULTY_LIBRARY": "Faculty Library",
     "CLASS_SETS": "Class Sets",
-    "CHILDREN_LIBRARY": "Children Library"
+    "CHILDREN_LIBRARY": "Children Library",
+    "BORROW": "Borrow",
+    "RETURN": "Return",
+    "EXTEND": "Extend"
 }

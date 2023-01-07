@@ -5,8 +5,11 @@ import LoanerEditForm from '../../components/LoanerEditForm';
 import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 function EditLoaner() {
+  const { t } = useTranslation('loaners');
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -14,7 +17,7 @@ function EditLoaner() {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Edit loaner' />
+            <Header heading={t('editLoaner')}/>
             <div className='container-fluid'>
               <LoanerEditForm />
             </div>

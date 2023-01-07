@@ -1,11 +1,12 @@
 {
     "deleteResp": {
         "200": "Book deleted successfully",
-        "400": "{{errorMessage}}",
-        "unspecific": "Something went wrong."
+        "404": "Book not found",
+        "400": "Cannot delete book with outstanding loans",
+        "unspecific": "Something went wrong"
     },
     "edit": "Edit details",
-    "delete": "Delete Book",
+    "delete": "Delete book",
     "bookId": "Book ID",
     "isbn10": "ISBN-10",
     "isbn13": "ISBN-13",

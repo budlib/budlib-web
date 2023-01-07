@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFetch } from '../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const LoanerList = (props) => {
+  const { t } = useTranslation('loaners');
   const url = '/api/loaners';
   let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
 
@@ -20,20 +22,20 @@ const LoanerList = (props) => {
                 <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0'>
                   <thead className='table-secondary text-dark'>
                     <tr>
-                      <th>Loaner ID</th>
-                      <th>School ID</th>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Total outstanding</th>
+                      <th>{t('loanerId')}</th>
+                      <th>{t('schoolId')}</th>
+                      <th>{t('name')}</th>
+                      <th>{t('type')}</th>
+                      <th>{t('totalOutstanding')}</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Loaner ID</th>
-                      <th>School ID</th>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Total outstanding</th>
+                      <th>{t('loanerId')}</th>
+                      <th>{t('schoolId')}</th>
+                      <th>{t('name')}</th>
+                      <th>{t('type')}</th>
+                      <th>{t('totalOutstanding')}</th>
                     </tr>
                   </tfoot>
                   <tbody>
@@ -41,9 +43,9 @@ const LoanerList = (props) => {
                       let { loanerId, schoolId, fullNameWithSalutation, isStudent, totalOutstanding } = dataItem;
 
                       if (isStudent === true || isStudent === 'true') {
-                        isStudent = 'Student';
+                        isStudent = t('student');
                       } else {
-                        isStudent = 'Faculty';
+                        isStudent = t('faculty');
                       }
 
                       return (

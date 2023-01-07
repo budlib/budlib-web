@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postCall } from '../helpers/postCall';
+import { useTranslation } from 'react-i18next';
 
 const LoanAddForm = () => {
+  const { t } = useTranslation('loaners');
   let navigate = useNavigate();
 
   const [details, setDetails] = useState({
@@ -21,7 +23,11 @@ const LoanAddForm = () => {
     e.preventDefault();
 
     postCall('/api/loaners', details).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`createResp.${status}`, 'createResp.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
       if (result['status'] === 200) {
         window.location.reload();
@@ -35,7 +41,7 @@ const LoanAddForm = () => {
         <form id='loanerForm' onSubmit={handleSubmit}>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLoanerType'>
-              Loaner Type
+              {t('loanerType')}
             </label>
             <div className='col-sm-8'>
               <select
@@ -51,17 +57,17 @@ const LoanAddForm = () => {
                   document.getElementById('formMotherName').parentElement.parentElement.classList.toggle('bg-hide');
 
                   let idLabel = document.getElementById('formSchoolId').parentElement.previousElementSibling;
-                  e.target.value === 'Student' ? (idLabel.textContent = 'School ID') : (idLabel.textContent = 'Employee ID');
+                  e.target.value === 'Student' ? (idLabel.textContent = t('schoolId')) : (idLabel.textContent = t('employeeId'));
                 }}
               >
-                <option value='Student'>Student</option>
-                <option value='Faculty'>Faculty</option>
+                <option value='Student'>{t('student')}</option>
+                <option value='Faculty'>{t('faculty')}</option>
               </select>
             </div>
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formSchoolId'>
-              School ID
+              {t('schoolId')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -80,7 +86,7 @@ const LoanAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formEmail'>
-              Email
+              {t('email')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -88,7 +94,7 @@ const LoanAddForm = () => {
                 className='form-control'
                 id='formEmail'
                 name='formEmail'
-                placeholder='john.doe@waldorf.ca'
+                placeholder={t('emailPlaceholder')}
                 maxLength='250'
                 value={details['email']}
                 onChange={(e) => {
@@ -99,7 +105,7 @@ const LoanAddForm = () => {
           </div>
           <div className='form-group row bg-hide'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formSalutation'>
-              Salutation
+              {t('salutation')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -108,7 +114,7 @@ const LoanAddForm = () => {
                 id='formSalutation'
                 name='formSalutation'
                 list='salutationList'
-                placeholder='Mr'
+                placeholder={t('mr')}
                 maxLength='250'
                 value={details['salutation']}
                 onChange={(e) => {
@@ -116,17 +122,17 @@ const LoanAddForm = () => {
                 }}
               />
               <datalist id='salutationList'>
-                <option value='Mr'></option>
-                <option value='Ms'></option>
-                <option value='Miss'></option>
-                <option value='Mrs'></option>
-                <option value='Dr'></option>
+                <option value={t('mr')}></option>
+                <option value={t('ms')}></option>
+                <option value={t('miss')}></option>
+                <option value={t('mrs')}></option>
+                <option value={t('dr')}></option>
               </datalist>
             </div>
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFirstName'>
-              First name
+              {t('firstName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -134,7 +140,7 @@ const LoanAddForm = () => {
                 className='form-control'
                 id='formFirstName'
                 name='formFirstName'
-                placeholder='John'
+                placeholder={t('firstNamePlaceholder')}
                 maxLength='250'
                 required
                 value={details['firstName']}
@@ -146,7 +152,7 @@ const LoanAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formMiddleName'>
-              Middle name
+              {t('middleName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -154,7 +160,7 @@ const LoanAddForm = () => {
                 className='form-control'
                 id='formMiddleName'
                 name='formMiddleName'
-                placeholder='Michael'
+                placeholder={t('middleNamePlaceholder')}
                 maxLength='250'
                 value={details['middleName']}
                 onChange={(e) => {
@@ -165,7 +171,7 @@ const LoanAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLastName'>
-              Last name
+              {t('lastName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -173,7 +179,7 @@ const LoanAddForm = () => {
                 className='form-control'
                 id='formLastName'
                 name='formLastName'
-                placeholder='Doe'
+                placeholder={t('lastNamePlaceholder')}
                 maxLength='250'
                 value={details['lastName']}
                 onChange={(e) => {
@@ -184,7 +190,7 @@ const LoanAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFatherName'>
-              Father's name
+              {t('fatherName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -192,7 +198,7 @@ const LoanAddForm = () => {
                 className='form-control'
                 id='formFatherName'
                 name='formFatherName'
-                placeholder='Michael Jake Doe'
+                placeholder={t('fatherNamePlaceholder')}
                 maxLength='250'
                 value={details['fatherName']}
                 onChange={(e) => {
@@ -203,7 +209,7 @@ const LoanAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formMotherName'>
-              Mother's name
+              {t('motherName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -211,7 +217,7 @@ const LoanAddForm = () => {
                 className='form-control'
                 id='formMotherName'
                 name='formMotherName'
-                placeholder='Emily Doe'
+                placeholder={t('motherNamePlaceholder')}
                 maxLength='250'
                 value={details['motherName']}
                 onChange={(e) => {
@@ -222,7 +228,7 @@ const LoanAddForm = () => {
           </div>
 
           <button type='submit' className='btn btn-primary my-2'>
-            Add loaner
+            {t('add')}
           </button>
           <button
             type='button'
@@ -232,7 +238,7 @@ const LoanAddForm = () => {
               navigate(path);
             }}
           >
-            Cancel
+            {t('cancel')}
           </button>
         </form>
       </div>
