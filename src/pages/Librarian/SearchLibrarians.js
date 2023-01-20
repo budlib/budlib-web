@@ -6,8 +6,10 @@ import LibrarianList from '../../components/LibrarianList';
 import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 const SearchLibrarians = () => {
+  const { t } = useTranslation('librarians');
   let navigate = useNavigate();
 
   return (
@@ -29,7 +31,7 @@ const SearchLibrarians = () => {
                   navigate(path);
                 }}
               >
-                Add new librarian
+                {t('addLibrarian')}
               </button>
               <button
                 type='button'
@@ -39,7 +41,7 @@ const SearchLibrarians = () => {
                   navigate(path);
                 }}
               >
-                Back to dashboard
+                {t('backToDashboard')}
               </button>
             </div>
           </div>

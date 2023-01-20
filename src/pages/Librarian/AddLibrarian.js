@@ -5,8 +5,11 @@ import LibrarianAddForm from '../../components/LibrarianAddForm';
 import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 function AddLibrarian() {
+  const { t } = useTranslation('librarians');
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -14,7 +17,7 @@ function AddLibrarian() {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Add Librarian' />
+            <Header heading={t('addLibrarian')} />
             <div className='container-fluid'>
               <LibrarianAddForm />
             </div>

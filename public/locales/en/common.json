@@ -31,5 +31,7 @@
     "CHILDREN_LIBRARY": "Children Library",
     "BORROW": "Borrow",
     "RETURN": "Return",
-    "EXTEND": "Extend"
+    "EXTEND": "Extend",
+    "ADMIN": "Admin",
+    "FACULTY": "Faculty"
 }

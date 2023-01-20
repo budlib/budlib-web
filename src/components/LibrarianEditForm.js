@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { putCall } from '../helpers/putCall';
 import { useFetch } from '../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const LibrarianEditForm = () => {
+  const { t } = useTranslation('librarians');
   const { id } = useParams();
   let navigate = useNavigate();
 
@@ -38,9 +40,13 @@ const LibrarianEditForm = () => {
     e.preventDefault();
 
     putCall(librarianDetailUrl, details).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`updateResp.${status}`, 'updateResp.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         if (id === loggedId) {
           window.localStorage.setItem('role', details['role']);
           window.localStorage.setItem('username', details['userName']);
@@ -58,7 +64,7 @@ const LibrarianEditForm = () => {
         <form id='librarianForm' onSubmit={handleSubmit}>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLibrarianType'>
-              Role
+              {t('role')}
             </label>
             <div className='col-sm-8'>
               <select
@@ -70,14 +76,14 @@ const LibrarianEditForm = () => {
                   setDetails({ ...details, role: e.target.value });
                 }}
               >
-                <option value='ADMIN'>ADMIN</option>
-                <option value='FACULTY'>FACULTY</option>
+                <option value='ADMIN'>{t('ADMIN')}</option>
+                <option value='FACULTY'>{t('FACULTY')}</option>
               </select>
             </div>
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFirstName'>
-              Username
+              {t('username')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -85,7 +91,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formuserName'
                 name='formuserName'
-                placeholder='John'
+                placeholder={t('usernamePlaceholder')}
                 maxLength='250'
                 required
                 value={details['userName']}
@@ -97,7 +103,7 @@ const LibrarianEditForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formEmail'>
-              Email
+              {t('email')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -105,7 +111,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formEmail'
                 name='formEmail'
-                placeholder='john.doe@waldorf.ca'
+                placeholder={t('emailPlaceholder')}
                 maxLength='250'
                 value={details['email']}
                 onChange={(e) => {
@@ -116,7 +122,7 @@ const LibrarianEditForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFirstName'>
-              First name
+              {t('firstName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -124,7 +130,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formFirstName'
                 name='formFirstName'
-                placeholder='John'
+                placeholder={t('firstNamePlaceholder')}
                 maxLength='250'
                 required
                 value={details['firstName']}
@@ -136,7 +142,7 @@ const LibrarianEditForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formMiddleName'>
-              Middle name
+              {t('middleName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -144,7 +150,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formMiddleName'
                 name='formMiddleName'
-                placeholder='Michael'
+                placeholder={t('middleNamePlaceholder')}
                 maxLength='250'
                 value={details['middleName']}
                 onChange={(e) => {
@@ -155,7 +161,7 @@ const LibrarianEditForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLastName'>
-              Last name
+              {t('lastName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -163,7 +169,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formLastName'
                 name='formLastName'
-                placeholder='Doe'
+                placeholder={t('lastNamePlaceholder')}
                 maxLength='250'
                 value={details['lastName']}
                 onChange={(e) => {
@@ -174,7 +180,7 @@ const LibrarianEditForm = () => {
           </div>
 
           <button type='submit' className='btn btn-primary my-2'>
-            Update
+            {t('update')}
           </button>
           <button
             type='button'
@@ -184,7 +190,7 @@ const LibrarianEditForm = () => {
               navigate(path);
             }}
           >
-            Cancel
+            {t('cancel')}
           </button>
         </form>
       </div>

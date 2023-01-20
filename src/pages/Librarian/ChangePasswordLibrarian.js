@@ -5,8 +5,11 @@ import LibrarianPasswordChangeForm from '../../components/LibrarianPasswordChang
 import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 function EditLibrarian() {
+  const { t } = useTranslation('librarians');
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -14,7 +17,7 @@ function EditLibrarian() {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Change password' />
+            <Header heading={t('changePassword')} />
             <div className='container-fluid'>
               <LibrarianPasswordChangeForm />
             </div>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { putCall } from '../helpers/putCall';
+import { useTranslation } from 'react-i18next';
 
 const LibrarianEditForm = () => {
+  const { t } = useTranslation('librarians');
   const { id } = useParams();
   let navigate = useNavigate();
 
@@ -19,14 +21,18 @@ const LibrarianEditForm = () => {
     let password2 = document.getElementById('formConfirmPassword').value;
 
     if (password1 !== password2) {
-      window.alert("Password don't match");
+      window.alert(t('passwordMismatch'));
       return;
     }
 
     putCall(librarianPasswordUrl, details).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`passUpdateResp.${status}`, 'passUpdateResp.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         let path = `/dashboard/librarian/${id}/view`;
         navigate(path);
       }
@@ -39,7 +45,7 @@ const LibrarianEditForm = () => {
         <form id='librarianPaswordForm' onSubmit={handleSubmit}>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formNewPassword'>
-              New password
+            {t('newPassword')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -47,7 +53,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formNewPassword'
                 name='formNewPassword'
-                placeholder='Enter a password'
+                placeholder={t('createPasswordPlaceholder')}
                 required
                 value={details['password']}
                 onChange={(e) => {
@@ -58,15 +64,22 @@ const LibrarianEditForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formConfirmPassword'>
-              Confirm password
+              {t('confirmPassword')}
             </label>
             <div className='col-sm-8'>
-              <input type='password' className='form-control' id='formConfirmPassword' name='formConfirmPassword' placeholder='Confirm password' required />
+              <input 
+                type='password' 
+                className='form-control' 
+                id='formConfirmPassword' 
+                name='formConfirmPassword' 
+                placeholder={t('confirmPasswordPlaceholder')}
+                required
+              />
             </div>
           </div>
 
           <button type='submit' className='btn btn-primary my-2'>
-            Update Password
+            {t('updatePassword')}
           </button>
           <button
             type='button'
@@ -76,7 +89,7 @@ const LibrarianEditForm = () => {
               navigate(path);
             }}
           >
-            Cancel
+            {t('cancel')}
           </button>
         </form>
       </div>

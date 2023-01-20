@@ -1,0 +1,54 @@
+{
+    "addLibrarian": "Add new librarian",
+    "backToDashboard": "Back to dashboard",
+    "notFound": "No other librarians found",
+    "details": "Details",
+    "librarianId": "Librarian ID",
+    "username": "Username",
+    "usernamePlaceholder": "johnrocks",
+    "email": "Email",
+    "emailPlaceholder": "john.doe@waldorf.org",
+    "role": "Role",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "John",
+    "middleName": "Middle Name",
+    "middleNamePlaceholder": "Michael",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Doe",
+    "createPassword": "Create password",
+    "createPasswordPlaceholder": "Enter a password",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "changePassword": "Change password",
+    "newPassword": "New password",
+    "updatePassword": "Update Password",
+    "editDetails": "Edit details",
+    "delete": "Delete Librarian",
+    "add": "Add Librarian",
+    "edit": "Edit Librarian",
+    "update": "Update",
+    "deleteResp": {
+        "200": "Librarian deleted successfully",
+        "403": "{{errorMessage}}",
+        "404": "Librarian not found",
+        "unspecific": "Something went wrong"
+    },
+    "createResp": {
+        "200": "Librarian added successfully",
+        "400": "{{errorMessage}}",
+        "unspecific": "Something went wrong"
+    },
+    "updateResp": {
+        "200": "Librarian updated successfully",
+        "400": "{{errorMessage}}",
+        "404": "Librarian not found",
+        "unspecific": "Something went wrong"
+    },
+    "passUpdateResp": {
+        "200": "Password updated successfully",
+        "400": "{{errorMessage}}",
+        "404": "Librarian not found",
+        "unspecific": "Something went wrong"
+    },
+    "passwordMismatch": "Password don't match"
+}
