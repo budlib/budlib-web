@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ViewTransactionDetailsCard = ({ data }) => {
+  const { t } = useTranslation('transactions');
   const { transactionId, transactionDateTime, transactionType, loaner, librarian, bookCopies } = data;
 
   const trnDateTime = new Date(transactionDateTime);
@@ -25,7 +27,7 @@ const ViewTransactionDetailsCard = ({ data }) => {
     <div className='col-lg-8'>
       <div className='card shadow mb-4'>
         <a href='#detailsCard' className='d-block card-header py-3' data-toggle='collapse' role='button' aria-expanded='true' aria-controls='detailsCard'>
-          <h6 className='m-0 font-weight-bold text-primary'>Details</h6>
+          <h6 className='m-0 font-weight-bold text-primary'>{t('details')}</h6>
         </a>
 
         <div className='collapse show' id='detailsCard'>
@@ -33,62 +35,62 @@ const ViewTransactionDetailsCard = ({ data }) => {
             <table className='table table-borderless'>
               <tbody>
                 <tr>
-                  <th style={{ width: '30%' }}>Transaction ID</th>
+                  <th style={{ width: '30%' }}>{t('transactionId')}</th>
                   <td>{transactionId}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Transaction type</th>
+                  <th style={{ width: '30%' }}>{t('transactionType')}</th>
                   <td>{transactionType}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Transaction date</th>
+                  <th style={{ width: '30%' }}>{t('transactionDate')}</th>
                   <td>{trnDate}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Transaction time</th>
+                  <th style={{ width: '30%' }}>{t('transactionTime')}</th>
                   <td>{trnTime}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Coordinator's ID</th>
-                  <td>{librarian == null ? '<removed>' : librarian['librarianId'] == null ? '-' : librarian['librarianId']}</td>
+                  <th style={{ width: '30%' }}>{t('coordinatorId')}</th>
+                  <td>{librarian == null ? t('<removed>') : librarian['librarianId'] == null ? '-' : librarian['librarianId']}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Coordinator's full name</th>
-                  <td>{librarian == null ? '<removed>' : librarian['fullName'] == null ? '-' : librarian['fullName']}</td>
+                  <th style={{ width: '30%' }}>{t('coordinatorName')}</th>
+                  <td>{librarian == null ? t('<removed>') : librarian['fullName'] == null ? '-' : librarian['fullName']}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Coordinator's email</th>
-                  <td>{librarian == null ? '<removed>' : librarian['email'] == null ? '-' : librarian['email']}</td>
+                  <th style={{ width: '30%' }}>{t('coordinatorEmail')}</th>
+                  <td>{librarian == null ? t('<removed>') : librarian['email'] == null ? '-' : librarian['email']}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Loaner type</th>
-                  <td>{loaner == null ? '<removed>' : loaner['isStudent'] === true ? 'Student' : 'Faculty'}</td>
+                  <th style={{ width: '30%' }}>{t('loanerType')}</th>
+                  <td>{loaner == null ? t('<removed>') : loaner['isStudent'] === true ? t('STUDENT') : t('FACULTY')}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Loaner ID</th>
-                  <td>{loaner == null ? '<removed>' : loaner['loanerId']}</td>
+                  <th style={{ width: '30%' }}>{t('loanerId')}</th>
+                  <td>{loaner == null ? t('<removed>') : loaner['loanerId']}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>{data['isStudent'] ? "Loaner's school ID" : "Loaner's employee ID"}</th>
-                  <td>{loaner == null ? '<removed>' : loaner['schoolId']}</td>
+                  <th style={{ width: '30%' }}>{data['isStudent'] ? t('loanerSchoolId') : t('loanerEmployeeId')}</th>
+                  <td>{loaner == null ? t('<removed>') : loaner['schoolId']}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Loaner's full name</th>
-                  <td>{loaner == null ? '<removed>' : loaner['fullNameWithSalutation']}</td>
+                  <th style={{ width: '30%' }}>{t('loanerName')}</th>
+                  <td>{loaner == null ? t('<removed>') : loaner['fullNameWithSalutation']}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Loaner's email</th>
-                  <td>{loaner == null ? '<removed>' : loaner['email'] == null ? '-' : loaner['email']}</td>
+                  <th style={{ width: '30%' }}>{t('loanerEmail')}</th>
+                  <td>{loaner == null ? t('<removed>') : loaner['email'] == null ? '-' : loaner['email']}</td>
                 </tr>
                 <tr>
-                  <th style={{ width: '30%' }}>Transacted books</th>
+                  <th style={{ width: '30%' }}>{t('transactedBooks')}</th>
                   <td>
                     <div className='table-responsive'>
                       <table className='table table-borderless'>
                         <thead className='table-light text-dark'>
                           <tr>
-                            <th>Title</th>
-                            <th>Copies</th>
+                            <th>{t('title')}</th>
+                            <th>{t('copies')}</th>
                           </tr>
                         </thead>
                         <tbody>

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFetch } from '../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const SelectExtenderList = (props) => {
+  const { t } = useTranslation(['transactions', 'loaners']);
   const url = '/api/loaners';
   let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
 
@@ -14,18 +16,18 @@ const SelectExtenderList = (props) => {
         <div className='card shadow mb-4'>
           <div className='card-body'>
             {data.length === 0 ? (
-              <div className='text-secondary pt-2 text-centerr'>No loaners found</div>
+              <div className='text-secondary pt-2 text-centerr'>{t('notFound', {ns: 'loaners'})}</div>
             ) : (
               <div className='table-responsive'>
                 <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0'>
                   <thead className='table-secondary text-dark'>
                     <tr>
-                      <th>Loaner ID</th>
-                      <th>School ID</th>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Total outstanding</th>
-                      <th>Select</th>
+                      <th>{t('loanerId', {ns: 'loaners'})}</th>
+                      <th>{t('schoolId', {ns: 'loaners'})}</th>
+                      <th>{t('name', {ns: 'loaners'})}</th>
+                      <th>{t('type', {ns: 'loaners'})}</th>
+                      <th>{t('totalOutstanding', {ns: 'loaners'})}</th>
+                      <th>{t('select')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -33,9 +35,9 @@ const SelectExtenderList = (props) => {
                       let { loanerId, schoolId, fullNameWithSalutation, isStudent, totalOutstanding } = dataItem;
 
                       if (isStudent === true || isStudent === 'true') {
-                        isStudent = 'Student';
+                        isStudent = t('student', {ns: 'loaners'});
                       } else {
-                        isStudent = 'Faculty';
+                        isStudent = t('faculty', {ns: 'loaners'});
                       }
 
                       return (

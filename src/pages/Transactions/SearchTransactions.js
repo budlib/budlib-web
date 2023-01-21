@@ -5,8 +5,11 @@ import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
 import TransactionList from '../../components/TransactionList';
+import { useTranslation } from 'react-i18next';
 
 const SearchTransactions = () => {
+  const { t } = useTranslation('transactions');
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -14,7 +17,7 @@ const SearchTransactions = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Transactions' />
+            <Header heading={t('pastTransactions')} />
             <div className='container-fluid'>
               <TransactionList />
             </div>

@@ -16,7 +16,7 @@ const LoanerList = (props) => {
         <div className='card shadow mb-4'>
           <div className='card-body'>
             {data.length === 0 ? (
-              <div className='text-secondary pt-2 text-centerr'>No loaners found</div>
+              <div className='text-secondary pt-2 text-centerr'>{t('notFound')}</div>
             ) : (
               <div className='table-responsive'>
                 <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0'>

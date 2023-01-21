@@ -6,8 +6,10 @@ import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import SelectReturnerList from '../../components/SelectReturnerList';
 import Sidebar from '../../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 const SelectReturner = () => {
+  const { t } = useTranslation('transactions');
   const [psearchBy, setSearchBy] = useState(['', '']);
 
   return (
@@ -17,7 +19,7 @@ const SelectReturner = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Return books - select loaner' />
+            <Header heading={t('returnBooks')} />
             <div className='container-fluid'>
               <LoanerSearchBar func={setSearchBy} />
               <SelectReturnerList searchBy={psearchBy[0]} searchTerm={psearchBy[1]} />

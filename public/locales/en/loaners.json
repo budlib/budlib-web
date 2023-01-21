@@ -8,6 +8,7 @@
     "searchTerm": "Search term",
     "searchTermPlaceholder": "Your search term goes here",
     "search": "Search",
+    "notFound": "No loaners found",
     "loanerId": "Loaner ID",
     "schoolId": "School ID",
     "employeeId": "Employee ID",

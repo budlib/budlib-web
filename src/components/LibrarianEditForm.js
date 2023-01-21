@@ -91,7 +91,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formuserName'
                 name='formuserName'
-                placeholder={t('usernamePlaceholder')}
+                placeholder='John'
                 maxLength='250'
                 required
                 value={details['userName']}
@@ -111,7 +111,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formEmail'
                 name='formEmail'
-                placeholder={t('emailPlaceholder')}
+                placeholder='john.doe@waldorf.ca'
                 maxLength='250'
                 value={details['email']}
                 onChange={(e) => {
@@ -130,7 +130,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formFirstName'
                 name='formFirstName'
-                placeholder={t('firstNamePlaceholder')}
+                placeholder='John'
                 maxLength='250'
                 required
                 value={details['firstName']}
@@ -150,7 +150,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formMiddleName'
                 name='formMiddleName'
-                placeholder={t('middleNamePlaceholder')}
+                placeholder='Michael'
                 maxLength='250'
                 value={details['middleName']}
                 onChange={(e) => {
@@ -169,7 +169,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formLastName'
                 name='formLastName'
-                placeholder={t('lastNamePlaceholder')}
+                placeholder='Doe'
                 maxLength='250'
                 value={details['lastName']}
                 onChange={(e) => {

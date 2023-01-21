@@ -74,7 +74,7 @@ const LibrarianAddForm = () => {
                 className='form-control'
                 id='formUserName'
                 name='formUserName'
-                placeholder={t('usernamePlaceholder')}
+                placeholder='johnrocks'
                 maxLength='250'
                 required
                 value={details['userName']}
@@ -94,7 +94,7 @@ const LibrarianAddForm = () => {
                 className='form-control'
                 id='formEmail'
                 name='formEmail'
-                placeholder={t('emailPlaceholder')}
+                placeholder='john.doe@waldorf.org'
                 maxLength='100'
                 required
                 value={details['email']}
@@ -114,7 +114,7 @@ const LibrarianAddForm = () => {
                 className='form-control'
                 id='formFirstName'
                 name='formFirstName'
-                placeholder={t('firstNamePlaceholder')}
+                placeholder='John'
                 maxLength='250'
                 required
                 value={details['firstName']}
@@ -134,7 +134,7 @@ const LibrarianAddForm = () => {
                 className='form-control'
                 id='formMiddleName'
                 name='formMiddleName'
-                placeholder={t('middleNamePlaceholder')}
+                placeholder='Michael'
                 maxLength='250'
                 value={details['middleName']}
                 onChange={(e) => {
@@ -153,7 +153,7 @@ const LibrarianAddForm = () => {
                 className='form-control'
                 id='formLastName'
                 name='formLastName'
-                placeholder={t('lastNamePlaceholder')}
+                placeholder='Doe'
                 maxLength='250'
                 value={details['lastName']}
                 onChange={(e) => {
@@ -172,7 +172,7 @@ const LibrarianAddForm = () => {
                 className='form-control'
                 id='formCreatePassword'
                 name='formCreatePassword'
-                placeholder={t('createPasswordPlaceholder')}
+                placeholder='Enter a password'
                 required
                 value={details['password']}
                 onChange={(e) => {
@@ -186,14 +186,7 @@ const LibrarianAddForm = () => {
               {t('confirmPassword')}
             </label>
             <div className='col-sm-8'>
-              <input 
-                type='password' 
-                className='form-control'
-                id='formConfirmPassword' 
-                name='formConfirmPassword' 
-                placeholder={t('confirmPasswordPlaceholder')}
-                required 
-              />
+              <input type='password' className='form-control' id='formConfirmPassword' name='formConfirmPassword' placeholder='Confirm password' required />
             </div>
           </div>
 

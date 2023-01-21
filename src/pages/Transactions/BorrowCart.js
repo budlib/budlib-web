@@ -8,6 +8,7 @@ import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
 import { postCall } from '../../helpers/postCall';
 import { useFetch } from '../../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 function todayDate() {
   let today = new Date();
@@ -32,6 +33,7 @@ function defaultDueDate() {
 }
 
 const BorrowCart = () => {
+  const { t } = useTranslation('transactions');
   let navigate = useNavigate();
 
   const currTransactionType = 'BORROW';
@@ -68,7 +70,7 @@ const BorrowCart = () => {
 
     if (newCart.length === 0) {
       if (parseInt(st[2]) < 1) {
-        window.alert('No copies availabile');
+        window.alert(t('noCopies'));
       } else {
         newCart.push({
           book: {
@@ -82,7 +84,7 @@ const BorrowCart = () => {
       }
     } else {
       if (parseInt(st[2]) < 1) {
-        window.alert('No copies availabile');
+        window.alert(t('noCopies'));
       } else {
         for (let i = 0; i < newCart.length; i++) {
           if (newCart[i]['book']['bookId'] === parseInt(st[0])) {
@@ -91,7 +93,7 @@ const BorrowCart = () => {
 
               setCartBookCopies([...newCart]);
             } else {
-              window.alert('No more copies availabile');
+              window.alert(t('noMoreCopies'));
             }
 
             flag = true;
@@ -140,7 +142,7 @@ const BorrowCart = () => {
           newCart[i]['copies'] = parseInt(newCart[i]['copies']) + 1;
           setCartBookCopies([...newCart]);
         } else {
-          window.alert('No more copies availabile');
+          window.alert(t('noMoreCopies'));
         }
       }
     }
@@ -150,7 +152,7 @@ const BorrowCart = () => {
     e.preventDefault();
 
     if (cartBookCopies.length === 0) {
-      window.alert('No books in cart to borrow');
+      window.alert(t('noBooksInCart'));
       return;
     }
 
@@ -160,9 +162,13 @@ const BorrowCart = () => {
     let sendDetails = { ...trnPayload, bookCopies: cartBookCopies };
 
     postCall(`/api/transactions?borrowDate=${sendBorrowDate}&dueDate=${sendDueDate}`, sendDetails).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`completeRes.${status}`, 'completeRes.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         navigate(`/loaners/${loanerId}/view`);
       }
     });
@@ -175,7 +181,7 @@ const BorrowCart = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Borrow books' />
+            <Header heading={t('borrowBooks', {ns: 'common'})} />
 
             <div className='container-fluid'>
               <div className='row'>
@@ -185,18 +191,18 @@ const BorrowCart = () => {
                       <form id='loanerForm' onSubmit={handleSubmit}>
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formTrnType'>
-                            Transaction type
+                            {t('transactionType')}
                           </label>
                           <div className='col-sm-8'>
                             <div className='form-control' style={{ margin: '0', overflow: 'hidden', backgroundColor: '#eaecf4', opacity: '1', boxSizing: 'border-box' }}>
-                              {currTransactionType}
+                              {t(currTransactionType)}
                             </div>
                           </div>
                         </div>
 
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLoanerId'>
-                            Loaner ID
+                            {t('loanerId')}
                           </label>
                           <div className='col-sm-8'>
                             <div className='form-control' style={{ margin: '0', overflow: 'hidden', backgroundColor: '#eaecf4', opacity: '1', boxSizing: 'border-box' }}>
@@ -207,7 +213,7 @@ const BorrowCart = () => {
 
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLoanerName'>
-                            Loaner's full name
+                            {t('loanerName')}
                           </label>
                           <div className='col-sm-8'>
                             <div className='form-control' style={{ margin: '0', overflow: 'hidden', backgroundColor: '#eaecf4', opacity: '1', boxSizing: 'border-box' }}>
@@ -218,7 +224,7 @@ const BorrowCart = () => {
 
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formOutstandingBooks'>
-                            Outstanding books
+                            {t('outstandingBooks')}
                           </label>
                           <div className='col-sm-8'>
                             <div className='form-control' style={{ margin: '0', overflow: 'hidden', backgroundColor: '#eaecf4', opacity: '1', boxSizing: 'border-box' }}>
@@ -229,7 +235,7 @@ const BorrowCart = () => {
 
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formBorrowDate'>
-                            Borrow date
+                            {t('borrowDate')}
                           </label>
                           <div className='col-sm-8'>
                             <input
@@ -247,7 +253,7 @@ const BorrowCart = () => {
 
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formDueDate'>
-                            Due date
+                            {t('dueDate')}
                           </label>
                           <div className='col-sm-8'>
                             <input
@@ -267,14 +273,14 @@ const BorrowCart = () => {
                           <div className='row form-group'>
                             <div className='col-sm-12'>
                               {cartBookCopies.length === 0 ? (
-                                <div className='text-secondary pt-2 text-center'>Empty cart</div>
+                                <div className='text-secondary pt-2 text-center'>{t('emptyCart')}</div>
                               ) : (
                                 <div className='table-responsive'>
                                   <table className='table'>
                                     <thead className='table-light text-dark'>
                                       <tr>
-                                        <th style={{ width: '70%' }}>Titles in the cart</th>
-                                        <th>Copies</th>
+                                        <th style={{ width: '70%' }}>{t('titlesInCart')}</th>
+                                        <th>{t('copies')}</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -311,7 +317,7 @@ const BorrowCart = () => {
                         </div>
 
                         <button type='submit' className='btn btn-primary my-2'>
-                          Complete transaction
+                          {t('completeTransaction')}
                         </button>
                         <button
                           type='button'
@@ -321,7 +327,7 @@ const BorrowCart = () => {
                             navigate(path);
                           }}
                         >
-                          Cancel
+                          {t('cancel')}
                         </button>
                       </form>
                     </div>
@@ -333,15 +339,15 @@ const BorrowCart = () => {
                   <div className='card shadow mb-4'>
                     <div className='card-body'>
                       {data.length === 0 ? (
-                        <div className='text-secondary pt-2 text-centerr'>No books found</div>
+                        <div className='text-secondary pt-2 text-centerr'>{t('booksNotFound')}</div>
                       ) : (
                         <div className='table-responsive'>
                           <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
                             <thead className='table-secondary text-dark'>
                               <tr className='o-hidden'>
-                                <th style={{ width: '70%' }}>Title</th>
-                                <th>Qty</th>
-                                <th>Add</th>
+                                <th style={{ width: '70%' }}>{t('title')}</th>
+                                <th>{t('qty')}</th>
+                                <th>{t('add')}</th>
                               </tr>
                             </thead>
                             <tbody>

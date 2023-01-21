@@ -45,7 +45,7 @@ const LibrarianEditForm = () => {
         <form id='librarianPaswordForm' onSubmit={handleSubmit}>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formNewPassword'>
-            {t('newPassword')}
+              New password
             </label>
             <div className='col-sm-8'>
               <input
@@ -53,7 +53,7 @@ const LibrarianEditForm = () => {
                 className='form-control'
                 id='formNewPassword'
                 name='formNewPassword'
-                placeholder={t('createPasswordPlaceholder')}
+                placeholder='Enter a password'
                 required
                 value={details['password']}
                 onChange={(e) => {
@@ -64,22 +64,15 @@ const LibrarianEditForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formConfirmPassword'>
-              {t('confirmPassword')}
+              Confirm password
             </label>
             <div className='col-sm-8'>
-              <input 
-                type='password' 
-                className='form-control' 
-                id='formConfirmPassword' 
-                name='formConfirmPassword' 
-                placeholder={t('confirmPasswordPlaceholder')}
-                required
-              />
+              <input type='password' className='form-control' id='formConfirmPassword' name='formConfirmPassword' placeholder='Confirm password' required />
             </div>
           </div>
 
           <button type='submit' className='btn btn-primary my-2'>
-            {t('updatePassword')}
+            Update Password
           </button>
           <button
             type='button'
@@ -89,7 +82,7 @@ const LibrarianEditForm = () => {
               navigate(path);
             }}
           >
-            {t('cancel')}
+            Cancel
           </button>
         </form>
       </div>
