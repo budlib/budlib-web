@@ -5,8 +5,10 @@ import Header from '../../components/Header';
 import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 const BookBatchUpload = () => {
+  const { t } = useTranslation('dashboard');
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -14,7 +16,7 @@ const BookBatchUpload = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Import books' />
+            <Header heading={t('importBooks')} />
             <div className='container-fluid'>
               <BookBatchLoad />
             </div>

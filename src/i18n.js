@@ -21,5 +21,9 @@ i18n
         interpolation: {
             // Escaping is handled by React:
             escapeValue: false
+        },
+        react: {
+            transSupportBasicHtmlNodes: true,
+            transKeepBasicHtmlNodesFor: ['strong', 'b']
         }
     });

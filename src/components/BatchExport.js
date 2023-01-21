@@ -1,7 +1,10 @@
 import React from 'react';
 import { downloadCall } from '../helpers/downloadCall';
+import { useTranslation } from 'react-i18next';
 
 const BatchExport = () => {
+  const { t } = useTranslation('dashboard');
+
   const exportBooks = () => {
     downloadCall('/api/dashboard/batch/export/books', 'budlib_books_export.csv');
   };
@@ -23,28 +26,28 @@ const BatchExport = () => {
       <div className='col-lg-6 mb-4'>
         <div className='card text-white shadow'>
           <button type='button' style={{ padding: '33px 20px' }} className='btn btn-success btn-block' onClick={() => exportBooks()}>
-            Export all books
+            {t('exportBooks')}
           </button>
         </div>
       </div>
       <div className='col-lg-6 mb-4'>
         <div className='card text-white shadow'>
           <button type='button' style={{ padding: '33px 20px' }} className='btn btn-warning btn-block' onClick={() => exportLoaners()}>
-            Export all loaners
+            {t('exportLoaners')}
           </button>
         </div>
       </div>
       <div className='col-lg-6 mb-4'>
         <div className='card text-white shadow'>
           <button type='button' style={{ padding: '33px 20px' }} className='btn btn-danger btn-block' onClick={() => exportLoans()}>
-            Export all outstanding loans
+            {t('exportLoans')}
           </button>
         </div>
       </div>
       <div className='col-lg-6 mb-4'>
         <div className='card text-white shadow'>
           <button type='button' style={{ padding: '33px 20px' }} className='btn btn-info btn-block' onClick={() => exportTransactions()}>
-            Export all transactions
+            {t('exportTransactions')}
           </button>
         </div>
       </div>

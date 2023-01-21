@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import * as xlsx from 'xlsx';
 import { downloadCall } from '../helpers/downloadCall';
 import { postCall } from '../helpers/postCall';
+import { useTranslation, Trans } from 'react-i18next';
 
 const LoanerBatchLoad = () => {
+  const { t } = useTranslation('dashboard');
   // const [file, setFile] = useState();
   const [json, setJson] = useState([]);
   const [header, setHeader] = useState([]);
@@ -22,7 +24,7 @@ const LoanerBatchLoad = () => {
       document.getElementById('formUploadButton').disabled = false;
       document.getElementById('formUploadButton').onclick = handleSubmit;
     }
-  }, [document.getElementById('formUploadFile')]);
+  });
 
   const readUploadFile = (e) => {
     try {
@@ -44,7 +46,7 @@ const LoanerBatchLoad = () => {
         reader.readAsArrayBuffer(e.target.files[0]);
       }
     } catch (exception) {
-      window.alert('Uploaded file cannot be read');
+      window.alert(t('cannotReadFile'));
     }
   };
 
@@ -61,9 +63,13 @@ const LoanerBatchLoad = () => {
     }
 
     postCall('/api/loaners/import', tempJson).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`loanersRes.${status}`, 'loanersRes.unspecific'],
+        {responseMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         let path = `/loaners/search`;
         navigate(path);
       }
@@ -93,25 +99,27 @@ const LoanerBatchLoad = () => {
             </div>
           </form>
           <div>
-            <strong>Note</strong>: The recommended file format during import is CSV. Please make sure that the file is in the correct format. A sample file can be downloaded from{' '}
-            <button
-              onClick={() => {
-                importLoanerSample();
-                return false;
-              }}
-              style={{
-                background: 'none!important',
-                backgroundColor: '#fff',
-                border: 'none',
-                padding: '0!important',
-                color: '#069',
-                textDecoration: 'underline',
-                cursor: 'pointer',
-              }}
-            >
-              this link.
-            </button>
-            The mandatory fields are <b>isStudent</b> and <b>firstName</b>.
+            <Trans i18nKey='loanerImportNote' ns='dashboard'>
+              <strong>Note</strong>: The recommended file format during import is CSV. Please make sure that the file is in the correct format. A sample file can be downloaded from 
+              <button
+                onClick={() => {
+                  importLoanerSample();
+                  return false;
+                }}
+                style={{
+                  background: 'none!important',
+                  backgroundColor: '#fff',
+                  border: 'none',
+                  padding: '0!important',
+                  color: '#069',
+                  textDecoration: 'underline',
+                  cursor: 'pointer',
+                }}
+              >
+                this link.
+              </button>
+              The mandatory fields are <b>isStudent</b> and <b>firstName</b>.
+            </Trans>
           </div>
         </div>
       </div>
@@ -119,14 +127,14 @@ const LoanerBatchLoad = () => {
       <div className='card shadow' style={{ maxWidth: '60rem' }}>
         <div className='card-body'>
           {header.length === 0 ? (
-            <div className='text-secondary pt-2 text-center'>No file uploaded</div>
+            <div className='text-secondary pt-2 text-center'>{t('noFile')}</div>
           ) : (
             <div className='table-responsive'>
               <table className='table table-bordered table-hover' id='dataTable' width='50%' cellSpacing='0'>
                 <thead className='table-secondary text-dark'>
                   <tr>
-                    <th>Header in File</th>
-                    <th>Database Category</th>
+                    <th>{t('headerInFile')}</th>
+                    <th>{t('databaseCategory')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -157,16 +165,16 @@ const LoanerBatchLoad = () => {
                                   setHMap(tempMap);
                                 }}
                               >
-                                <option value={dataItem + '@' + 'na'}>not_use</option>
-                                <option value={dataItem + '@' + 'schoolId'}>schoolId</option>
-                                <option value={dataItem + '@' + 'email'}>email</option>
-                                <option value={dataItem + '@' + 'isStudent'}>isStudent</option>
-                                <option value={dataItem + '@' + 'salutation'}>salutation</option>
-                                <option value={dataItem + '@' + 'firstName'}>firstName</option>
-                                <option value={dataItem + '@' + 'middleName'}>middleName</option>
-                                <option value={dataItem + '@' + 'lastName'}>lastName</option>
-                                <option value={dataItem + '@' + 'motherName'}>motherName</option>
-                                <option value={dataItem + '@' + 'fatherName'}>fatherName</option>
+                                <option value={dataItem + '@' + 'na'}>{t('notUsed')}</option>
+                                <option value={dataItem + '@' + 'schoolId'}>{t('schoolId')}</option>
+                                <option value={dataItem + '@' + 'email'}>{t('email')}</option>
+                                <option value={dataItem + '@' + 'isStudent'}>{t('isStudent')}</option>
+                                <option value={dataItem + '@' + 'salutation'}>{t('salutation')}</option>
+                                <option value={dataItem + '@' + 'firstName'}>{t('firstName')}</option>
+                                <option value={dataItem + '@' + 'middleName'}>{t('middleName')}</option>
+                                <option value={dataItem + '@' + 'lastName'}>{t('lastName')}</option>
+                                <option value={dataItem + '@' + 'motherName'}>{t('motherName')}</option>
+                                <option value={dataItem + '@' + 'fatherName'}>{t('fatherName')}</option>
                               </select>
                             </div>
                           </div>
@@ -182,7 +190,7 @@ const LoanerBatchLoad = () => {
       </div>
       <div className='pt-3 mb-4'>
         <button type='button' className='btn btn-primary' id='formUploadButton' disabled>
-          Upload File
+          {t('upload')}
         </button>
         <button
           type='button'
@@ -192,7 +200,7 @@ const LoanerBatchLoad = () => {
             navigate(path);
           }}
         >
-          Cancel
+          {t('cancel')}
         </button>
       </div>
     </React.Fragment>

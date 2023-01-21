@@ -5,8 +5,10 @@ import LoanerBatchLoad from '../../components/LoanerBatchLoad';
 import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 const LoanerBatchUpload = () => {
+  const { t } = useTranslation('dashboard');
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -14,7 +16,7 @@ const LoanerBatchUpload = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Import loaners' />
+            <Header heading={t('importLoaners')} />
             <div className='container-fluid'>
               <LoanerBatchLoad />
             </div>

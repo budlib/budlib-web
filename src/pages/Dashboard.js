@@ -7,8 +7,10 @@ import ModalLogout from '../components/ModalLogout';
 import ScrollTop from '../components/ScrollTop';
 import Sidebar from '../components/Sidebar';
 import { useFetch } from '../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const Dashboard = () => {
+  const { t } = useTranslation('dashboard');
   const statsUrl = '/api/dashboard/stats';
   const { data: statsData } = useFetch(statsUrl);
 
@@ -32,7 +34,7 @@ const Dashboard = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Dashboard' />
+            <Header heading={t('dashboard')} />
             <div className='container-fluid'>
               <div className='row'>
                 <div className='col-xl-3 col-md-6 mb-4'>
@@ -40,7 +42,7 @@ const Dashboard = () => {
                     <div className='card-body'>
                       <div className='row no-gutters align-items-center'>
                         <div className='col mr-2'>
-                          <div className='text-xs font-weight-bold text-primary text-uppercase mb-1'>Unique titles</div>
+                          <div className='text-xs font-weight-bold text-primary text-uppercase mb-1'>{t('uniqueTitles')}</div>
                           <div className='h5 mb-0 font-weight-bold text-gray-800'>{statsData['uniqueTitles']}</div>
                         </div>
                         <div className='col-auto'>
@@ -56,7 +58,7 @@ const Dashboard = () => {
                     <div className='card-body'>
                       <div className='row no-gutters align-items-center'>
                         <div className='col mr-2'>
-                          <div className='text-xs font-weight-bold text-warning text-uppercase mb-1'>Total loaners</div>
+                          <div className='text-xs font-weight-bold text-warning text-uppercase mb-1'>{t('totalLoaners')}</div>
                           <div className='h5 mb-0 font-weight-bold text-gray-800'>{statsData['totalLoaners']}</div>
                         </div>
                         <div className='col-auto'>
@@ -72,7 +74,7 @@ const Dashboard = () => {
                     <div className='card-body'>
                       <div className='row no-gutters align-items-center'>
                         <div className='col mr-2'>
-                          <div className='text-xs font-weight-bold text-success text-uppercase mb-1'>Total copies of all titles</div>
+                          <div className='text-xs font-weight-bold text-success text-uppercase mb-1'>{t('totalCopies')}</div>
                           <div className='h5 mb-0 font-weight-bold text-gray-800'>{statsData['totalCopies']}</div>
                         </div>
                         <div className='col-auto'>
@@ -88,7 +90,7 @@ const Dashboard = () => {
                     <div className='card-body'>
                       <div className='row no-gutters align-items-center'>
                         <div className='col mr-2'>
-                          <div className='text-xs font-weight-bold text-info text-uppercase mb-1'>Total outstanding copies</div>
+                          <div className='text-xs font-weight-bold text-info text-uppercase mb-1'>{t('totalOutstanding')}</div>
                           <div className='row no-gutters align-items-center'>
                             <div className='col-auto'>
                               <div className='h5 mb-0 mr-3 font-weight-bold text-gray-800'>{percentageOutstanding + '%'}</div>
@@ -128,8 +130,8 @@ const Dashboard = () => {
                       <div className='card bg-dark text-white shadow'>
                         <Link to='/dashboard/librarian/search' style={{ textDecoration: 'none' }}>
                           <div className='card-body'>
-                            <h5 className='text-white'>Librarian management</h5>
-                            <div className='text-white-50 small'>Add or update librarian or faculty</div>
+                            <h5 className='text-white'>{t('librarianManagement')}</h5>
+                            <div className='text-white-50 small'>{t('librarianManagementDesc')}</div>
                           </div>
                         </Link>
                       </div>
@@ -138,8 +140,8 @@ const Dashboard = () => {
                       <div className='card bg-dark text-white shadow'>
                         <Link to='/dashboard/import/books' style={{ textDecoration: 'none' }}>
                           <div className='card-body'>
-                            <h5 className='text-white'>Import books</h5>
-                            <div className='text-white-50 small'>Import books from CSV</div>
+                            <h5 className='text-white'>{t('importBooks')}</h5>
+                            <div className='text-white-50 small'>{t('importBooksDesc')}</div>
                           </div>
                         </Link>
                       </div>
@@ -148,8 +150,8 @@ const Dashboard = () => {
                       <div className='card bg-dark text-white shadow'>
                         <Link to='/dashboard/import/loaners' style={{ textDecoration: 'none' }}>
                           <div className='card-body'>
-                            <h5 className='text-white'>Import loaners</h5>
-                            <div className='text-white-50 small'>Import loaners from CSV</div>
+                            <h5 className='text-white'>{t('importLoaners')}</h5>
+                            <div className='text-white-50 small'>{t('importLoanersDesc')}</div>
                           </div>
                         </Link>
                       </div>
@@ -161,20 +163,20 @@ const Dashboard = () => {
                 <div className='col-lg-6 mb-4'>
                   <div className='card shadow mb-4'>
                     <div className='card-header py-3'>
-                      <h6 className='m-0 font-weight-bold text-primary'>Overdue loans</h6>
+                      <h6 className='m-0 font-weight-bold text-primary'>{t('overdueLoans')}</h6>
                     </div>
                     <div className='card-body'>
                       <div className='table-responsive'>
                         {overdueData.length === 0 ? (
-                          'No overdue loans'
+                          t('noOverdueLoans')
                         ) : (
                           <table className='table table-bordered table-hover' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
                             <thead className='table-secondary text-dark'>
                               <tr>
-                                <th style={{ width: '25%' }}>Loaner</th>
-                                <th style={{ width: '35%' }}>Book</th>
-                                <th style={{ width: '15%' }}>Copies</th>
-                                <th style={{ width: '25%' }}>Due date</th>
+                                <th style={{ width: '25%' }}>{t('loaner')}</th>
+                                <th style={{ width: '35%' }}>{t('book')}</th>
+                                <th style={{ width: '15%' }}>{t('copies')}</th>
+                                <th style={{ width: '25%' }}>{t('dueDate')}</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -231,20 +233,20 @@ const Dashboard = () => {
                 <div className='col-lg-6 mb-4'>
                   <div className='card shadow mb-4'>
                     <div className='card-header py-3'>
-                      <h6 className='m-0 font-weight-bold text-primary'>Upcoming due dates</h6>
+                      <h6 className='m-0 font-weight-bold text-primary'>{t('upcomingDueDates')}</h6>
                     </div>
                     <div className='card-body'>
                       <div className='table-responsive'>
                         {upcomingdueData.length === 0 ? (
-                          'No upcoming due date until next week'
+                          t('noUpcomingDueDates')
                         ) : (
                           <table className='table table-bordered table-hover' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
                             <thead className='table-secondary text-dark'>
                               <tr>
-                                <th style={{ width: '25%' }}>Loaner</th>
-                                <th style={{ width: '35%' }}>Book</th>
-                                <th style={{ width: '15%' }}>Copies</th>
-                                <th style={{ width: '25%' }}>Due date</th>
+                                <th style={{ width: '25%' }}>{t('loaner')}</th>
+                                <th style={{ width: '35%' }}>{t('book')}</th>
+                                <th style={{ width: '15%' }}>{t('copies')}</th>
+                                <th style={{ width: '25%' }}>{t('dueDate')}</th>
                               </tr>
                             </thead>
                             <tbody>
