@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection, imageLink, tags }) => {
-  const { t } = useTranslation('search-books');
+  const { t } = useTranslation('books');
   subtitle = subtitle || '';
   imageLink = imageLink || `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
   librarySection = librarySection || 'NA';
@@ -64,7 +64,7 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
                 WebkitBoxOrient: 'vertical',
               }}
             >
-              {t('section', {section: t(librarySection)})}
+              {t('section:', {section: t(librarySection)})}
             </p>
           </div>
           <div

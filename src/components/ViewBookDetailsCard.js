@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const ViewBookDetailsCard = ({ data }) => {
-  const { t } = useTranslation('view-book');
+  const { t } = useTranslation('books');
   let customImg = data['imageLink'];
   let defaultImg = customImg || `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
 

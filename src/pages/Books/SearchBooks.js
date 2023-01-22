@@ -9,7 +9,7 @@ import Sidebar from '../../components/Sidebar';
 import { useTranslation } from 'react-i18next';
 
 function SearchBooks() {
-  const { t } = useTranslation('search-books');
+  const { t } = useTranslation('books');
   const [psearchBy, setSearchBy] = useState(['', '']);
 
   return (

@@ -8,16 +8,10 @@ i18n
     .use(LanguageDetector)
     .use(Backend)
     .init({
-        debug: true,
         fallbackLang: 'en',
         defaultNS: 'common',
         fallbackNS: 'common',
-        ns: [
-            'login',
-            'common',
-            'search-books',
-            'view-book'
-        ],
+        ns: ['common', 'login'],
         interpolation: {
             // Escaping is handled by React:
             escapeValue: false

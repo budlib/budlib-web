@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 
 function BookCards(props) {
-  const { t } = useTranslation('search-books');
+  const { t } = useTranslation('books');
   const url = '/api/books';
   let thisurl = url + '?searchBy=' + props.searchBy + '&searchTerm=' + props.searchTerm;
 

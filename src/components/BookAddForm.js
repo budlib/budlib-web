@@ -15,7 +15,7 @@ function get_book_details(isbn_number) {
 }
 
 const BookAddForm = () => {
-  const { t } = useTranslation('input-book');
+  const { t } = useTranslation('books');
 
   let navigate = useNavigate();
   let defaultImg = `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
@@ -429,12 +429,12 @@ const BookAddForm = () => {
                 />
               </div>
               <div className='form-group col-md-3'>
-                <label htmlFor='formYear'>{t('year')}</label>
+                <label htmlFor='formYear'>{t('yearOfPub')}</label>
                 <input
                   type='text'
                   id='formYear'
                   className='form-control'
-                  placeholder={t('yearPlaceholder')}
+                  placeholder={t('yearOfPubPlaceholder')}
                   maxLength='250'
                   value={details['year']}
                   onChange={(e) => {
@@ -460,7 +460,7 @@ const BookAddForm = () => {
 
             <div className='form-row'>
               <div className='form-group col-md-12'>
-                <label htmlFor='formTags'>{t('tags')}</label>
+                <label htmlFor='formTags'>{t('tagsCommaSep')}</label>
                 <input
                   type='text'
                   id='formTags'

@@ -12,7 +12,7 @@ import { useFetch } from '../../helpers/useFetch';
 import { useTranslation } from 'react-i18next';
 
 const ViewBook = () => {
-  const { t } = useTranslation('view-book');
+  const { t } = useTranslation('books');
   const { id } = useParams();
 
   let bookDetailUrl = `/api/books/${id}`;

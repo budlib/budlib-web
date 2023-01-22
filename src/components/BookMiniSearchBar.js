@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function BookSearchBar(props) {
-  const { t } = useTranslation('search-books');
+  const { t } = useTranslation('books');
   const [filterOption, setfilterOption] = useState('');
   const [filterText, setfilterText] = useState('');
 

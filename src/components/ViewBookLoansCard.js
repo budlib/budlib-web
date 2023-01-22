@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 const ViewBookLoansCard = ({ data }) => {
-  const { t } = useTranslation('view-book');
+  const { t } = useTranslation('books');
 
   return (
     <div className='col-lg-8'>
