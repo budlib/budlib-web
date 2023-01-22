@@ -11,7 +11,7 @@ i18n
         fallbackLang: 'en',
         defaultNS: 'common',
         fallbackNS: 'common',
-        ns: ['common', 'login'],
+        ns: ['common'],
         interpolation: {
             // Escaping is handled by React:
             escapeValue: false

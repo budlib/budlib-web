@@ -5,7 +5,7 @@ import { useAuth } from '../helpers/useAuth';
 import { useTranslation } from 'react-i18next';
 
 const Login = () => {
-  const { t } = useTranslation("login");
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { login } = useAuth();
 
@@ -55,7 +55,7 @@ const Login = () => {
                   <div className='col-lg-6'>
                     <div className='p-5'>
                       <div className='text-center pb-5'>
-                        <h1 className='h4 text-gray-900 mb-4'>{t('header')}</h1>
+                        <h1 className='h4 text-gray-900 mb-4'>{t('loginHeader')}</h1>
                       </div>
                       <form id='loginForm' className='user' onSubmit={handleLogin}>
                         <div className='form-group'>
