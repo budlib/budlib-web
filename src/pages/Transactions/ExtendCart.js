@@ -7,6 +7,7 @@ import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
 import { postCall } from '../../helpers/postCall';
 import { useFetch } from '../../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 function defaultDueDate() {
   let target = new Date();
@@ -34,6 +35,7 @@ function displayDate(dueDateString) {
 }
 
 const ExtendCart = () => {
+  const { t } = useTranslation('transactions');
   let navigate = useNavigate();
 
   const currTransactionType = 'EXTEND';
@@ -66,7 +68,7 @@ const ExtendCart = () => {
 
     if (newCart.length === 0) {
       if (parseInt(st[2]) < 1) {
-        window.alert('No books for providing extension');
+        window.alert(t('noBooksToExtend'));
       } else {
         // adding extra properties loanId and dueDate for processing
         newCart.push({
@@ -83,11 +85,11 @@ const ExtendCart = () => {
       }
     } else {
       if (parseInt(st[2]) < 1) {
-        window.alert('No books for providing extension');
+        window.alert(t('noBooksToExtend'));
       } else {
         for (let i = 0; i < newCart.length; i++) {
           if (newCart[i]['loanId'] === parseInt(st[3])) {
-            window.alert('Book already in cart');
+            window.alert(t('alreadyInCart'));
 
             flag = true;
           }
@@ -127,7 +129,7 @@ const ExtendCart = () => {
     e.preventDefault();
 
     if (cartBookCopies.length === 0) {
-      window.alert('No books in cart for providing extension');
+      window.alert(t('noBooksInCartToExtend'));
       return;
     }
 
@@ -142,9 +144,13 @@ const ExtendCart = () => {
     let sendDetails = { ...trnPayload, bookCopies: newCart };
 
     postCall(`/api/transactions?dueDate=${sendDueDate}`, sendDetails).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`completeRes.${status}`, 'completeRes.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         navigate(`/loaners/${loanerId}/view`);
       }
     });
@@ -157,7 +163,7 @@ const ExtendCart = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Provide extension' />
+            <Header heading={t('extendLoan')} />
 
             <div className='container-fluid'>
               <div className='row'>
@@ -167,18 +173,18 @@ const ExtendCart = () => {
                       <form id='loanerForm' onSubmit={handleSubmit}>
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formTrnType'>
-                            Transaction type
+                            {t('transactionType')}
                           </label>
                           <div className='col-sm-8'>
                             <div className='form-control' style={{ margin: '0', overflow: 'hidden', backgroundColor: '#eaecf4', opacity: '1', boxSizing: 'border-box' }}>
-                              {currTransactionType}
+                              {t(currTransactionType)}
                             </div>
                           </div>
                         </div>
 
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLoanerId'>
-                            Loaner ID
+                            {t('loanerId')}
                           </label>
                           <div className='col-sm-8'>
                             <div className='form-control' style={{ margin: '0', overflow: 'hidden', backgroundColor: '#eaecf4', opacity: '1', boxSizing: 'border-box' }}>
@@ -189,7 +195,7 @@ const ExtendCart = () => {
 
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLoanerName'>
-                            Loaner's full name
+                            {t('loanerName')}
                           </label>
                           <div className='col-sm-8'>
                             <div className='form-control' style={{ margin: '0', overflow: 'hidden', backgroundColor: '#eaecf4', opacity: '1', boxSizing: 'border-box' }}>
@@ -200,7 +206,7 @@ const ExtendCart = () => {
 
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formOutstandingBooks'>
-                            Outstanding books
+                            {t('outstandingBooks')}
                           </label>
                           <div className='col-sm-8'>
                             <div className='form-control' style={{ margin: '0', overflow: 'hidden', backgroundColor: '#eaecf4', opacity: '1', boxSizing: 'border-box' }}>
@@ -211,7 +217,7 @@ const ExtendCart = () => {
 
                         <div className='form-group row'>
                           <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formDueDate'>
-                            New due date
+                            {t('newDueDate')}
                           </label>
                           <div className='col-sm-8'>
                             <input
@@ -231,15 +237,15 @@ const ExtendCart = () => {
                           <div className='row form-group'>
                             <div className='col-sm-12'>
                               {cartBookCopies.length === 0 ? (
-                                <div className='text-secondary pt-2 text-center'>Empty cart</div>
+                                <div className='text-secondary pt-2 text-center'>{t('emptyCart')}</div>
                               ) : (
                                 <div className='table-responsive'>
                                   <table className='table'>
                                     <thead className='table-light text-dark'>
                                       <tr>
-                                        <th style={{ width: '55%' }}>Titles in the cart</th>
-                                        <th>Qty</th>
-                                        <th>Old due date</th>
+                                        <th style={{ width: '55%' }}>{t('titlesInCart')}</th>
+                                        <th>{t('qty')}</th>
+                                        <th>{t('oldDueDate')}</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -274,7 +280,7 @@ const ExtendCart = () => {
                         </div>
 
                         <button type='submit' className='btn btn-primary my-2'>
-                          Complete transaction
+                          {t('completeTransaction')}
                         </button>
                         <button
                           type='button'
@@ -284,7 +290,7 @@ const ExtendCart = () => {
                             navigate(path);
                           }}
                         >
-                          Cancel
+                          {t('cancel')}
                         </button>
                       </form>
                     </div>
@@ -294,15 +300,15 @@ const ExtendCart = () => {
                   <div className='card shadow mb-4'>
                     <div className='card-body'>
                       {currentLoans.length === 0 ? (
-                        <div className='text-secondary pt-2 text-center'>No outstanding loans</div>
+                        <div className='text-secondary pt-2 text-center'>{t('noLoans')}</div>
                       ) : (
                         <div className='table-responsive'>
                           <table className='table table-bordered table-hover' id='dataTable' width='100%' cellSpacing='0' style={{ tableLayout: 'fixed' }}>
                             <thead className='table-secondary text-dark'>
                               <tr className='o-hidden'>
-                                <th style={{ width: '70%' }}>Title</th>
-                                <th>Qty</th>
-                                <th>Add</th>
+                                <th style={{ width: '70%' }}>{t('title')}</th>
+                                <th>{t('qty')}</th>
+                                <th>{t('add')}</th>
                               </tr>
                             </thead>
                             <tbody>

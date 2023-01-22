@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { putCall } from '../helpers/putCall';
+import { useTranslation } from 'react-i18next';
 
 const LibrarianEditForm = () => {
+  const { t } = useTranslation('librarians');
   const { id } = useParams();
   let navigate = useNavigate();
 
@@ -19,14 +21,18 @@ const LibrarianEditForm = () => {
     let password2 = document.getElementById('formConfirmPassword').value;
 
     if (password1 !== password2) {
-      window.alert("Password don't match");
+      window.alert(t('passwordMismatch'));
       return;
     }
 
     putCall(librarianPasswordUrl, details).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`passUpdateResp.${status}`, 'passUpdateResp.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         let path = `/dashboard/librarian/${id}/view`;
         navigate(path);
       }

@@ -5,8 +5,11 @@ import Header from '../../components/Header';
 import ModalLogout from '../../components/ModalLogout';
 import ScrollTop from '../../components/ScrollTop';
 import Sidebar from '../../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 function AddBook() {
+  const { t } = useTranslation('books');
+
   return (
     <React.Fragment>
       <div id='wrapper'>
@@ -14,7 +17,7 @@ function AddBook() {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Add book' />
+            <Header heading={t('addBook')} />
             <div className='container-fluid'>
               <BookAddForm />
             </div>

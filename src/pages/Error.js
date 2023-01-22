@@ -5,8 +5,10 @@ import Header from '../components/Header';
 import ModalLogout from '../components/ModalLogout.js';
 import ScrollTop from '../components/ScrollTop';
 import Sidebar from '../components/Sidebar';
+import { useTranslation } from 'react-i18next';
 
 const Error = () => {
+  const { t } = useTranslation();
   let notFoundPic = '/images/not_found.svg';
 
   return (
@@ -16,7 +18,7 @@ const Error = () => {
 
         <div id='content-wrapper' className='d-flex flex-column'>
           <div id='content'>
-            <Header heading='Page not found' />
+            <Header heading={t('pageNotFound')} />
             <div className='container-fluid'>
               <div className='text-center'>
                 {/* <div class='error mx-auto' data-text='404'>
@@ -30,7 +32,7 @@ const Error = () => {
                   <span className='icon text-white-50'>
                     <i className='fas fa-arrow-alt-circle-left'></i>
                   </span>
-                  <span className='text'>Back to home</span>
+                  <span className='text'>{t('backToHome')}</span>
                 </Link>
               </div>
             </div>

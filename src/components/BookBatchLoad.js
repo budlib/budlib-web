@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import * as xlsx from 'xlsx';
 import { downloadCall } from '../helpers/downloadCall';
 import { postCall } from '../helpers/postCall';
+import { useTranslation, Trans } from 'react-i18next';
 
 const BookBatchLoad = () => {
+  const { t } = useTranslation('dashboard');
   // const [file, setFile] = useState();
   const [json, setJson] = useState([]);
   const [header, setHeader] = useState([]);
@@ -22,7 +24,7 @@ const BookBatchLoad = () => {
       document.getElementById('formUploadButton').disabled = false;
       document.getElementById('formUploadButton').onclick = handleSubmit;
     }
-  }, [document.getElementById('formUploadFile')]);
+  });
 
   const readUploadFile = (e) => {
     try {
@@ -44,7 +46,7 @@ const BookBatchLoad = () => {
         reader.readAsArrayBuffer(e.target.files[0]);
       }
     } catch (exception) {
-      window.alert('Uploaded file cannot be read');
+      window.alert(t('cannotReadFile'));
     }
   };
 
@@ -61,9 +63,13 @@ const BookBatchLoad = () => {
     }
 
     postCall('/api/books/import', tempJson).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`booksRes.${status}`, 'booksRes.unspecific'],
+        {responseMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         let path = `/books/search`;
         navigate(path);
       }
@@ -93,39 +99,41 @@ const BookBatchLoad = () => {
             </div>
           </form>
           <div>
-            <strong>Note</strong>: The recommended file format during import is CSV. Please make sure that the file is in the correct format. A sample file can be downloaded from{' '}
-            <button
-              onClick={() => {
-                importBookSample();
-                return false;
-              }}
-              style={{
-                background: 'none!important',
-                backgroundColor: '#fff',
-                border: 'none',
-                padding: '0!important',
-                color: '#069',
-                textDecoration: 'underline',
-                cursor: 'pointer',
-              }}
-            >
-              this link.
-            </button>
-            The mandatory fields are <b>title</b>, <b>isbn_10</b> or <b>isbn_13</b>, <b>library_section</b>, <b>totalQuantity</b>, and <b>availableQuantity</b>.
+            <Trans i18nKey='bookImportNote' ns='dashboard'>
+              <strong>Note</strong>: The recommended file format during import is CSV. Please make sure that the file is in the correct format. A sample file can be downloaded from 
+              <button
+                onClick={() => {
+                  importBookSample();
+                  return false;
+                }}
+                style={{
+                  background: 'none!important',
+                  backgroundColor: '#fff',
+                  border: 'none',
+                  padding: '0!important',
+                  color: '#069',
+                  textDecoration: 'underline',
+                  cursor: 'pointer',
+                }}
+              >
+                this link.
+              </button>
+              The mandatory fields are <b>title</b>, <b>isbn_10</b> or <b>isbn_13</b>, <b>library_section</b>, <b>totalQuantity</b>, and <b>availableQuantity</b>.
+            </Trans>
           </div>
         </div>
       </div>
       <div className='card shadow' style={{ maxWidth: '60rem' }}>
         <div className='card-body'>
           {header.length === 0 ? (
-            <div className='text-secondary pt-2 text-center'>No file uploaded</div>
+            <div className='text-secondary pt-2 text-center'>{t('noFile')}</div>
           ) : (
             <div className='table-responsive'>
               <table className='table table-bordered table-hover' id='dataTable' width='50%' cellSpacing='0'>
                 <thead className='table-secondary text-dark'>
                   <tr>
-                    <th>Header in File</th>
-                    <th>Database Category</th>
+                    <th>{t('headerInFile')}</th>
+                    <th>{t('databaseCategory')}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -155,23 +163,23 @@ const BookBatchLoad = () => {
                                   setHMap(tempMap);
                                 }}
                               >
-                                <option value={dataItem + '@@' + 'na'}>not used</option>
-                                <option value={dataItem + '@@' + 'title'}>title</option>
-                                <option value={dataItem + '@@' + 'subtitle'}>subtitle</option>
-                                <option value={dataItem + '@@' + 'authors'}>authors</option>
-                                <option value={dataItem + '@@' + 'publisher'}>publisher</option>
-                                <option value={dataItem + '@@' + 'edition'}>edition</option>
-                                <option value={dataItem + '@@' + 'year'}>year</option>
-                                <option value={dataItem + '@@' + 'language'}>language</option>
-                                <option value={dataItem + '@@' + 'isbn_10'}>isbn_10</option>
-                                <option value={dataItem + '@@' + 'isbn_13'}>isbn_13</option>
-                                <option value={dataItem + '@@' + 'librarySection'}>librarySection</option>
-                                <option value={dataItem + '@@' + 'totalQuantity'}>totalQuantity</option>
-                                <option value={dataItem + '@@' + 'availableQuantity'}>availableQuantity</option>
-                                <option value={dataItem + '@@' + 'imageLink'}>imageLink</option>
-                                <option value={dataItem + '@@' + 'notes'}>notes</option>
-                                <option value={dataItem + '@@' + 'priceRetail'}>priceRetail</option>
-                                <option value={dataItem + '@@' + 'priceLibrary'}>priceLibrary</option>
+                                <option value={dataItem + '@@' + 'na'}>{t('notUsed')}</option>
+                                <option value={dataItem + '@@' + 'title'}>{t('title')}</option>
+                                <option value={dataItem + '@@' + 'subtitle'}>{t('subtitle')}</option>
+                                <option value={dataItem + '@@' + 'authors'}>{t('authors')}</option>
+                                <option value={dataItem + '@@' + 'publisher'}>{t('publisher')}</option>
+                                <option value={dataItem + '@@' + 'edition'}>{t('edition')}</option>
+                                <option value={dataItem + '@@' + 'year'}>{t('year')}</option>
+                                <option value={dataItem + '@@' + 'language'}>{t('language')}</option>
+                                <option value={dataItem + '@@' + 'isbn_10'}>{t('isbn_10')}</option>
+                                <option value={dataItem + '@@' + 'isbn_13'}>{t('isbn_13')}</option>
+                                <option value={dataItem + '@@' + 'librarySection'}>{t('librarySection')}</option>
+                                <option value={dataItem + '@@' + 'totalQuantity'}>{t('totalQuantity')}</option>
+                                <option value={dataItem + '@@' + 'availableQuantity'}>{t('availableQuantity')}</option>
+                                <option value={dataItem + '@@' + 'imageLink'}>{t('imageLink')}</option>
+                                <option value={dataItem + '@@' + 'notes'}>{t('notes')}</option>
+                                <option value={dataItem + '@@' + 'priceRetail'}>{t('priceRetail')}</option>
+                                <option value={dataItem + '@@' + 'priceLibrary'}>{t('priceLibrary')}</option>
                               </select>
                             </div>
                           </div>
@@ -187,7 +195,7 @@ const BookBatchLoad = () => {
       </div>
       <div className='pt-3 mb-4'>
         <button type='button' className='btn btn-primary' id='formUploadButton' disabled>
-          Upload File
+          {t('upload')}
         </button>
         <button
           type='button'
@@ -197,7 +205,7 @@ const BookBatchLoad = () => {
             navigate(path);
           }}
         >
-          Cancel
+          {t('cancel')}
         </button>
       </div>
     </React.Fragment>

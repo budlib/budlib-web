@@ -1,27 +1,30 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ViewBookLoansCard = ({ data }) => {
+  const { t } = useTranslation('books');
+
   return (
     <div className='col-lg-8'>
       <div className='card shadow mb-4'>
         <a href='#loansCard' className='d-block card-header py-3' data-toggle='collapse' role='button' aria-expanded='true' aria-controls='loansCard'>
-          <h6 className='m-0 font-weight-bold text-primary'>Current loans</h6>
+          <h6 className='m-0 font-weight-bold text-primary'>{t('currentLoans')}</h6>
         </a>
 
         <div className='collapse show' id='loansCard'>
           <div className='card-body'>
             <div className='table-responsive'>
               {data.length === 0 ? (
-                'No outstanding loans found'
+                t('noLoans')
               ) : (
                 <table className='table table-bordered table-hover'>
                   <thead className='table-secondary text-dark'>
                     <tr>
-                      <th>Loaner ID</th>
-                      <th>Full name</th>
-                      <th>Copies</th>
-                      <th>Borrow date</th>
-                      <th>Due date</th>
+                      <th>{t('loanerId')}</th>
+                      <th>{t('fullName')}</th>
+                      <th>{t('copies')}</th>
+                      <th>{t('borrowDate')}</th>
+                      <th>{t('dueDate')}</th>
                     </tr>
                   </thead>
                   <tbody>

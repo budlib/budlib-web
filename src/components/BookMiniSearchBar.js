@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function BookSearchBar(props) {
+  const { t } = useTranslation('books');
   const [filterOption, setfilterOption] = useState('');
   const [filterText, setfilterText] = useState('');
 
@@ -16,7 +18,7 @@ function BookSearchBar(props) {
     if (filterOption !== '') {
       props.func([filterOption, filterText]);
     } else {
-      window.alert('Searching requires a filter');
+      window.alert(t('missingFilter'));
     }
   };
 
@@ -34,25 +36,25 @@ function BookSearchBar(props) {
             <div className='input-group mb-3'>
               <div className='input-group-prepend'>
                 <span className='input-group-text' htmlFor='inputGroupSelect01'>
-                  Search by
+                  {t('searchBy')}
                 </span>
               </div>
               <select className='form-control form-select' id='selectFilter' onChange={(e) => handleFilter(e)} value={filterOption}>
-                <option value=''>No Filter</option>
-                <option value='librarysection'>Library Section</option>
-                <option value='title'>Title</option>
-                <option value='author'>Author</option>
-                <option value='publisher'>Publisher</option>
-                <option value='isbn'>ISBN</option>
-                <option value='tags'>Tags</option>
-                <option value='language'>Language</option>
+                <option value=''>{t('noFilter')}</option>
+                <option value='librarysection'>{t('librarySection')}</option>
+                <option value='title'>{t('title')}</option>
+                <option value='author'>{t('author')}</option>
+                <option value='publisher'>{t('publisher')}</option>
+                <option value='isbn'>{t('isbn')}</option>
+                <option value='tags'>{t('tags')}</option>
+                <option value='language'>{t('language')}</option>
               </select>
             </div>
           </div>
 
           <div className='col-lg-4'>
             <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleSearch(e)}>
-              Search
+              {t('search')}
             </button>
           </div>
         </div>
@@ -61,7 +63,7 @@ function BookSearchBar(props) {
           <div className='col-lg-12'>
             <div className='input-group mb-3'>
               <div className='input-group-prepend'>
-                <span className='input-group-text'>Search term</span>
+                <span className='input-group-text'>{t('searchTerm')}</span>
               </div>
               <input
                 type='text'
@@ -69,7 +71,7 @@ function BookSearchBar(props) {
                 onChange={(e) => handleFilterText(e)}
                 value={filterText}
                 className='form-control'
-                placeholder='Your search term goes here'
+                placeholder={t('searchTermPlaceholder')}
                 onKeyDown={(e) => triggerSearchOnEnter(e)}
               />
             </div>

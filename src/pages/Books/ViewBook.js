@@ -9,8 +9,10 @@ import ViewBookDetailsCard from '../../components/ViewBookDetailsCard';
 import ViewBookLoansCard from '../../components/ViewBookLoansCard';
 import { deleteCall } from '../../helpers/deleteCall';
 import { useFetch } from '../../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const ViewBook = () => {
+  const { t } = useTranslation('books');
   const { id } = useParams();
 
   let bookDetailUrl = `/api/books/${id}`;
@@ -23,9 +25,13 @@ const ViewBook = () => {
 
   function handleDelete(e) {
     deleteCall(bookDetailUrl).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`deleteResp.${status}`, 'deleteResp.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         let path = `/books/search`;
         navigate(path);
       }
@@ -54,10 +60,10 @@ const ViewBook = () => {
                   <div className='col-sm-4 px-4 p-2'>
                     <div className='btn-group btn-block'>
                       <button type='button' className='btn btn-secondary' onClick={handleEdit}>
-                        Edit details
+                        {t('edit')}
                       </button>
                       <button type='button' className='btn btn-danger' onClick={handleDelete}>
-                        Delete Book
+                        {t('delete')}
                       </button>
                     </div>
                   </div>

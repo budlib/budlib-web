@@ -8,8 +8,10 @@ import Sidebar from '../../components/Sidebar';
 import ViewLibrarianDetailsCard from '../../components/ViewLibrarianDetailsCard';
 import { deleteCall } from '../../helpers/deleteCall';
 import { useFetch } from '../../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const ViewLibrarian = () => {
+  const { t } = useTranslation('librarians');
   const { id } = useParams();
 
   let librarianDetailUrl = `/api/librarian/${id}`;
@@ -21,9 +23,13 @@ const ViewLibrarian = () => {
     let librarianDeleteUrl = `${librarianDetailUrl}?deleteBy=${window.localStorage.getItem('id')}`;
 
     deleteCall(librarianDeleteUrl).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`deleteResp.${status}`, 'deleteResp.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         navigate(`/dashboard/librarian/search`);
       }
     });
@@ -61,10 +67,10 @@ const ViewLibrarian = () => {
                     <div className='col-lg-12 px-4 p-2'>
                       <div className='btn-group btn-block'>
                         <button type='button' className='btn btn-secondary' onClick={handleEdit}>
-                          Edit details
+                          {t('editDetails')}
                         </button>
                         <button type='button' className='btn btn-info' onClick={handlePasswordChange}>
-                          Change password
+                          {t('changePassword')}
                         </button>
                       </div>
                     </div>
@@ -72,7 +78,7 @@ const ViewLibrarian = () => {
                   <div className='row' id='deleteButton'>
                     <div className='col-lg-12 px-4 p-2'>
                       <button type='button' className='btn btn-danger btn-block' onClick={handleDelete}>
-                        Delete Librarian
+                        {t('delete')}
                       </button>
                     </div>
                   </div>

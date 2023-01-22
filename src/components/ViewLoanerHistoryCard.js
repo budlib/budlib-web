@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useFetch } from '../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const ViewLoanerHistoryCard = () => {
+  const { t } = useTranslation('loaners');
   const { id } = useParams();
 
   let loanerHistoryUrl = `/api/loaners/${id}/history`;
@@ -12,7 +14,7 @@ const ViewLoanerHistoryCard = () => {
     <div className='col-lg-8'>
       <div className='card shadow mb-4'>
         <a href='#historyCard' className='d-block card-header py-3' data-toggle='collapse' role='button' aria-expanded='true' aria-controls='historyCard'>
-          <h6 className='m-0 font-weight-bold text-primary'>History</h6>
+          <h6 className='m-0 font-weight-bold text-primary'>{t('history')}</h6>
         </a>
 
         <div className='collapse show' id='historyCard'>
@@ -24,10 +26,10 @@ const ViewLoanerHistoryCard = () => {
                 <table className='table table-bordered table-hover' id='dataTable' cellSpacing='0'>
                   <thead className='table-secondary text-dark'>
                     <tr>
-                      <th>Trn No</th>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Type</th>
+                      <th>{t('transactionNumber')}</th>
+                      <th>{t('transactionDate')}</th>
+                      <th>{t('transactionTime')}</th>
+                      <th>{t('transactionType')}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -52,7 +54,7 @@ const ViewLoanerHistoryCard = () => {
                       const trnDate = [year, month, day].join('-');
                       const trnTime = [hour, minutes, seconds].join(':');
 
-                      const trnType = transactionType.charAt(0) + transactionType.substr(1).toLowerCase();
+                      const trnType = t(transactionType);
 
                       return (
                         <tr key={transactionId}>

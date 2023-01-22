@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFetch } from '../helpers/useFetch';
+import { useTranslation } from 'react-i18next';
 
 const TransactionList = () => {
+  const { t } = useTranslation('transactions');
   const url = '/api/transactions';
   const { data } = useFetch(url);
 
@@ -13,25 +15,25 @@ const TransactionList = () => {
           <div className='card-body'>
             <div className='table-responsive'>
               {data.length === 0 ? (
-                'No transactions found'
+                t('notFound')
               ) : (
                 <table className='table table-bordered table-hover' id='dataTable' cellSpacing='0'>
                   <thead className='table-secondary text-dark'>
                     <tr>
-                      <th>Trn No</th>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Type</th>
-                      <th>Loaner</th>
+                      <th>{t('trnNo')}</th>
+                      <th>{t('date')}</th>
+                      <th>{t('time')}</th>
+                      <th>{t('type')}</th>
+                      <th>{t('loaner')}</th>
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>Trn No</th>
-                      <th>Date</th>
-                      <th>Time</th>
-                      <th>Type</th>
-                      <th>Loaner</th>
+                      <th>{t('trnNo')}</th>
+                      <th>{t('date')}</th>
+                      <th>{t('time')}</th>
+                      <th>{t('type')}</th>
+                      <th>{t('loaner')}</th>
                     </tr>
                   </tfoot>
                   <tbody>
@@ -56,7 +58,7 @@ const TransactionList = () => {
                       const trnDate = [year, month, day].join('-');
                       const trnTime = [hour, minutes, seconds].join(':');
 
-                      const trnType = transactionType.charAt(0) + transactionType.substr(1).toLowerCase();
+                      const trnType = t(transactionType);
 
                       return (
                         <tr key={transactionId}>
@@ -75,7 +77,7 @@ const TransactionList = () => {
                           <td>{trnDate}</td>
                           <td>{trnTime}</td>
                           <td>{trnType}</td>
-                          <td>{loaner == null ? '<removed>' : loaner['fullNameWithSalutation']}</td>
+                          <td>{loaner == null ? t('removed') : loaner['fullNameWithSalutation']}</td>
                         </tr>
                       );
                     })}

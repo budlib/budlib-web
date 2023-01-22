@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ViewBookDetailsCard = ({ data }) => {
+  const { t } = useTranslation('books');
   let customImg = data['imageLink'];
   let defaultImg = customImg || `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
 
@@ -17,28 +19,28 @@ const ViewBookDetailsCard = ({ data }) => {
               <table className='table table-borderless'>
                 <tbody>
                   <tr>
-                    <th style={{ width: '60%' }}>Book ID</th>
+                    <th style={{ width: '60%' }}>{t('bookId')}</th>
                     <td>{data['bookId']}</td>
                   </tr>
                   <tr>
-                    <th style={{ width: '60%' }}>ISBN-10</th>
+                    <th style={{ width: '60%' }}>{t('isbn10')}</th>
                     <td>{data['isbn_10'] || '-'}</td>
                   </tr>
                   <tr>
-                    <th style={{ width: '60%' }}>ISBN-13</th>
+                    <th style={{ width: '60%' }}>{t('isbn13')}</th>
                     <td>{data['isbn_13'] || '-'}</td>
                   </tr>
                   <tr>
-                    <th style={{ width: '60%' }}>Total quantity</th>
+                    <th style={{ width: '60%' }}>{t('totalQuantity')}</th>
                     <td>{data['totalQuantity']}</td>
                   </tr>
                   <tr>
-                    <th style={{ width: '60%' }}>Available quantity</th>
+                    <th style={{ width: '60%' }}>{t('availableQuantity')}</th>
                     <td>{data['availableQuantity']}</td>
                   </tr>
                   <tr>
-                    <th style={{ width: '60%' }}>Library Section</th>
-                    <td>{data['librarySection'] || '-'}</td>
+                    <th style={{ width: '60%' }}>{t('librarySection')}</th>
+                    <td>{t(data['librarySection']) || '-'}</td>
                   </tr>
                 </tbody>
               </table>
@@ -56,35 +58,35 @@ const ViewBookDetailsCard = ({ data }) => {
           <table className='table table-borderless'>
             <tbody>
               <tr>
-                <th style={{ width: '30%' }}>Title</th>
+                <th style={{ width: '30%' }}>{t('title')}</th>
                 <td>{data['title'] || '-'}</td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Subtitle</th>
+                <th style={{ width: '30%' }}>{t('subtitle')}</th>
                 <td>{data['subtitle'] || '-'}</td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Author(s)</th>
+                <th style={{ width: '30%' }}>{t('authors')}</th>
                 <td>{data['authors'] || '-'}</td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Publisher</th>
+                <th style={{ width: '30%' }}>{t('publisher')}</th>
                 <td>{data['publisher'] || '-'}</td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Edition</th>
+                <th style={{ width: '30%' }}>{t('edition')}</th>
                 <td>{data['edition'] || '-'}</td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Year</th>
+                <th style={{ width: '30%' }}>{t('year')}</th>
                 <td>{data['year'] || '-'}</td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Language</th>
+                <th style={{ width: '30%' }}>{t('language')}</th>
                 <td>{data['language'] || '-'}</td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Tags</th>
+                <th style={{ width: '30%' }}>{t('tags')}</th>
                 <td>
                   {data['tags']?.map((eachTag) => {
                     return eachTag['tagName'] + ', ';
@@ -92,15 +94,15 @@ const ViewBookDetailsCard = ({ data }) => {
                 </td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Retail price</th>
+                <th style={{ width: '30%' }}>{t('retailPrice')}</th>
                 <td>$ {data['priceRetail'] || '-'}</td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Library price</th>
+                <th style={{ width: '30%' }}>{t('libraryPrice')}</th>
                 <td>$ {data['priceLibrary'] || '-'}</td>
               </tr>
               <tr>
-                <th style={{ width: '30%' }}>Additional notes</th>
+                <th style={{ width: '30%' }}>{t('additionalNotes')}</th>
                 <td>{data['notes'] || '-'}</td>
               </tr>
             </tbody>

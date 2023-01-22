@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import profilePic from '../assets/img/undraw_profile_3.svg';
+import { useTranslation } from 'react-i18next';
 
 const Header = (props) => {
+  const { t } = useTranslation();
   let loggedName = window.localStorage.getItem('username');
   let loggedId = window.localStorage.getItem('id');
   let loggedRole = window.localStorage.getItem('role');
@@ -45,7 +47,7 @@ const Header = (props) => {
               <React.Fragment>
                 <Link className='dropdown-item' to={`/dashboard/librarian/${loggedId}/view`}>
                   <i className='fas fa-user fa-sm fa-fw mr-2 text-gray-400'></i>
-                  Profile
+                  {t('profile')}
                 </Link>
                 <div className='dropdown-divider'></div>
               </React.Fragment>
@@ -54,7 +56,7 @@ const Header = (props) => {
             )}
             <button className='dropdown-item' data-toggle='modal' data-target='#logoutModal'>
               <i className='fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400'></i>
-              Logout
+              {t('logout')}
             </button>
           </div>
         </li>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postCall } from '../helpers/postCall';
+import { useTranslation } from 'react-i18next';
 
 const LibrarianAddForm = () => {
+  const { t } = useTranslation('librarians');
   let navigate = useNavigate();
 
   const [details, setDetails] = useState({
@@ -22,14 +24,18 @@ const LibrarianAddForm = () => {
     let password2 = document.getElementById('formConfirmPassword').value;
 
     if (password1 !== password2) {
-      window.alert("Password don't match");
+      window.alert(t('passwordMismatch'));
       return;
     }
 
     postCall('/api/librarian', details).then((result) => {
-      window.alert(result['data']['message']);
+      const status = result['status'];
+      window.alert(t(
+        [`createResp.${status}`, 'createResp.unspecific'],
+        {errorMessage: result['data']['message']}
+      ));
 
-      if (result['status'] === 200) {
+      if (status === 200) {
         navigate(`/dashboard/librarian/search`);
       }
     });
@@ -41,7 +47,7 @@ const LibrarianAddForm = () => {
         <form id='librarianForm' onSubmit={handleSubmit}>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLibrarianType'>
-              Role
+              {t('role')}
             </label>
             <div className='col-sm-8'>
               <select
@@ -53,14 +59,14 @@ const LibrarianAddForm = () => {
                   setDetails({ ...details, role: e.target.value });
                 }}
               >
-                <option value='ADMIN'>ADMIN</option>
-                <option value='FACULTY'>FACULTY</option>
+                <option value='ADMIN'>{t('ADMIN')}</option>
+                <option value='FACULTY'>{t('FACULTY')}</option>
               </select>
             </div>
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formUserName'>
-              Username
+              {t('username')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -80,7 +86,7 @@ const LibrarianAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formEmail'>
-              Email
+              {t('email')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -100,7 +106,7 @@ const LibrarianAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formFirstName'>
-              First name
+              {t('firstName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -120,7 +126,7 @@ const LibrarianAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formMiddleName'>
-              Middle name
+              {t('middleName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -139,7 +145,7 @@ const LibrarianAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formLastName'>
-              Last name
+              {t('lastName')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -158,7 +164,7 @@ const LibrarianAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formCreatePassword'>
-              Create password
+              {t('createPassword')}
             </label>
             <div className='col-sm-8'>
               <input
@@ -177,7 +183,7 @@ const LibrarianAddForm = () => {
           </div>
           <div className='form-group row'>
             <label className='col-sm-4 col-form-label font-weight-bold' htmlFor='formConfirmPassword'>
-              Confirm password
+              {t('confirmPassword')}
             </label>
             <div className='col-sm-8'>
               <input type='password' className='form-control' id='formConfirmPassword' name='formConfirmPassword' placeholder='Confirm password' required />
@@ -185,7 +191,7 @@ const LibrarianAddForm = () => {
           </div>
 
           <button type='submit' className='btn btn-primary my-2'>
-            Add Librarian
+            {t('add')}
           </button>
           <button
             type='button'
@@ -194,7 +200,7 @@ const LibrarianAddForm = () => {
               navigate(`/dashboard/librarian/search`);
             }}
           >
-            Cancel
+            {t('cancel')}
           </button>
         </form>
       </div>

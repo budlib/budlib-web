@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection, imageLink, tags }) => {
+  const { t } = useTranslation('books');
   subtitle = subtitle || '';
   imageLink = imageLink || `${process.env.PUBLIC_URL + '/images/no_image_book_v2.jpg'}`;
   librarySection = librarySection || 'NA';
   let bookBy = authors || publisher;
+  let byCount = bookBy?.split(',')?.length ?? 0;
 
   let displayTitle = title;
 
@@ -46,7 +49,7 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
                 WebkitBoxOrient: 'vertical',
               }}
             >
-              by {bookBy}
+              {t('by', {authors: bookBy, count: byCount})}
             </p>
 
             <p
@@ -61,7 +64,7 @@ const BookCard = ({ bookId, title, subtitle, authors, publisher, librarySection,
                 WebkitBoxOrient: 'vertical',
               }}
             >
-              Section: {librarySection}
+              {t('section:', {section: t(librarySection)})}
             </p>
           </div>
           <div

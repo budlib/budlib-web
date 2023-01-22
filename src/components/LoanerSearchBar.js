@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 function LoanerSearchBar(props) {
+  const { t } = useTranslation('loaners');
   const [filterOption, setfilterOption] = useState('');
   const [filterText, setfilterText] = useState('');
 
@@ -16,7 +18,7 @@ function LoanerSearchBar(props) {
     if (filterOption !== '') {
       props.func([filterOption, filterText]);
     } else {
-      window.alert('Searching requires a filter');
+      window.alert(t('missingFilter'));
     }
   };
 
@@ -41,15 +43,15 @@ function LoanerSearchBar(props) {
                 <div className='input-group mb-3'>
                   <div className='input-group-prepend'>
                     <span className='input-group-text' htmlFor='inputGroupSelect01'>
-                      Search by
+                      {t('searchBy')}
                     </span>
                   </div>
                   <select className='form-control form-select' id='selectFilter' onChange={(e) => handleFilter(e)} value={filterOption}>
-                    <option value=''>No filter</option>
-                    <option value='id'>ID</option>
-                    <option value='schoolId'>School ID</option>
-                    <option value='name'>Name</option>
-                    <option value='parentName'>Parent's Name</option>
+                  <option value=''>{t('noFilter')}</option>
+                    <option value='id'>{t('id')}</option>
+                    <option value='schoolId'>{t('schoolId')}</option>
+                    <option value='name'>{t('name')}</option>
+                    <option value='parentName'>{t('parentName')}</option>
                   </select>
                 </div>
               </div>
@@ -57,7 +59,7 @@ function LoanerSearchBar(props) {
               <div className='col-lg-5'>
                 <div className='input-group mb-3'>
                   <div className='input-group-prepend'>
-                    <span className='input-group-text'>Search term</span>
+                    <span className='input-group-text'>{t('searchTerm')}</span>
                   </div>
                   <input
                     type='text'
@@ -65,7 +67,7 @@ function LoanerSearchBar(props) {
                     onChange={(e) => handleFilterText(e)}
                     value={filterText}
                     className='form-control'
-                    placeholder='Your search term goes here'
+                    placeholder={t('searchTermPlaceholder')}
                     onKeyDown={(e) => triggerSearchOnEnter(e)}
                   />
                 </div>
@@ -76,7 +78,7 @@ function LoanerSearchBar(props) {
                   <div className='col-lg-6'>
                     <div className='mb-3'>
                       <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleSearch(e)}>
-                        Search
+                        {t('search')}
                       </button>
                     </div>
                   </div>
@@ -84,7 +86,7 @@ function LoanerSearchBar(props) {
                   <div className='col-lg-6'>
                     <div className='mb-3'>
                       <button type='button' className='btn btn-primary btn-block' onClick={(e) => handleClear(e)}>
-                        Clear
+                        {t('clear')}
                       </button>
                     </div>
                   </div>
